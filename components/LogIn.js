@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View, Form } from 'react-native';
+import { Button, Text, TextInput, View } from 'react-native';
 import API from '../services/API';
 import { useHistory } from 'react-router-native';
 

@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Text, View } from 'react-native';
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { useHistory } from 'react-router-native';
 import API from '../services/API';
 import moment from 'moment';
-import { PlusCircle, Info } from 'react-feather';
+import { Feather } from '@expo/vector-icons';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
@@ -25,29 +32,129 @@ export default function Dashboard(props) {
     history.push(`/add-trip`);
   };
 
+  const styles = StyleSheet.create({
+    myTripsTitle: {
+      textAlign: 'left',
+      marginTop: 20,
+      marginBottom: 20,
+      fontSize: 20,
+      color: '#38516d',
+    },
+    tabs: { marginLeft: 0, display: 'flex', flexDirection: 'row' },
+    tabAlone: {
+      margin: 10,
+    },
+    tabActive: {
+      borderBottomWidth: 2,
+      borderColor: '#38516d',
+      fontWeight: 'bold',
+      color: '#38516d',
+    },
+    ImageList: {
+      height: 90,
+      width: 210,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      margin: 10,
+      marginLeft: 20,
+      borderRadius: 10,
+    },
+    Image: {
+      borderRadius: 10,
+      width: 330,
+      height: 230,
+    },
+    fetchedTrip: {
+      display: 'flex',
+      flexDirection: 'column-reverse',
+      alignItems: 'center',
+    },
+    containerdatesDashboard: {
+      display: 'flex',
+      position: 'absolute',
+      top: 220,
+      left: 30,
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    titleInfoSection: { display: 'flex', margin: 10 },
+    containerTriptitle: {
+      display: 'flex',
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 25,
+      position: 'absolute',
+      top: 25,
+      right: 50,
+    },
+    infoButton: {
+      marginLeft: 12,
+      width: 20,
+      display: 'flex',
+      position: 'absolute',
+      top: 190,
+      right: 40,
+    },
+    status: {
+      textAlign: 'left',
+      marginLeft: 20,
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#38516d',
+    },
+    dates: {
+      display: 'flex',
+      color: 'black',
+      marginLeft: 20,
+      fontSize: 13,
+    },
+    titleImageContainer: { flexDirection: 'column-reverse', marginTop: 30 },
+    trips: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+    },
+    TripTitle: {
+      color: 'black',
+      marginLeft: 30,
+      marginRight: 20,
+      alignSelf: 'center',
+    },
+    addTripButton: {
+      display: 'flex',
+      justifyContent: 'flex-start',
+      marginLeft: 20,
+      marginBottom: 30,
+    },
+  });
+
   return (
-    <View>
-      <Text>My Trips</Text>
-      <View style={{ marginLeft: 80 }}>
+    <ScrollView>
+      <Text style={styles.myTripsTitle}>My Trips</Text>
+      <View style={styles.tabs}>
         <Text
-          className={'tab ' + (tab === 'active' ? 'tab-active' : '')}
-          onClick={() => {
+          style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
+          onPress={() => {
             setTab('active');
           }}
         >
           Active
         </Text>
         <Text
-          className={'tab ' + (tab === 'upcoming' ? 'tab-active' : '')}
-          onClick={() => {
+          style={[
+            styles.tabAlone,
+            tab === 'upcoming' ? styles.tabActive : null,
+          ]}
+          onPress={() => {
             setTab('upcoming');
           }}
         >
           Upcoming
         </Text>
         <Text
-          className={'tab ' + (tab === 'past' ? 'tab-active' : '')}
-          onClick={() => {
+          style={[styles.tabAlone, tab === 'past' ? styles.tabActive : null]}
+          onPress={() => {
             setTab('past');
           }}
         >
@@ -68,75 +175,30 @@ export default function Dashboard(props) {
           .slice(0, 1)
           .map((fetchTrip) => {
             return (
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'columnReverse',
-                  alignItems: 'center',
-                }}
-              >
+              <View style={styles.fetchedTrip}>
                 <Image
-                  src={fetchTrip.photo}
-                  style={{
-                    cursor: 'pointer',
-                    borderRadius: 10,
-                    width: 330,
-                    height: 230,
-                    objectFit: 'cover',
-                  }}
+                  source={{ uri: fetchTrip.photo }}
+                  style={styles.Image}
                   alt='random'
                 ></Image>
-                <View
-                  style={{
-                    display: 'flex',
-                    position: 'absolute',
-                    top: 200,
-                    left: 40,
-                    color: 'white',
-                    fontWeight: 'bold',
-                  }}
-                >
+                <Text style={styles.containerdatesDashboard}>
                   {moment(fetchTrip.startDate).format('MMM Do')} -
                   {moment(fetchTrip.endDATE).format('MMM Do')}
-                </View>
-                <View style={{ display: 'flex', margin: 10 }}>
-                  <Text
-                    style={{
-                      display: 'flex',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      fontSize: 25,
-                      position: 'absolute',
-                      top: 25,
-                      left: 40,
-                    }}
-                  >
+                </Text>
+                <View style={styles.titleInfoSection}>
+                  <Text style={styles.containerTriptitle}>
                     {fetchTrip.title}
                   </Text>
-                  <View
-                    onClick={() => openTripDetails(fetchTrip.id)}
-                    style={{
-                      marginLeft: 12,
-                      width: 20,
-                      display: 'flex',
-                      position: 'absolute',
-                      top: 190,
-                      right: 40,
-                    }}
+                  <Feather
+                    name='info'
+                    size={20}
+                    color='white'
+                    onPress={() => openTripDetails(fetchTrip.id)}
+                    style={styles.infoButton}
                   />
                 </View>
 
-                <Text
-                  style={{
-                    textAlign: 'left',
-                    marginLeft: 20,
-                    fontSize: 20,
-                    fontWeight: 'bolder',
-                    color: '#38516d',
-                  }}
-                >
-                  Active
-                </Text>
+                <Text style={styles.status}>Active</Text>
               </View>
             );
           })}
@@ -149,76 +211,31 @@ export default function Dashboard(props) {
           .slice(0, 1)
           .map((fetchTrip) => {
             return (
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'columnReverse',
-                  alignItems: 'center',
-                }}
-              >
+              <View style={styles.fetchedTrip}>
                 <Image
-                  src={fetchTrip.photo}
-                  style={{
-                    cursor: 'pointer',
-                    borderRadius: 10,
-                    width: 330,
-                    height: 230,
-                    objectFit: 'cover',
-                  }}
+                  source={{ uri: fetchTrip.photo }}
+                  style={styles.Image}
                   alt='random'
                 ></Image>
-                <View
-                  style={{
-                    display: 'flex',
-                    position: 'absolute',
-                    top: 200,
-                    left: 40,
-                    color: 'white',
-                    fontWeight: 'bold',
-                  }}
-                >
+                <Text style={styles.containerdatesDashboard}>
                   {moment(fetchTrip.startDate).format('MMM Do')}{' '}
-                  <View> - </View>
+                  <Text> - </Text>
                   {moment(fetchTrip.endDATE).format('MMM Do')}
-                </View>
-                <View style={{ display: 'flex', margin: 10 }}>
-                  <View
-                    style={{
-                      display: 'flex',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      fontSize: 25,
-                      position: 'absolute',
-                      top: 25,
-                      left: 40,
-                    }}
-                  >
+                </Text>
+                <View style={styles.titleInfoSection}>
+                  <Text style={styles.containerTriptitle}>
                     {fetchTrip.title}
-                  </View>
-                  <View
-                    onClick={() => openTripDetails(fetchTrip.id)}
-                    style={{
-                      marginLeft: 12,
-                      width: 20,
-                      display: 'flex',
-                      position: 'absolute',
-                      top: 190,
-                      right: 40,
-                    }}
+                  </Text>
+                  <Feather
+                    name='info'
+                    size={20}
+                    color='white'
+                    onPress={() => openTripDetails(fetchTrip.id)}
+                    style={styles.infoButton}
                   />
                 </View>
 
-                <Text
-                  style={{
-                    textAlign: 'left',
-                    marginLeft: 20,
-                    fontSize: 20,
-                    fontWeight: 'bolder',
-                    color: '#38516d',
-                  }}
-                >
-                  Upcoming
-                </Text>
+                <Text style={styles.status}>Upcoming</Text>
               </View>
             );
           })}
@@ -231,87 +248,36 @@ export default function Dashboard(props) {
           .slice(0, 1)
           .map((fetchTrip) => {
             return (
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'columnReverse',
-                  alignItems: 'center',
-                }}
-              >
+              <View style={styles.fetchedTrip}>
                 <Image
-                  src={fetchTrip.photo}
-                  style={{
-                    cursor: 'pointer',
-                    borderRadius: 10,
-                    width: 330,
-                    height: 230,
-                    objectFit: 'cover',
-                  }}
+                  source={{ uri: fetchTrip.photo }}
+                  style={styles.Image}
                   alt='random'
                 ></Image>
-                <View
-                  style={{
-                    display: 'flex',
-                    position: 'absolute',
-                    top: 200,
-                    left: 40,
-                    color: 'white',
-                    fontWeight: 'bold',
-                  }}
-                >
+                <Text style={styles.containerdatesDashboard}>
                   {moment(fetchTrip.startDate).format('MMM Do')}
-                  <View> - </View>
+                  <Text> - </Text>
                   {moment(fetchTrip.endDATE).format('MMM Do')}
-                </View>
-                <View style={{ display: 'flex', margin: 10 }}>
-                  <View
-                    style={{
-                      display: 'flex',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      fontSize: 25,
-                      position: 'absolute',
-                      top: 25,
-                      left: 40,
-                    }}
-                  >
+                </Text>
+                <View style={styles.titleInfoSection}>
+                  <Text style={styles.containerTriptitle}>
                     {fetchTrip.title}
-                  </View>
+                  </Text>
 
-                  <View
-                    onClick={() => openTripDetails(fetchTrip.id)}
-                    style={{
-                      marginLeft: 12,
-                      width: 20,
-                      display: 'flex',
-                      position: 'absolute',
-                      top: 190,
-                      right: 40,
-                    }}
+                  <Feather
+                    name='info'
+                    size={20}
+                    color='white'
+                    onPress={() => openTripDetails(fetchTrip.id)}
+                    style={styles.infoButton}
                   />
                 </View>
 
-                <Text
-                  style={{
-                    textAlign: 'left',
-                    marginLeft: 20,
-                    fontSize: 20,
-                    fontWeight: 'bolder',
-                    color: '#38516d',
-                  }}
-                >
-                  Past
-                </Text>
+                <Text style={styles.status}>Past</Text>
               </View>
             );
           })}
-        <View
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.trips}>
           {fetchTrips
             .filter((fetchTrip) => {
               if (tab === 'active') {
@@ -324,69 +290,30 @@ export default function Dashboard(props) {
             .slice(1)
             .map((fetchTrip) => {
               return (
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'columnReverse',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View
-                    style={{
-                      display: 'flex',
-                      color: rgb(100, 99, 99),
-                      marginLeft: 20,
-                      fontSize: 13,
-                    }}
-                  >
+                <View style={styles.fetchedTrip}>
+                  <Text style={styles.dates}>
                     {moment(fetchTrip.startDate).format('MMM Do')}{' '}
-                    <View> - </View>
+                    <Text> - </Text>
                     {moment(fetchTrip.endDATE).format('MMM Do')}
-                  </View>
-                  <View
-                    style={{ flexDirection: 'columnReverse', marginTop: 30 }}
-                  >
-                    <Image
-                      src={fetchTrip.photo}
-                      style={{
-                        backgroundRepeat: 'noRepeat',
-                        height: 90,
-                        width: 210,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flexStart',
-                        cursor: 'pointer',
-                        margin: 10,
-                        marginLeft: 20,
-                        borderRadius: 10,
-                        objectFit: 'cover',
-                      }}
-                      alt='random'
-                      onClick={() => openTripDetails(fetchTrip.id)}
-                    ></Image>
-                    <View
-                      style={{
-                        color: 'black',
-                        marginLeft: 30,
-                        marginRight: 20,
-                        alignSelf: 'center',
-                      }}
+                  </Text>
+                  <View style={styles.titleImageContainer}>
+                    <TouchableOpacity
+                      onPress={() => openTripDetails(fetchTrip.id)}
                     >
-                      {fetchTrip.title}
-                    </View>
+                      <Image
+                        source={{ uri: fetchTrip.photo }}
+                        style={styles.ImageList}
+                        alt='random'
+                      ></Image>
+                    </TouchableOpacity>
+                    <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
                   </View>
                 </View>
               );
             })}
         </View>
 
-        <View
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.trips}>
           {fetchTrips
             .filter((fetchTrip) => {
               if (tab === 'upcoming') {
@@ -396,68 +323,29 @@ export default function Dashboard(props) {
             .slice(1)
             .map((fetchTrip) => {
               return (
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'columnReverse',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View
-                    style={{
-                      display: 'flex',
-                      color: rgb(100, 99, 99),
-                      marginLeft: 20,
-                      fontSize: 13,
-                    }}
-                  >
+                <View style={styles.fetchedTrip}>
+                  <Text style={styles.dates}>
                     {moment(fetchTrip.startDate).format('MMM Do')}{' '}
-                    <View> - </View>
+                    <Text> - </Text>
                     {moment(fetchTrip.endDATE).format('MMM Do')}
-                  </View>
-                  <View
-                    style={{ flexDirection: 'columnReverse', marginTop: 30 }}
-                  >
-                    <Image
-                      src={fetchTrip.photo}
-                      style={{
-                        backgroundRepeat: 'noRepeat',
-                        height: 90,
-                        width: 210,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flexStart',
-                        cursor: 'pointer',
-                        margin: 10,
-                        marginLeft: 20,
-                        borderRadius: 10,
-                        objectFit: 'cover',
-                      }}
-                      alt='random'
-                      onClick={() => openTripDetails(fetchTrip.id)}
-                    ></Image>
-                    <View
-                      style={{
-                        color: 'black',
-                        marginLeft: 30,
-                        marginRight: 20,
-                        alignSelf: 'center',
-                      }}
+                  </Text>
+                  <View style={styles.titleImageContainer}>
+                    <TouchableOpacity
+                      onPress={() => openTripDetails(fetchTrip.id)}
                     >
-                      {fetchTrip.title}
-                    </View>
+                      <Image
+                        source={{ uri: fetchTrip.photo }}
+                        style={styles.ImageList}
+                        alt='random'
+                      ></Image>
+                    </TouchableOpacity>
+                    <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
                   </View>
                 </View>
               );
             })}
         </View>
-        <View
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.trips}>
           {fetchTrips
             .filter((fetchTrip) => {
               if (tab === 'past') {
@@ -467,72 +355,32 @@ export default function Dashboard(props) {
             .slice(1)
             .map((fetchTrip) => {
               return (
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'columnReverse',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View
-                    style={{
-                      display: 'flex',
-                      color: rgb(100, 99, 99),
-                      marginLeft: 20,
-                      fontSize: 13,
-                    }}
-                  >
+                <View style={styles.fetchedTrip}>
+                  <Text style={styles.dates}>
                     {moment(fetchTrip.startDate).format('MMM Do')}{' '}
-                    <View> - </View>
+                    <Text> - </Text>
                     {moment(fetchTrip.endDATE).format('MMM Do')}
-                  </View>
-                  <View
-                    style={{ flexDirection: 'columnReverse', marginTop: 30 }}
-                  >
-                    <Image
-                      src={fetchTrip.photo}
-                      style={{
-                        backgroundRepeat: 'noRepeat',
-                        height: 90,
-                        width: 210,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flexStart',
-                        cursor: 'pointer',
-                        margin: 10,
-                        marginLeft: 20,
-                        borderRadius: 10,
-                        objectFit: 'cover',
-                      }}
-                      alt='random'
-                      onClick={() => openTripDetails(fetchTrip.id)}
-                    ></Image>
-                    <View
-                      style={{
-                        color: 'black',
-                        marginLeft: 30,
-                        marginRight: 20,
-                        alignSelf: 'center',
-                      }}
+                  </Text>
+                  <View style={styles.titleImageContainer}>
+                    <TouchableOpacity
+                      onPress={() => openTripDetails(fetchTrip.id)}
                     >
-                      {fetchTrip.title}
-                    </View>
+                      <Image
+                        source={{ uri: fetchTrip.photo }}
+                        style={styles.ImageList}
+                        alt='random'
+                      ></Image>
+                    </TouchableOpacity>
+                    <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
                   </View>
                 </View>
               );
             })}
         </View>
       </View>
-      <View
-        style={{
-          display: 'flex',
-          justifyContent: 'flexStart',
-          marginLeft: 20,
-          marginBottom: 30,
-        }}
-      >
-        <Text onClick={addTrip}>PLUS</Text>
+      <View style={styles.addTripButton}>
+        <Feather name='plus-circle' size={32} color='black' onPress={addTrip} />
       </View>
-    </View>
+    </ScrollView>
   );
 }
