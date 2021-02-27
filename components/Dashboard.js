@@ -93,8 +93,8 @@ export default function Dashboard(props) {
       width: 20,
       display: 'flex',
       position: 'absolute',
-      top: 190,
-      right: 40,
+      top: 180,
+      left: 110,
     },
     status: {
       textAlign: 'left',
