@@ -32,6 +32,10 @@ export default function Dashboard(props) {
     history.push(`/add-trip`);
   };
 
+  const goToMessages = () => {
+    history.push(`/messages`);
+  };
+
   const styles = StyleSheet.create({
     myTripsTitle: {
       textAlign: 'left',
@@ -52,7 +56,7 @@ export default function Dashboard(props) {
     },
     ImageList: {
       height: 90,
-      width: 210,
+      width: 180,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-start',
@@ -106,10 +110,9 @@ export default function Dashboard(props) {
     dates: {
       display: 'flex',
       color: 'black',
-      marginLeft: 20,
       fontSize: 13,
     },
-    titleImageContainer: { flexDirection: 'column-reverse', marginTop: 30 },
+    tripsList: { flexDirection: 'row', marginTop: 30 },
     trips: {
       display: 'flex',
       flexWrap: 'wrap',
@@ -117,15 +120,24 @@ export default function Dashboard(props) {
     },
     TripTitle: {
       color: 'black',
-      marginLeft: 30,
+      marginLeft: 10,
       marginRight: 20,
-      alignSelf: 'center',
+      marginBottom: 5,
+      alignSelf: 'flex-start',
+      fontWeight: 'bold',
     },
     addTripButton: {
       display: 'flex',
       justifyContent: 'flex-start',
       marginLeft: 20,
       marginBottom: 30,
+    },
+    titleDatesList: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: 150,
+      alignItems: 'center',
+      marginTop: 30,
     },
   });
 
@@ -291,12 +303,7 @@ export default function Dashboard(props) {
             .map((fetchTrip) => {
               return (
                 <View style={styles.fetchedTrip}>
-                  <Text style={styles.dates}>
-                    {moment(fetchTrip.startDate).format('MMM Do')}{' '}
-                    <Text> - </Text>
-                    {moment(fetchTrip.endDATE).format('MMM Do')}
-                  </Text>
-                  <View style={styles.titleImageContainer}>
+                  <View style={styles.tripsList}>
                     <TouchableOpacity
                       onPress={() => openTripDetails(fetchTrip.id)}
                     >
@@ -306,7 +313,14 @@ export default function Dashboard(props) {
                         alt='random'
                       ></Image>
                     </TouchableOpacity>
-                    <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                    <View style={styles.titleDatesList}>
+                      <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                      <Text style={styles.dates}>
+                        {moment(fetchTrip.startDate).format('MMM Do')}{' '}
+                        <Text> - </Text>
+                        {moment(fetchTrip.endDATE).format('MMM Do')}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               );
@@ -324,12 +338,7 @@ export default function Dashboard(props) {
             .map((fetchTrip) => {
               return (
                 <View style={styles.fetchedTrip}>
-                  <Text style={styles.dates}>
-                    {moment(fetchTrip.startDate).format('MMM Do')}{' '}
-                    <Text> - </Text>
-                    {moment(fetchTrip.endDATE).format('MMM Do')}
-                  </Text>
-                  <View style={styles.titleImageContainer}>
+                  <View style={styles.tripsList}>
                     <TouchableOpacity
                       onPress={() => openTripDetails(fetchTrip.id)}
                     >
@@ -339,7 +348,14 @@ export default function Dashboard(props) {
                         alt='random'
                       ></Image>
                     </TouchableOpacity>
-                    <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                    <View style={styles.titleDatesList}>
+                      <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                      <Text style={styles.dates}>
+                        {moment(fetchTrip.startDate).format('MMM Do')}{' '}
+                        <Text> - </Text>
+                        {moment(fetchTrip.endDATE).format('MMM Do')}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               );
@@ -356,12 +372,7 @@ export default function Dashboard(props) {
             .map((fetchTrip) => {
               return (
                 <View style={styles.fetchedTrip}>
-                  <Text style={styles.dates}>
-                    {moment(fetchTrip.startDate).format('MMM Do')}{' '}
-                    <Text> - </Text>
-                    {moment(fetchTrip.endDATE).format('MMM Do')}
-                  </Text>
-                  <View style={styles.titleImageContainer}>
+                  <View style={styles.tripsList}>
                     <TouchableOpacity
                       onPress={() => openTripDetails(fetchTrip.id)}
                     >
@@ -371,7 +382,14 @@ export default function Dashboard(props) {
                         alt='random'
                       ></Image>
                     </TouchableOpacity>
-                    <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                    <View style={styles.titleDatesList}>
+                      <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                      <Text style={styles.dates}>
+                        {moment(fetchTrip.startDate).format('MMM Do')}{' '}
+                        <Text> - </Text>
+                        {moment(fetchTrip.endDATE).format('MMM Do')}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               );

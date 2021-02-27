@@ -5,6 +5,7 @@ import moment from 'moment';
 import Activities from './Activities';
 import { ScrollView, View, Image, Text, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import Friends from './Friends';
 
 export default function TripDetails(props) {
   const [fetchTripDetails, setFetchTripDetails] = useState(null);
@@ -37,15 +38,16 @@ export default function TripDetails(props) {
       position: 'relative',
       width: 400,
       height: 230,
+      opacity: 0.7,
     },
-    arrowLeft: { position: 'absolute', top: 8, left: 8 },
+    arrowLeft: { position: 'absolute', top: 20, left: 8 },
     containerDates: {
       display: 'flex',
       position: 'absolute',
       top: 190,
       left: 20,
-      color: 'white',
-      fontWeight: 'bold',
+      color: 'orange',
+      fontSize: 15,
     },
     messageButton: {
       position: 'relative',
@@ -73,8 +75,8 @@ export default function TripDetails(props) {
         <View style={styles.arrowLeft}>
           <Feather
             name='arrow-left'
-            size={25}
-            color='white'
+            size={30}
+            color='orange'
             onPress={backToDashboard}
           />
         </View>
@@ -92,7 +94,9 @@ export default function TripDetails(props) {
       </View>
 
       <Text style={styles.tripTitle}>{fetchTripDetails.title}</Text>
-
+      <View>
+        <Friends />
+      </View>
       <View>
         <Activities tripId={tripId} />
       </View>

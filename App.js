@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard';
 import { NavigationContainer } from '@react-navigation/native';
 import AddTrip from './components/AddTrip';
 import AddActivity from './components/AddActivity';
+import Messages from './components/Messages';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path='/trip-details/:id' component={TripDetails} />
           <Route path='/add-trip' component={AddTrip} />
           <Route path='/add-activities/:id' component={AddActivity} />
+          <Route path='/messages' component={Messages} />
         </View>
       </NativeRouter>
     </NavigationContainer>
