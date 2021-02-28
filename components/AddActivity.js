@@ -53,29 +53,6 @@ export default function AddActivity(props) {
     history.push(`/trip-details/${tripId}`);
   };
 
-  const styles = StyleSheet.create({
-    addInfoFields: { width: 300, marginTop: 30 },
-    addTripTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
-    addInfo: {
-      display: 'flex',
-      padding: 15,
-      borderWidth: 1,
-      borderColor: '#535b63',
-      marginBottom: 15,
-      margin: 10,
-    },
-    button: {
-      width: 80,
-      padding: 15,
-      backgroundColor: '#1b3332',
-      fontWeight: 'bold',
-      color: '#ffffff',
-    },
-    arrow: {
-      marginTop: 30,
-    },
-  });
-
   return (
     <ScrollView>
       <Feather
@@ -133,3 +110,26 @@ export default function AddActivity(props) {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  addInfoFields: { width: 300, marginTop: 30 },
+  addTripTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
+  addInfo: {
+    display: 'flex',
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#535b63',
+    marginBottom: 15,
+    margin: 10,
+  },
+  button: {
+    width: 80,
+    padding: 15,
+    backgroundColor: '#1b3332',
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  arrow: {
+    marginTop: 30,
+  },
+});
