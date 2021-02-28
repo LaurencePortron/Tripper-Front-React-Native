@@ -10,48 +10,55 @@ import {
   ScrollView,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import firebase from 'firebase/app';
 
 export default function AddTrip(props) {
-  const [changeTripTitle, setChangeTripTitle] = useState('');
-  const [changeStartDate, setChangeStartDate] = useState('');
-  const [changeEndDate, setChangeEndDate] = useState('');
-  const [changeDescription, setChangeDescription] = useState('');
-  const [changeCost, setChangeCost] = useState('');
-  const [isClicked, setIsClicked] = useState(false);
+  const [addTripTitle, setAddTripTitle] = useState('');
+  const [addStartDate, setAddStartDate] = useState('');
+  const [addEndDate, setAddEndDate] = useState('');
+  const [addDescription, setAddDescription] = useState('');
+  const [addCost, setAddCost] = useState('');
+  var db = firebase.firestore();
+  require('firebase/firestore');
 
   const history = useHistory();
 
-  const changeTripTitleInput = (inputText) => {
-    setChangeTripTitle(inputText);
+  const addTripTitleInput = (inputText) => {
+    setAddTripTitle(inputText);
   };
 
-  const changeStartDateInput = (inputText) => {
-    setChangeStartDate(inputText);
+  const addStartDateInput = (inputText) => {
+    setAddStartDate(inputText);
   };
-  const changeEndDateInput = (inputText) => {
-    setChangeEndDate(inputText);
-  };
-
-  const changeDescriptionInput = (inputText) => {
-    setChangeDescription(inputText);
+  const addEndDateInput = (inputText) => {
+    setAddEndDate(inputText);
   };
 
-  const changeCostInput = (inputText) => {
-    setChangeCost(inputText);
+  const addDescriptionInput = (inputText) => {
+    setAddDescription(inputText);
   };
 
-  const clickToAddTrip = async () => {
-    await API.post(`/trips`, {
-      title: changeTripTitle,
-      startDate: changeStartDate,
-      endDATE: changeEndDate,
-      description: changeDescription,
-      cost: changeCost,
-    });
-    setIsClicked(false);
-    history.push(`/dashboard`);
+  const addCostInput = (inputText) => {
+    setAddCost(inputText);
   };
 
+  const clickToAddTrip = () => {
+    db.collection('trips')
+      .add({
+        title: addTripTitle,
+        startDate: addStartDate,
+        endDate: addEndDate,
+        description: addDescription,
+        cost: addCost,
+      })
+      .then((docRef) => {
+        history.push(`/dashboard`);
+        console.log('Document add trips written with ID: ', docRef.id);
+      })
+      .catch((error) => {
+        console.error('Error adding document: ', error);
+      });
+  };
   const backToDashboard = () => {
     history.push(`/dashboard`);
   };
@@ -71,40 +78,40 @@ export default function AddTrip(props) {
           style={styles.addInfo}
           placeholder='Location'
           name='title'
-          inputText={changeTripTitle}
-          onChangeText={changeTripTitleInput}
+          inputText={addTripTitle}
+          onChangeText={addTripTitleInput}
         />
 
         <TextInput
           style={styles.addInfo}
           placeholder='Start Date'
           name='startDate'
-          inputText={changeStartDate}
-          onChangeText={changeStartDateInput}
+          inputText={addStartDate}
+          onChangeText={addStartDateInput}
         />
 
         <TextInput
           style={styles.addInfo}
           placeholder='End Date'
-          name='endDATE'
-          inputText={changeEndDate}
-          onChangeText={changeEndDateInput}
+          name='endDate'
+          inputText={addEndDate}
+          onChangeText={addEndDateInput}
         />
 
         <TextInput
           style={styles.addInfo}
           placeholder='Description'
           name='description'
-          inputText={changeDescription}
-          onChangeText={changeDescriptionInput}
+          inputText={addDescription}
+          onChangeText={addDescriptionInput}
         />
 
         <TextInput
           style={styles.addInfo}
           placeholder='Description'
           name='cost'
-          inputText={changeCost}
-          onChangeText={changeCostInput}
+          inputText={addCost}
+          onChangeText={addCostInput}
         />
 
         <Button

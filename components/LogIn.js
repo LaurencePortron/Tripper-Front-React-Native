@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Text, TextInput, View, StyleSheet } from 'react-native';
-import API from '../services/API';
+import 'firebase/auth';
+import firebase from 'firebase/app';
+
 import { useHistory } from 'react-router-native';
 
 function LogIn(props) {
-  const [postUser, setPostUser] = useState([]);
-  const [getUsername, setGetUsername] = useState('');
+  const [getEmail, setGetEmail] = useState('');
   const [getPassword, setGetPassword] = useState('');
   const history = useHistory();
 
-  const handleUsername = (inputText) => {
-    setGetUsername(inputText);
+  const handleEmail = (inputText) => {
+    setGetEmail(inputText);
   };
 
   const handlePassword = (inputText) => {
@@ -22,17 +23,15 @@ function LogIn(props) {
   };
 
   const handleLogin = (event) => {
-    event.preventDefault();
-    API.post('/login', { username: getUsername, password: getPassword }).then(
-      (res) => {
-        setPostUser(res.data);
-        history.push('/dashboard');
-      },
-      (err) => {
-        console.log(err);
-        alert('wrong credentials');
-      }
-    );
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(getEmail, getPassword)
+      .then(() => {
+        history.push(`/dashboard`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -42,20 +41,21 @@ function LogIn(props) {
       <View>
         <TextInput
           style={styles.inputStyle}
-          type='text'
+          textContentType='emailAddress'
           name='username'
           placeholder='Username'
-          inputText={getUsername}
-          onChangeText={handleUsername}
+          inputText={getEmail}
+          onChangeText={handleEmail}
           required
         />
         <TextInput
           style={styles.inputStyle}
-          type='text'
+          textContentType='password'
           name='password'
           placeholder='Password'
           inputText={getPassword}
           onChangeText={handlePassword}
+          secureTextEntry={true}
           required
         />
         <Text style={styles.SignUpText} onPress={navigateToSignUp}>

@@ -8,21 +8,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useHistory } from 'react-router-native';
-import API from '../services/API';
 import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
+import firebase from 'firebase/app';
+import { useFirestoreCollection } from './hooks';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
-  const [fetchTrips, setFetchTrips] = useState([]);
   const history = useHistory();
 
-  useEffect(() => {
-    API.get(`/trips`).then((res) => {
-      setFetchTrips(res.data);
-      console.log(res.data);
-    });
-  }, []);
+  const fetchTrips = useFirestoreCollection(
+    firebase.firestore().collection('trips'),
+    []
+  );
 
   const openTripDetails = (id) => {
     history.push(`/trip-details/${id}`);
@@ -36,110 +34,16 @@ export default function Dashboard(props) {
     history.push(`/messages`);
   };
 
-  const styles = StyleSheet.create({
-    myTripsTitle: {
-      textAlign: 'left',
-      marginTop: 20,
-      marginBottom: 20,
-      fontSize: 20,
-      color: '#38516d',
-    },
-    tabs: { marginLeft: 0, display: 'flex', flexDirection: 'row' },
-    tabAlone: {
-      margin: 10,
-    },
-    tabActive: {
-      borderBottomWidth: 2,
-      borderColor: '#38516d',
-      fontWeight: 'bold',
-      color: '#38516d',
-    },
-    ImageList: {
-      height: 90,
-      width: 180,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      margin: 10,
-      marginLeft: 20,
-      borderRadius: 10,
-    },
-    Image: {
-      borderRadius: 10,
-      width: 330,
-      height: 230,
-    },
-    fetchedTrip: {
-      display: 'flex',
-      flexDirection: 'column-reverse',
-      alignItems: 'center',
-    },
-    containerdatesDashboard: {
-      display: 'flex',
-      position: 'absolute',
-      top: 220,
-      left: 30,
-      color: 'white',
-      fontWeight: 'bold',
-    },
-    titleInfoSection: { display: 'flex', margin: 10 },
-    containerTriptitle: {
-      display: 'flex',
-      color: 'white',
-      fontWeight: 'bold',
-      fontSize: 25,
-      position: 'absolute',
-      top: 25,
-      right: 50,
-    },
-    infoButton: {
-      marginLeft: 12,
-      width: 20,
-      display: 'flex',
-      position: 'absolute',
-      top: 180,
-      left: 110,
-    },
-    status: {
-      textAlign: 'left',
-      marginLeft: 20,
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: '#38516d',
-    },
-    dates: {
-      display: 'flex',
-      color: 'black',
-      fontSize: 13,
-    },
-    tripsList: { flexDirection: 'row', marginTop: 30 },
-    trips: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-    },
-    TripTitle: {
-      color: 'black',
-      marginLeft: 10,
-      marginRight: 20,
-      marginBottom: 5,
-      alignSelf: 'flex-start',
-      fontWeight: 'bold',
-    },
-    addTripButton: {
-      display: 'flex',
-      justifyContent: 'flex-start',
-      marginLeft: 20,
-      marginBottom: 30,
-    },
-    titleDatesList: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: 150,
-      alignItems: 'center',
-      marginTop: 30,
-    },
-  });
+  var user = firebase.auth().currentUser;
+
+  // user
+  //   .sendEmailVerification()
+  //   .then(function () {
+  //     console.log('email sent');
+  //   })
+  //   .catch(function (error) {
+  //     console.log('not sent', error);
+  //   });
 
   return (
     <ScrollView>
@@ -179,8 +83,8 @@ export default function Dashboard(props) {
           .filter((fetchTrip) => {
             if (tab === 'active') {
               return (
-                new Date(fetchTrip.startDate) <= new Date() &&
-                new Date(fetchTrip.endDATE) >= new Date()
+                new Date(fetchTrip.data.startDate) <= new Date() &&
+                new Date(fetchTrip.data.endDate) >= new Date()
               );
             }
           })
@@ -189,17 +93,17 @@ export default function Dashboard(props) {
             return (
               <View style={styles.fetchedTrip}>
                 <Image
-                  source={{ uri: fetchTrip.photo }}
+                  source={{ uri: fetchTrip.data.photo }}
                   style={styles.Image}
                   alt='random'
                 ></Image>
                 <Text style={styles.containerdatesDashboard}>
-                  {moment(fetchTrip.startDate).format('MMM Do')} -
-                  {moment(fetchTrip.endDATE).format('MMM Do')}
+                  {moment(fetchTrip.data.startDate).format('MMM Do')} -
+                  {moment(fetchTrip.data.endDate).format('MMM Do')}
                 </Text>
                 <View style={styles.titleInfoSection}>
                   <Text style={styles.containerTriptitle}>
-                    {fetchTrip.title}
+                    {fetchTrip.data.title}
                   </Text>
                   <Feather
                     name='info'
@@ -217,7 +121,9 @@ export default function Dashboard(props) {
         {fetchTrips
           .filter((fetchTrip) => {
             if (tab === 'upcoming') {
-              return Date.parse(fetchTrip.endDATE) > Date.parse(new Date());
+              return (
+                Date.parse(fetchTrip.data.endDate) > Date.parse(new Date())
+              );
             }
           })
           .slice(0, 1)
@@ -225,18 +131,18 @@ export default function Dashboard(props) {
             return (
               <View style={styles.fetchedTrip}>
                 <Image
-                  source={{ uri: fetchTrip.photo }}
+                  source={{ uri: fetchTrip.data.photo }}
                   style={styles.Image}
                   alt='random'
                 ></Image>
                 <Text style={styles.containerdatesDashboard}>
-                  {moment(fetchTrip.startDate).format('MMM Do')}{' '}
+                  {moment(fetchTrip.data.startDate).format('MMM Do')}{' '}
                   <Text> - </Text>
-                  {moment(fetchTrip.endDATE).format('MMM Do')}
+                  {moment(fetchTrip.data.endDate).format('MMM Do')}
                 </Text>
                 <View style={styles.titleInfoSection}>
                   <Text style={styles.containerTriptitle}>
-                    {fetchTrip.title}
+                    {fetchTrip.data.title}
                   </Text>
                   <Feather
                     name='info'
@@ -254,7 +160,9 @@ export default function Dashboard(props) {
         {fetchTrips
           .filter((fetchTrip) => {
             if (tab === 'past') {
-              return Date.parse(fetchTrip.endDATE) < Date.parse(new Date());
+              return (
+                Date.parse(fetchTrip.data.endDate) < Date.parse(new Date())
+              );
             }
           })
           .slice(0, 1)
@@ -262,18 +170,18 @@ export default function Dashboard(props) {
             return (
               <View style={styles.fetchedTrip}>
                 <Image
-                  source={{ uri: fetchTrip.photo }}
+                  source={{ uri: fetchTrip.data.photo }}
                   style={styles.Image}
                   alt='random'
                 ></Image>
                 <Text style={styles.containerdatesDashboard}>
-                  {moment(fetchTrip.startDate).format('MMM Do')}
+                  {moment(fetchTrip.data.startDate).format('MMM Do')}
                   <Text> - </Text>
-                  {moment(fetchTrip.endDATE).format('MMM Do')}
+                  {moment(fetchTrip.data.endDate).format('MMM Do')}
                 </Text>
                 <View style={styles.titleInfoSection}>
                   <Text style={styles.containerTriptitle}>
-                    {fetchTrip.title}
+                    {fetchTrip.data.title}
                   </Text>
 
                   <Feather
@@ -294,8 +202,9 @@ export default function Dashboard(props) {
             .filter((fetchTrip) => {
               if (tab === 'active') {
                 return (
-                  Date.parse(fetchTrip.startDate) <= Date.parse(new Date()) &&
-                  Date.parse(fetchTrip.endDATE) >= Date.parse(new Date())
+                  Date.parse(fetchTrip.data.startDate) <=
+                    Date.parse(new Date()) &&
+                  Date.parse(fetchTrip.data.endDate) >= Date.parse(new Date())
                 );
               }
             })
@@ -308,17 +217,19 @@ export default function Dashboard(props) {
                       onPress={() => openTripDetails(fetchTrip.id)}
                     >
                       <Image
-                        source={{ uri: fetchTrip.photo }}
+                        source={{ uri: fetchTrip.data.photo }}
                         style={styles.ImageList}
                         alt='random'
                       ></Image>
                     </TouchableOpacity>
                     <View style={styles.titleDatesList}>
-                      <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                      <Text style={styles.TripTitle}>
+                        {fetchTrip.data.title}
+                      </Text>
                       <Text style={styles.dates}>
-                        {moment(fetchTrip.startDate).format('MMM Do')}{' '}
+                        {moment(fetchTrip.data.startDate).format('MMM Do')}{' '}
                         <Text> - </Text>
-                        {moment(fetchTrip.endDATE).format('MMM Do')}
+                        {moment(fetchTrip.data.endDate).format('MMM Do')}
                       </Text>
                     </View>
                   </View>
@@ -331,7 +242,9 @@ export default function Dashboard(props) {
           {fetchTrips
             .filter((fetchTrip) => {
               if (tab === 'upcoming') {
-                return Date.parse(fetchTrip.endDATE) > Date.parse(new Date());
+                return (
+                  Date.parse(fetchTrip.data.endDate) > Date.parse(new Date())
+                );
               }
             })
             .slice(1)
@@ -343,17 +256,19 @@ export default function Dashboard(props) {
                       onPress={() => openTripDetails(fetchTrip.id)}
                     >
                       <Image
-                        source={{ uri: fetchTrip.photo }}
+                        source={{ uri: fetchTrip.data.photo }}
                         style={styles.ImageList}
                         alt='random'
                       ></Image>
                     </TouchableOpacity>
                     <View style={styles.titleDatesList}>
-                      <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                      <Text style={styles.TripTitle}>
+                        {fetchTrip.data.title}
+                      </Text>
                       <Text style={styles.dates}>
-                        {moment(fetchTrip.startDate).format('MMM Do')}{' '}
+                        {moment(fetchTrip.data.startDate).format('MMM Do')}{' '}
                         <Text> - </Text>
-                        {moment(fetchTrip.endDATE).format('MMM Do')}
+                        {moment(fetchTrip.data.endDate).format('MMM Do')}
                       </Text>
                     </View>
                   </View>
@@ -365,7 +280,9 @@ export default function Dashboard(props) {
           {fetchTrips
             .filter((fetchTrip) => {
               if (tab === 'past') {
-                return Date.parse(fetchTrip.endDATE) < Date.parse(new Date());
+                return (
+                  Date.parse(fetchTrip.data.endDate) < Date.parse(new Date())
+                );
               }
             })
             .slice(1)
@@ -377,17 +294,19 @@ export default function Dashboard(props) {
                       onPress={() => openTripDetails(fetchTrip.id)}
                     >
                       <Image
-                        source={{ uri: fetchTrip.photo }}
+                        source={{ uri: fetchTrip.data.photo }}
                         style={styles.ImageList}
                         alt='random'
                       ></Image>
                     </TouchableOpacity>
                     <View style={styles.titleDatesList}>
-                      <Text style={styles.TripTitle}>{fetchTrip.title}</Text>
+                      <Text style={styles.TripTitle}>
+                        {fetchTrip.data.title}
+                      </Text>
                       <Text style={styles.dates}>
-                        {moment(fetchTrip.startDate).format('MMM Do')}{' '}
+                        {moment(fetchTrip.data.startDate).format('MMM Do')}{' '}
                         <Text> - </Text>
-                        {moment(fetchTrip.endDATE).format('MMM Do')}
+                        {moment(fetchTrip.data.endDate).format('MMM Do')}
                       </Text>
                     </View>
                   </View>
@@ -402,3 +321,108 @@ export default function Dashboard(props) {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  myTripsTitle: {
+    textAlign: 'left',
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 20,
+    color: '#38516d',
+  },
+  tabs: { marginLeft: 0, display: 'flex', flexDirection: 'row' },
+  tabAlone: {
+    margin: 10,
+  },
+  tabActive: {
+    borderBottomWidth: 2,
+    borderColor: '#38516d',
+    fontWeight: 'bold',
+    color: '#38516d',
+  },
+  ImageList: {
+    height: 90,
+    width: 180,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    margin: 10,
+    marginLeft: 20,
+    borderRadius: 10,
+  },
+  Image: {
+    borderRadius: 10,
+    width: 330,
+    height: 230,
+  },
+  fetchedTrip: {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+    alignItems: 'center',
+  },
+  containerdatesDashboard: {
+    display: 'flex',
+    position: 'absolute',
+    top: 220,
+    left: 30,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  titleInfoSection: { display: 'flex', margin: 10 },
+  containerTriptitle: {
+    display: 'flex',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 25,
+    position: 'absolute',
+    top: 25,
+    right: 50,
+  },
+  infoButton: {
+    marginLeft: 12,
+    width: 20,
+    display: 'flex',
+    position: 'absolute',
+    top: 180,
+    left: 110,
+  },
+  status: {
+    textAlign: 'left',
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#38516d',
+  },
+  dates: {
+    display: 'flex',
+    color: 'black',
+    fontSize: 13,
+  },
+  tripsList: { flexDirection: 'row', marginTop: 30 },
+  trips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  TripTitle: {
+    color: 'black',
+    marginLeft: 10,
+    marginRight: 20,
+    marginBottom: 5,
+    alignSelf: 'flex-start',
+    fontWeight: 'bold',
+  },
+  addTripButton: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginLeft: 20,
+    marginBottom: 30,
+  },
+  titleDatesList: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: 150,
+    alignItems: 'center',
+    marginTop: 30,
+  },
+});

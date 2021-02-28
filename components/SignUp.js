@@ -43,7 +43,7 @@ function SignUp(props) {
         <TextInput
           style={styles.inputStyle}
           type='text'
-          name='username'
+          textContentType='username'
           placeholder='Username'
           inputText={registerUsername}
           onChangeText={getUsernameInput}
@@ -51,7 +51,7 @@ function SignUp(props) {
         />
         <TextInput
           style={styles.inputStyle}
-          type='text'
+          textContentType='emailAddress'
           name='email'
           placeholder='Email'
           inputText={registerEmail}
@@ -60,11 +60,12 @@ function SignUp(props) {
         />
         <TextInput
           style={styles.inputStyle}
-          type='text'
+          textContentType='newPassword'
           name='password'
           placeholder='Password'
           inputText={registerPassword}
           onChangeText={getPasswordInput}
+          secureTextEntry={true}
           required
         />
         <Button

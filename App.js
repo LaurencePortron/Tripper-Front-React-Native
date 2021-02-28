@@ -5,11 +5,13 @@ import LogIn from './components/LogIn';
 import TripDetails from './components/TripDetails';
 import Dashboard from './components/Dashboard';
 import { NavigationContainer } from '@react-navigation/native';
+import { UserContext } from './context/Context';
 import AddTrip from './components/AddTrip';
 import AddActivity from './components/AddActivity';
 import SignUp from './components/SignUp';
 import Messages from './components/Messages';
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -28,6 +30,7 @@ if (!firebase.apps.length) {
 
 export default function App() {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       console.log('user changed', user);
@@ -36,19 +39,21 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <NativeRouter>
-        <View style={styles.container}>
-          <Route exact path='/' component={LogIn} />
-          <Route exact path='/signup' component={SignUp} />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route path='/trip-details/:id' component={TripDetails} />
-          <Route path='/add-trip' component={AddTrip} />
-          <Route path='/add-activities/:id' component={AddActivity} />
-          <Route path='/messages' component={Messages} />
-        </View>
-      </NativeRouter>
-    </NavigationContainer>
+    <UserContext.Provider value={user}>
+      <NavigationContainer>
+        <NativeRouter>
+          <View style={styles.container}>
+            <Route exact path='/' component={LogIn} />
+            <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/dashboard' component={Dashboard} />
+            <Route path='/trip-details/:id' component={TripDetails} />
+            <Route path='/add-trip' component={AddTrip} />
+            <Route path='/add-activities/:id' component={AddActivity} />
+            <Route path='/messages' component={Messages} />
+          </View>
+        </NativeRouter>
+      </NavigationContainer>
+    </UserContext.Provider>
   );
 }
 
