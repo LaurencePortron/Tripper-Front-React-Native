@@ -6,7 +6,7 @@ export default function InviteModal({ show, handleInviteModalClosure }) {
   const clickToInvite = () => {
     sendInvite();
   };
-  //style={show ? styles.modalMainDisplay : styles.modalMainNoDisplay}
+
   return (
     <Modal
       visible={show}

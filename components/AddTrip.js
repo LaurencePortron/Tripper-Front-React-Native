@@ -42,22 +42,23 @@ export default function AddTrip(props) {
     setAddCost(inputText);
   };
 
-  const clickToAddTrip = () => {
-    db.collection('trips')
-      .add({
+  const clickToAddTrip = async () => {
+    try {
+      const result = await API.post('/images', { title: addTripTitle });
+
+      await db.collection('trips').add({
         title: addTripTitle,
         startDate: addStartDate,
         endDate: addEndDate,
         description: addDescription,
         cost: addCost,
-      })
-      .then((docRef) => {
-        history.push(`/dashboard`);
-        console.log('Document add trips written with ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error);
+        photo: result.data.url,
       });
+
+      history.push(`/dashboard`);
+    } catch (error) {
+      console.error('Error', error);
+    }
   };
   const backToDashboard = () => {
     history.push(`/dashboard`);

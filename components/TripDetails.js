@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import API from '../services/API';
+import React from 'react';
 import { useHistory } from 'react-router-native';
 import moment from 'moment';
 import Activities from './Activities';
 import { ScrollView, View, Image, Text, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import firebase from 'firebase/app';
 import Friends from './Friends';
 import { useFirestoreDocument } from './hooks';
 
@@ -33,7 +33,7 @@ export default function TripDetails(props) {
     <ScrollView>
       <View style={styles.tripHeader}>
         <Image
-          source={{ uri: fetchTripDetails.photo }}
+          source={{ uri: fetchTripDetails.data.photo }}
           style={styles.photo}
           alt='random'
         />

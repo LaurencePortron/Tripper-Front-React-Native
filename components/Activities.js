@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-native';
 import API from '../services/API';
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useFirestoreCollection, useFirestoreDocument } from './hooks';
+import firebase from 'firebase/app';
 
 export default function Activites({ tripId }) {
   const history = useHistory();
@@ -11,8 +13,12 @@ export default function Activites({ tripId }) {
     history.push(`/add-activities/${tripId}`);
   };
 
-  const fetchActivities = useFirestoreDocument(
-    firebase.firestore().collection('activities').doc(tripId),
+  const fetchActivities = useFirestoreCollection(
+    firebase
+      .firestore()
+      .collection('trips')
+      .doc(tripId)
+      .collection('activities'),
     [tripId]
   );
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { NativeRouter, Route } from 'react-router-native';
+import { NativeRouter, Redirect, Route } from 'react-router-native';
 import LogIn from './components/LogIn';
 import TripDetails from './components/TripDetails';
 import Dashboard from './components/Dashboard';
@@ -43,7 +43,11 @@ export default function App() {
       <NavigationContainer>
         <NativeRouter>
           <View style={styles.container}>
-            <Route exact path='/' component={LogIn} />
+            {user ? (
+              <Redirect from='/' to='/dashboard' />
+            ) : (
+              <Route exact path='/' component={LogIn} />
+            )}
             <Route exact path='/signup' component={SignUp} />
             <Route exact path='/dashboard' component={Dashboard} />
             <Route path='/trip-details/:id' component={TripDetails} />
