@@ -34,16 +34,16 @@ export default function Activites({ tripId }) {
           return (
             <View>
               <Image
-                source={{ uri: fetchActivity.photo }}
+                source={{ uri: fetchActivity.data.photo }}
                 style={styles.activityPhoto}
                 alt='random'
               />
 
               <Text style={styles.activityTitle} key={fetchActivity.id}>
-                {fetchActivity.title}
+                {fetchActivity.data.title}
               </Text>
-              <Text style={styles.activityCost} key={fetchActivity.title}>
-                {fetchActivity.cost}
+              <Text style={styles.activityCost} key={fetchActivity.data.title}>
+                {fetchActivity.data.cost}
               </Text>
             </View>
           );

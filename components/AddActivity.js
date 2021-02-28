@@ -10,46 +10,54 @@ import {
   ScrollView,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import firebase from 'firebase/app';
 
 export default function AddActivity(props) {
-  const [addTitle, setAddTitle] = useState('');
-  const [addDate, setAddDate] = useState('');
-  const [addDescription, setAddDescription] = useState('');
-  const [addCost, setAddCost] = useState('');
+  const [addActivityTitle, setAddActivityTitle] = useState('');
+  const [addActivityDate, setAddActivityDate] = useState('');
+  const [addActivityDescription, setAddActivityDescription] = useState('');
+  const [addActivityCost, setAddActivityCost] = useState('');
   const history = useHistory();
   const [isClicked, setIsClicked] = useState(false);
+  var db = firebase.firestore();
+  require('firebase/firestore');
 
   const tripId = props.match.params.id;
 
   const addTitleForActivity = (inputText) => {
-    setAddTitle(inputText);
+    setAddActivityTitle(inputText);
   };
   const addDateForActivity = (inputText) => {
-    setAddDate(inputText);
+    setAddActivityDate(inputText);
   };
 
   const addDescriptionForActivity = (inputText) => {
-    setAddDescription(inputText);
+    setAddActivityDescription(inputText);
   };
 
   const addCostForActivity = (inputText) => {
-    setAddCost(inputText);
-  };
-
-  const backToDashboard = () => {
-    history.push(`/dashboard`);
+    setAddActivityCost(inputText);
   };
 
   const clickToAddActivity = async () => {
-    await API.post(`/activities`, {
-      title: addTitle,
-      date: addDate,
-      description: addDescription,
-      cost: addCost,
-      trip_id: tripId,
-    });
+    try {
+      const result = await API.post('/images', { title: addActivityTitle });
 
-    setIsClicked(true);
+      await db.collection('trips').doc(tripId).collection('activities').add({
+        title: addActivityTitle,
+        date: addActivityDate,
+        description: addActivityDescription,
+        cost: addActivityCost,
+        trip_id: tripId,
+        photo: result.data.url,
+      });
+
+      history.push(`/dashboard`);
+    } catch (error) {
+      console.error('Error', error);
+    }
+  };
+  const backToDashboard = () => {
     history.push(`/trip-details/${tripId}`);
   };
 
@@ -68,7 +76,7 @@ export default function AddActivity(props) {
           style={styles.addInfo}
           placeholder='Title'
           name='title'
-          inputText={addTitle}
+          inputText={addActivityTitle}
           onChangeText={addTitleForActivity}
         />
 
@@ -76,7 +84,7 @@ export default function AddActivity(props) {
           style={styles.addInfo}
           placeholder='Date'
           name='date'
-          inputText={addDate}
+          inputText={addActivityDate}
           onChangeText={addDateForActivity}
         />
 
@@ -84,7 +92,7 @@ export default function AddActivity(props) {
           style={styles.addInfo}
           placeholder='Description'
           name='description'
-          inputText={addDescription}
+          inputText={addActivityDescription}
           onChangeText={addDescriptionForActivity}
         />
 
@@ -92,7 +100,7 @@ export default function AddActivity(props) {
           style={styles.addInfo}
           placeholder='Cost'
           name='cost'
-          inputText={addCost}
+          inputText={addActivityCost}
           onChangeText={addCostForActivity}
         />
 
