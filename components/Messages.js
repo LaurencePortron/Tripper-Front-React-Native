@@ -48,42 +48,6 @@ export default function Messages(props) {
     history.push(`/dashboard`);
   };
 
-  const styles = StyleSheet.create({
-    newFeature: { textAlign: 'center' },
-    messages: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginTop: 10,
-      marginBottom: 10,
-      color: '#38516d',
-      fontWeight: 'bold',
-    },
-    messageBlue: {
-      position: 'relative',
-      marginLeft: 20,
-      marginBottom: 10,
-      padding: 10,
-      backgroundColor: '#85959f',
-      width: 200,
-      height: 50,
-      textAlign: 'left',
-      borderWidth: 1,
-      borderColor: '#85959f',
-      borderRadius: 10,
-    },
-    addInfo: {},
-    message: {},
-    button: {
-      width: 20,
-      padding: 5,
-      backgroundColor: '#535b63',
-      fontWeight: 'bold',
-      color: '#ffffff',
-    },
-    arrow: {
-      marginTop: 20,
-    },
-  });
   return (
     <ScrollView>
       <Feather
@@ -127,3 +91,39 @@ export default function Messages(props) {
     </ScrollView>
   );
 }
+const styles = StyleSheet.create({
+  newFeature: { textAlign: 'center' },
+  messages: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: 10,
+    marginBottom: 10,
+    color: '#38516d',
+    fontWeight: 'bold',
+  },
+  messageBlue: {
+    position: 'relative',
+    marginLeft: 20,
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#85959f',
+    width: 200,
+    height: 50,
+    textAlign: 'left',
+    borderWidth: 1,
+    borderColor: '#85959f',
+    borderRadius: 10,
+  },
+  addInfo: {},
+  message: {},
+  button: {
+    width: 20,
+    padding: 5,
+    backgroundColor: '#535b63',
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  arrow: {
+    marginTop: 20,
+  },
+});

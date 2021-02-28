@@ -40,26 +40,6 @@ export default function AddTrip(props) {
     setChangeCost(inputText);
   };
 
-  const styles = StyleSheet.create({
-    addInfoFields: { width: 300, marginTop: 30 },
-    addTripTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
-    addInfo: {
-      display: 'flex',
-      padding: 15,
-      borderWidth: 1,
-      borderColor: '#535b63',
-      marginBottom: 15,
-      margin: 10,
-    },
-    button: {
-      width: 80,
-      padding: 15,
-      backgroundColor: '#1b3332',
-      fontWeight: 'bold',
-      color: '#ffffff',
-    },
-  });
-
   const clickToAddTrip = async () => {
     await API.post(`/trips`, {
       title: changeTripTitle,
@@ -79,6 +59,7 @@ export default function AddTrip(props) {
   return (
     <ScrollView>
       <Feather
+        style={styles.arrow}
         name='arrow-left'
         size={25}
         color='black'
@@ -140,3 +121,24 @@ export default function AddTrip(props) {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  addInfoFields: { width: 300, marginTop: 30 },
+  addTripTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
+  addInfo: {
+    display: 'flex',
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#535b63',
+    marginBottom: 15,
+    margin: 10,
+  },
+  button: {
+    width: 80,
+    padding: 15,
+    backgroundColor: '#1b3332',
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  arrow: { marginTop: 30 },
+});
