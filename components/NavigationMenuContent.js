@@ -21,10 +21,11 @@ export default function NavigationMenuContent({ clickToCloseMenu }) {
   return (
     <View style={styles.container}>
       <Feather
-        name='x-circle'
-        size={30}
+        name='arrow-right-circle'
+        size={25}
         color='orange'
         onPress={clickToCloseMenu}
+        style={styles.arrowClose}
       />
       <Text style={styles.navItemStyle} onPress={navigateToProfile}>
         My profile
