@@ -10,6 +10,9 @@ import AddTrip from './components/AddTrip';
 import AddActivity from './components/AddActivity';
 import SignUp from './components/SignUp';
 import Messages from './components/Messages';
+import Profile from './components/Profile';
+import AccountSettings from './components/AccountSettings';
+
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -53,6 +56,8 @@ export default function App() {
           <Route path='/add-trip' component={AddTrip} />
           <Route path='/add-activities/:id' component={AddActivity} />
           <Route path='/messages' component={Messages} />
+          <Route path='/myprofile' component={Profile} />
+          <Route path='/settings' component={AccountSettings} />
         </View>
       </NativeRouter>
     </UserContext.Provider>

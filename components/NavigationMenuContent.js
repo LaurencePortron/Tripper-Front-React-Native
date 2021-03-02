@@ -10,8 +10,8 @@ export default function NavigationMenuContent({ clickToCloseMenu }) {
     history.push('/myprofile');
   };
 
-  const navigateToPhotos = () => {
-    history.push('/myphotos');
+  const navigateToSettings = () => {
+    history.push('/settings');
   };
 
   const navigateToMessages = () => {
@@ -28,10 +28,10 @@ export default function NavigationMenuContent({ clickToCloseMenu }) {
         style={styles.arrowClose}
       />
       <Text style={styles.navItemStyle} onPress={navigateToProfile}>
-        My profile
+        My profile info
       </Text>
-      <Text style={styles.navItemStyle} onPress={navigateToPhotos}>
-        Shared photos
+      <Text style={styles.navItemStyle} onPress={navigateToSettings}>
+        Account Settings
       </Text>
       <TouchableOpacity onPress={navigateToMessages}>
         <Text style={styles.navItemStyle}>Messages</Text>
