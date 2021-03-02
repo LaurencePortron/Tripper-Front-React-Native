@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { Animated, View, Easing, StyleSheet, Header } from 'react-native';
 import NavigationMenuContent from './NavigationMenuContent';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export default function NavigationMenu(props) {
   const [menuIsOpen, setMenuIsOPen] = useState(false);
@@ -55,6 +54,7 @@ const styles = StyleSheet.create({
   navigationMenuContainer: {
     padding: 10,
     marginTop: 20,
+    display: 'flex',
   },
 
   navigationMenuCon: {
@@ -67,6 +67,5 @@ const styles = StyleSheet.create({
   navigationMenu: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
   },
 });

@@ -50,8 +50,8 @@ export default function Dashboard(props) {
     <ScrollView>
       <View style={styles.dashboardScrollView}>
         <NavigationMenu />
-        <Text style={styles.myTripsTitle}>My Trips</Text>
       </View>
+      <Text style={styles.myTripsTitle}>My Trips</Text>
       <View style={styles.tabs}>
         <Text
           style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
@@ -332,10 +332,10 @@ const styles = StyleSheet.create({
   dashboardScrollView: {
     display: 'flex',
     flexDirection: 'row-reverse',
+
     zIndex: 1,
   },
   myTripsTitle: {
-    textAlign: 'left',
     marginTop: 20,
     marginBottom: 20,
     fontSize: 20,
