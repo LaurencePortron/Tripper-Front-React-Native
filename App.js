@@ -55,9 +55,9 @@ export default function App() {
           <Route path='/trip-details/:id' component={TripDetails} />
           <Route path='/add-trip' component={AddTrip} />
           <Route path='/add-activities/:id' component={AddActivity} />
-          <Route path='/messages' component={Messages} />
-          <Route path='/myprofile' component={Profile} />
           <Route path='/settings' component={AccountSettings} />
+          <Route path='/myprofile' component={Profile} />
+          <Route path='/messages' component={Messages} />
         </View>
       </NativeRouter>
     </UserContext.Provider>

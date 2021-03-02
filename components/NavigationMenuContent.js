@@ -6,10 +6,6 @@ import { useHistory } from 'react-router-dom';
 export default function NavigationMenuContent({ clickToCloseMenu }) {
   const history = useHistory();
 
-  const navigateToProfile = () => {
-    history.push('/myprofile');
-  };
-
   const navigateToSettings = () => {
     history.push('/settings');
   };
@@ -27,12 +23,10 @@ export default function NavigationMenuContent({ clickToCloseMenu }) {
         onPress={clickToCloseMenu}
         style={styles.arrowClose}
       />
-      <Text style={styles.navItemStyle} onPress={navigateToProfile}>
-        My profile info
-      </Text>
       <Text style={styles.navItemStyle} onPress={navigateToSettings}>
         Account Settings
       </Text>
+      <Text style={styles.navItemStyle}>My Trips</Text>
       <TouchableOpacity onPress={navigateToMessages}>
         <Text style={styles.navItemStyle}>Messages</Text>
       </TouchableOpacity>

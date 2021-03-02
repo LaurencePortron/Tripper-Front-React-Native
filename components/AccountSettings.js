@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { ScrollView, View, Text, StyleSheet, Button } from 'react-native';
 import { useHistory } from 'react-router-native';
 
-export default function AccountSettings(props) {
+export default function NotificationSettings(props) {
   const history = useHistory();
 
   const backToDashboard = () => {
@@ -11,39 +11,41 @@ export default function AccountSettings(props) {
   };
 
   return (
-    <ScrollView>
-      <Feather
-        name='arrow-left-circle'
-        size={32}
-        color='black'
-        style={styles.backToDashboardButton}
-        onPress={backToDashboard}
-      />
-      <View>
-        <Text style={styles.myProfile}>Account Settings</Text>
-
-        <View style={styles.profileSections}>
-          <Text style={styles.sectionsTitle}>Notification Preferences</Text>
-          <View style={styles.notifications}>
-            <Text style={styles.sectionsparagraph}>Message Notifications</Text>
-
-            <Feather name='toggle-left' size={32} color='black' />
-          </View>
-          <View style={styles.notifications}>
-            <Text style={styles.sectionsparagraph}>Trip Notifications</Text>
-
-            <Feather name='toggle-right' size={32} color='black' />
-          </View>
-          <View style={styles.notifications}>
-            <Text style={styles.sectionsparagraph}>Activity Notifications</Text>
-
-            <Feather name='toggle-left' size={32} color='black' />
-          </View>
-          <Button
-            style={styles.profileButton}
-            type='submit'
-            title='Save'
-          ></Button>
+    <ScrollView style={styles.settingsContainer}>
+      <View style={styles.settingsHeader}>
+        <Text style={styles.settingsTitle}>Settings</Text>
+        <Feather
+          name='arrow-left-circle'
+          size={32}
+          color='black'
+          style={styles.backToDashboardButton}
+          onPress={backToDashboard}
+        />
+      </View>
+      <View style={styles.profileSection}>
+        <View style={styles.profileLinks}>
+          <Feather name='user' size={25} color='black' />
+          <Text>My info</Text>
+          <Feather name='chevron-right' size={25} color='black' />
+        </View>
+        <View style={styles.profileLinks}>
+          <Feather name='bell' size={25} color='black' />
+          <Text>Notifications</Text>
+          <Feather name='chevron-right' size={25} color='black' />
+        </View>
+        <View style={styles.profileLinks}>
+          <Feather name='headphones' size={25} color='black' />
+          <Text>Help</Text>
+          <Feather name='chevron-right' size={25} color='black' />
+        </View>
+        <View style={styles.profileLinks}>
+          <Feather name='help-circle' size={25} color='black' />
+          <Text>About</Text>
+          <Feather name='chevron-right' size={25} color='black' />
+        </View>
+        <View style={styles.logOut}>
+          <Feather name='log-out' size={25} color='orange' />
+          <Text>Log Out</Text>
         </View>
       </View>
     </ScrollView>
@@ -51,33 +53,42 @@ export default function AccountSettings(props) {
 }
 
 const styles = StyleSheet.create({
-  myProfile: {
-    textAlign: 'center',
+  settingsContainer: {
+    width: '80%',
+  },
+  settingsHeader: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-around',
+    alignContent: 'center',
+  },
+  settingsTitle: {
     marginTop: 20,
-    fontSize: 40,
+    marginBottom: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#38516d',
   },
-  profileSections: {
+  profileSection: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 20,
-    alignItems: 'flex-start',
   },
-  sectionsTitle: {
-    textAlign: 'left',
-    fontSize: 20,
+  profileLinks: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
+
+    padding: 20,
   },
   backToDashboardButton: {
     marginTop: 20,
   },
-  sectionsparagraph: {
-    fontSize: 15,
-    marginRight: 30,
-  },
-  notifications: {
+  logOut: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 10,
   },
 });
