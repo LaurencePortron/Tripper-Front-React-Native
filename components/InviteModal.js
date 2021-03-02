@@ -1,10 +1,19 @@
-import React from 'react';
-import { View, StyleSheet, Modal, Text, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Modal, Text, TextInput, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import API from '../services/API';
 
 export default function InviteModal({ show, handleInviteModalClosure }) {
-  const clickToInvite = () => {
-    sendInvite();
+  const [getEmail, setGetEmail] = useState('');
+
+  const getEmailInput = (inputText) => {
+    setGetEmail(inputText);
+  };
+
+  const handleSendInvite = () => {
+    API.post(`/invites`, {
+      to: getEmail,
+    });
   };
 
   return (
@@ -23,15 +32,20 @@ export default function InviteModal({ show, handleInviteModalClosure }) {
         <Text style={styles.inviteText}>Who would you like to invite?</Text>
         <TextInput
           style={styles.addEmail}
+          onChangeText={getEmailInput}
+          inputText={getEmail}
           placeholder='Enter Email'
           name='title'
         />
-        <View
+        <Button
           onPress={() => {
-            clickToInvite();
+            handleSendInvite();
           }}
           type='submit'
-        ></View>
+          method='post'
+          action='/invites'
+          title='Send Invite'
+        ></Button>
       </View>
     </Modal>
   );

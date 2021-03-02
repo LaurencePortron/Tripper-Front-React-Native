@@ -40,23 +40,21 @@ export default function App() {
 
   return (
     <UserContext.Provider value={user}>
-      <NavigationContainer>
-        <NativeRouter>
-          <View style={styles.container}>
-            {user ? (
-              <Redirect from='/' to='/dashboard' />
-            ) : (
-              <Route exact path='/' component={LogIn} />
-            )}
-            <Route exact path='/signup' component={SignUp} />
-            <Route exact path='/dashboard' component={Dashboard} />
-            <Route path='/trip-details/:id' component={TripDetails} />
-            <Route path='/add-trip' component={AddTrip} />
-            <Route path='/add-activities/:id' component={AddActivity} />
-            <Route path='/messages' component={Messages} />
-          </View>
-        </NativeRouter>
-      </NavigationContainer>
+      <NativeRouter>
+        <View style={styles.container}>
+          {user ? (
+            <Redirect from='/' to='/dashboard' />
+          ) : (
+            <Route exact path='/' component={LogIn} />
+          )}
+          <Route exact path='/signup' component={SignUp} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route path='/trip-details/:id' component={TripDetails} />
+          <Route path='/add-trip' component={AddTrip} />
+          <Route path='/add-activities/:id' component={AddActivity} />
+          <Route path='/messages' component={Messages} />
+        </View>
+      </NativeRouter>
     </UserContext.Provider>
   );
 }

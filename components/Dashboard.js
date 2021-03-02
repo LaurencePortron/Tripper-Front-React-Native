@@ -12,6 +12,7 @@ import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import { useFirestoreCollection } from './hooks';
+import NavigationMenu from './NavigationMenu';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
@@ -47,7 +48,10 @@ export default function Dashboard(props) {
 
   return (
     <ScrollView>
-      <Text style={styles.myTripsTitle}>My Trips</Text>
+      <View style={styles.dashboardScrollView}>
+        <NavigationMenu />
+        <Text style={styles.myTripsTitle}>My Trips</Text>
+      </View>
       <View style={styles.tabs}>
         <Text
           style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
@@ -157,6 +161,7 @@ export default function Dashboard(props) {
               </View>
             );
           })}
+
         {fetchTrips
           .filter((fetchTrip) => {
             if (tab === 'past') {
@@ -197,6 +202,7 @@ export default function Dashboard(props) {
               </View>
             );
           })}
+
         <View style={styles.trips}>
           {fetchTrips
             .filter((fetchTrip) => {
@@ -323,6 +329,11 @@ export default function Dashboard(props) {
 }
 
 const styles = StyleSheet.create({
+  dashboardScrollView: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    zIndex: 1,
+  },
   myTripsTitle: {
     textAlign: 'left',
     marginTop: 20,
@@ -381,7 +392,6 @@ const styles = StyleSheet.create({
   infoButton: {
     marginLeft: 12,
     width: 20,
-    display: 'flex',
     position: 'absolute',
     top: 180,
     left: 110,
