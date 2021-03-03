@@ -7,12 +7,13 @@ import {
   StyleSheet,
   Button,
   Image,
+  TextInput,
 } from 'react-native';
 import AccountHeader from './AccountHeader';
 
 export default function Friends(props) {
   return (
-    <ScrollView style={styles.settingsContainer}>
+    <ScrollView>
       <AccountHeader />
       {/* <Image
         source={require('./images/avatar.png')}
@@ -21,9 +22,24 @@ export default function Friends(props) {
       ></Image> */}
       <View>
         <View style={styles.profileSections}>
-          <Text style={styles.sectionsTitle}>Laurence</Text>
+          <Text style={styles.sectionsTitle}>First name</Text>
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Description'
+            name='description'
+          />
           <Text style={styles.sectionsTitle}>Email</Text>
-          <Text style={styles.sectionsTitle}>Password</Text>
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Description'
+            name='description'
+          />
+          <Text style={styles.sectionsTitle}>Change Password</Text>
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Description'
+            name='description'
+          />
           <Button
             style={styles.profileButton}
             type='submit'
@@ -47,6 +63,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     marginTop: 20,
+    alignItems: 'center',
   },
   sectionsTitle: {
     fontSize: 20,
@@ -55,8 +72,13 @@ const styles = StyleSheet.create({
   settingsContainer: {
     width: '100%',
   },
-  // Image: {
-  //   width: '50%',
-  //   height: '50%',
-  // },
+  addInfo: {
+    display: 'flex',
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#535b63',
+    marginBottom: 15,
+    margin: 10,
+    width: 200,
+  },
 });

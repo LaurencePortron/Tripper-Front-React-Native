@@ -5,7 +5,7 @@ import AccountHeader from './AccountHeader';
 
 export default function NotificationSettings(props) {
   return (
-    <ScrollView style={styles.settingsContainer}>
+    <ScrollView>
       <AccountHeader />
       <View>
         <View style={styles.profileSections}>

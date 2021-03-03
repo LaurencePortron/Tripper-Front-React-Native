@@ -19,6 +19,10 @@ export default function NotificationSettings(props) {
     history.push('/notifications');
   };
 
+  const navigateToHelpCenter = () => {
+    history.push('/helpCenter');
+  };
+
   const handleLogOut = (event) => {
     firebase
       .auth()
@@ -56,7 +60,7 @@ export default function NotificationSettings(props) {
         </View>
         <View style={styles.profileLinks}>
           <Feather name='headphones' size={25} color='black' />
-          <Text>Help</Text>
+          <Text onPress={navigateToHelpCenter}>Help</Text>
           <Feather name='chevron-right' size={25} color='black' />
         </View>
         <View style={styles.profileLinks}>

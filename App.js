@@ -12,7 +12,7 @@ import SignUp from './components/SignUp';
 import Messages from './components/Messages';
 import Profile from './components/Profile';
 import AccountSettings from './components/AccountSettings';
-
+import HelpCenter from './components/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import NotificationSettings from './components/NotificationSettings';
@@ -60,6 +60,7 @@ export default function App() {
           <Route path='/myprofile' component={Profile} />
           <Route path='/notifications' component={NotificationSettings} />
           <Route path='/messages' component={Messages} />
+          <Route path='/helpCenter' component={HelpCenter} />
         </View>
       </NativeRouter>
     </UserContext.Provider>
