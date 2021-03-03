@@ -1,27 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Feather } from '@expo/vector-icons';
 import { ScrollView, View, Text, StyleSheet, Button } from 'react-native';
-import { useHistory } from 'react-router-native';
+import AccountHeader from './AccountHeader';
 
 export default function NotificationSettings(props) {
-  const history = useHistory();
-
-  const backToDashboard = () => {
-    history.push('/dashboard');
-  };
-
   return (
-    <ScrollView>
-      <Feather
-        name='arrow-left-circle'
-        size={32}
-        color='black'
-        style={styles.backToDashboardButton}
-        onPress={backToDashboard}
-      />
+    <ScrollView style={styles.settingsContainer}>
+      <AccountHeader />
       <View>
-        <Text style={styles.myProfile}>Notifications</Text>
-
         <View style={styles.profileSections}>
           <Text style={styles.sectionsTitle}>Notification Preferences</Text>
           <View style={styles.notifications}>
@@ -68,9 +54,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
   },
-  backToDashboardButton: {
-    marginTop: 20,
-  },
+
   sectionsparagraph: {
     fontSize: 15,
     marginRight: 30,
@@ -79,5 +63,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  settingsContainer: {
+    width: '100%',
   },
 });

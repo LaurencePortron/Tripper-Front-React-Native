@@ -1,36 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { ScrollView, View, Text, StyleSheet, Button } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { useHistory } from 'react-router-native';
+import firebase from 'firebase/app';
+import BackToDashboardButton from './Buttons';
 
 export default function NotificationSettings(props) {
   const history = useHistory();
+  var db = firebase.firestore();
+  require('firebase/firestore');
 
-  const backToDashboard = () => {
-    history.push('/dashboard');
+  const navigateToProfileInfo = () => {
+    history.push('/myprofile');
+  };
+
+  const navigateToNotifications = () => {
+    history.push('/notifications');
+  };
+
+  const handleLogOut = (event) => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log('successfully logged out');
+        history.push(`/`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <ScrollView style={styles.settingsContainer}>
       <View style={styles.settingsHeader}>
         <Text style={styles.settingsTitle}>Settings</Text>
-        <Feather
-          name='arrow-left-circle'
-          size={32}
-          color='black'
-          style={styles.backToDashboardButton}
-          onPress={backToDashboard}
-        />
+        <BackToDashboardButton />
       </View>
       <View style={styles.profileSection}>
         <View style={styles.profileLinks}>
           <Feather name='user' size={25} color='black' />
-          <Text>My info</Text>
+          <Text onPress={navigateToProfileInfo}>My info</Text>
           <Feather name='chevron-right' size={25} color='black' />
         </View>
         <View style={styles.profileLinks}>
           <Feather name='bell' size={25} color='black' />
-          <Text>Notifications</Text>
+          <Text onPress={navigateToNotifications}>Notifications</Text>
+          <Feather name='chevron-right' size={25} color='black' />
+        </View>
+        <View style={styles.profileLinks}>
+          <MaterialCommunityIcons name='piggy-bank' size={25} color='black' />
+          <Text>Splitwise</Text>
           <Feather name='chevron-right' size={25} color='black' />
         </View>
         <View style={styles.profileLinks}>
@@ -45,7 +66,7 @@ export default function NotificationSettings(props) {
         </View>
         <View style={styles.logOut}>
           <Feather name='log-out' size={25} color='orange' />
-          <Text>Log Out</Text>
+          <Text onPress={handleLogOut}>Log Out</Text>
         </View>
       </View>
     </ScrollView>
@@ -54,36 +75,37 @@ export default function NotificationSettings(props) {
 
 const styles = StyleSheet.create({
   settingsContainer: {
-    width: '80%',
+    width: '100%',
   },
   settingsHeader: {
     display: 'flex',
     flexDirection: 'row-reverse',
-    justifyContent: 'space-around',
-    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#38516d',
+    height: 80,
   },
   settingsTitle: {
-    marginTop: 20,
-    marginBottom: 20,
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#38516d',
+    color: 'white',
   },
   profileSection: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   profileLinks: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     borderBottomColor: 'lightgrey',
     borderBottomWidth: 1,
-
     padding: 20,
   },
   backToDashboardButton: {
-    marginTop: 20,
+    marginRight: 30,
   },
   logOut: {
     display: 'flex',

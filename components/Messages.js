@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API from '../services/API';
-import { Feather } from '@expo/vector-icons';
-import { useHistory } from 'react-router-native';
+import BackToDashboardButton from './Buttons';
 import {
   ScrollView,
   TextInput,
@@ -15,7 +14,6 @@ export default function Messages(props) {
   const [postIsClicked, setPostIsClicked] = useState(false);
   const [writePost, setWritePost] = useState('');
   const [fetchPosts, setFetchPosts] = useState([]);
-  const history = useHistory();
 
   const getMessageInput = (inputText) => {
     setWritePost(inputText);
@@ -44,19 +42,9 @@ export default function Messages(props) {
     loadMessages();
   }, []);
 
-  const backToDashboard = () => {
-    history.push(`/dashboard`);
-  };
-
   return (
     <ScrollView>
-      <Feather
-        name='arrow-left'
-        size={20}
-        color='orange'
-        onPress={backToDashboard}
-        style={styles.arrow}
-      />
+      <BackToDashboardButton />
       <Text style={styles.newFeature}>Coming soon! </Text>
       {postIsClicked ? (
         <Text style={styles.messages}>

@@ -9,8 +9,8 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
+import BackToDashboardButton from './Buttons';
 
 export default function AddTrip(props) {
   const [addTripTitle, setAddTripTitle] = useState('');
@@ -60,19 +60,10 @@ export default function AddTrip(props) {
       console.error('Error', error);
     }
   };
-  const backToDashboard = () => {
-    history.push(`/dashboard`);
-  };
 
   return (
     <ScrollView>
-      <Feather
-        style={styles.arrow}
-        name='arrow-left'
-        size={25}
-        color='black'
-        onPress={backToDashboard}
-      />
+      <BackToDashboardButton />
       <Text style={styles.addTripTitle}>Add your trip</Text>
       <View style={styles.addInfoFields}>
         <TextInput

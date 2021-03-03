@@ -15,6 +15,7 @@ import AccountSettings from './components/AccountSettings';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import NotificationSettings from './components/NotificationSettings';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -57,6 +58,7 @@ export default function App() {
           <Route path='/add-activities/:id' component={AddActivity} />
           <Route path='/settings' component={AccountSettings} />
           <Route path='/myprofile' component={Profile} />
+          <Route path='/notifications' component={NotificationSettings} />
           <Route path='/messages' component={Messages} />
         </View>
       </NativeRouter>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-native';
 
 export default function NavigationMenuContent({ clickToCloseMenu }) {
   const history = useHistory();

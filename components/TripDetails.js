@@ -7,6 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import Friends from './Friends';
 import { useFirestoreDocument } from './hooks';
+import BackToDashboardButton from './Buttons';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
@@ -16,10 +17,6 @@ export default function TripDetails(props) {
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
   );
-
-  const backToDashboard = () => {
-    history.push(`/dashboard`);
-  };
 
   const goToMessages = () => {
     history.push(`/messages`);
@@ -38,12 +35,7 @@ export default function TripDetails(props) {
           alt='random'
         />
         <View style={styles.arrowLeft}>
-          <Feather
-            name='arrow-left'
-            size={30}
-            color='orange'
-            onPress={backToDashboard}
-          />
+          <BackToDashboardButton />
         </View>
         <Text style={styles.containerDates}>
           {moment(fetchTripDetails.data.startDate).format('MMM Do')} -
