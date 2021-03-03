@@ -12,7 +12,7 @@ export default function NavigationMenu(props) {
 
     Animated.timing(animatedValue, {
       toValue: 0.5,
-      duration: 150,
+      duration: 1200,
       easing: Easing.ease,
     }).start();
   };
@@ -21,7 +21,7 @@ export default function NavigationMenu(props) {
 
     Animated.timing(animatedValue, {
       toValue: 1,
-      duration: 150,
+      duration: 1200,
       easing: Easing.ease,
     }).start();
   };
@@ -52,7 +52,6 @@ export default function NavigationMenu(props) {
 
 const styles = StyleSheet.create({
   navigationMenuContainer: {
-    padding: 10,
     marginTop: 20,
     display: 'flex',
   },

@@ -33,7 +33,7 @@ export default function NotificationSettings(props) {
   };
 
   return (
-    <ScrollView style={styles.settingsContainer}>
+    <ScrollView>
       <View style={styles.settingsHeader}>
         <Text style={styles.settingsTitle}>Settings</Text>
         <BackToDashboardButton />
@@ -74,9 +74,6 @@ export default function NotificationSettings(props) {
 }
 
 const styles = StyleSheet.create({
-  settingsContainer: {
-    width: '100%',
-  },
   settingsHeader: {
     display: 'flex',
     flexDirection: 'row-reverse',
@@ -84,6 +81,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#38516d',
     height: 80,
+    padding: 10,
   },
   settingsTitle: {
     fontSize: 30,
@@ -94,23 +92,22 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
   },
   profileLinks: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     borderBottomColor: 'lightgrey',
     borderBottomWidth: 1,
     padding: 20,
   },
-  backToDashboardButton: {
-    marginRight: 30,
-  },
+
   logOut: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+
     marginTop: 10,
   },
 });

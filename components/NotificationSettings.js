@@ -37,18 +37,11 @@ export default function NotificationSettings(props) {
 }
 
 const styles = StyleSheet.create({
-  myProfile: {
-    textAlign: 'center',
-    marginTop: 20,
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: '#38516d',
-  },
   profileSections: {
     display: 'flex',
     flexDirection: 'column',
     marginTop: 20,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   sectionsTitle: {
     textAlign: 'left',

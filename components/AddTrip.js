@@ -64,64 +64,71 @@ export default function AddTrip(props) {
   return (
     <ScrollView>
       <BackToDashboardButton />
-      <Text style={styles.addTripTitle}>Add your trip</Text>
-      <View style={styles.addInfoFields}>
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Location'
-          name='title'
-          inputText={addTripTitle}
-          onChangeText={addTripTitleInput}
-        />
+      <View style={styles.addTripContainer}>
+        <Text style={styles.addTripTitle}>Add your trip</Text>
+        <View style={styles.addInfoFields}>
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Location'
+            name='title'
+            inputText={addTripTitle}
+            onChangeText={addTripTitleInput}
+          />
 
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Start Date'
-          name='startDate'
-          inputText={addStartDate}
-          onChangeText={addStartDateInput}
-        />
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Start Date'
+            name='startDate'
+            inputText={addStartDate}
+            onChangeText={addStartDateInput}
+          />
 
-        <TextInput
-          style={styles.addInfo}
-          placeholder='End Date'
-          name='endDate'
-          inputText={addEndDate}
-          onChangeText={addEndDateInput}
-        />
+          <TextInput
+            style={styles.addInfo}
+            placeholder='End Date'
+            name='endDate'
+            inputText={addEndDate}
+            onChangeText={addEndDateInput}
+          />
 
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Description'
-          name='description'
-          inputText={addDescription}
-          onChangeText={addDescriptionInput}
-        />
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Description'
+            name='description'
+            inputText={addDescription}
+            onChangeText={addDescriptionInput}
+          />
 
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Description'
-          name='cost'
-          inputText={addCost}
-          onChangeText={addCostInput}
-        />
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Description'
+            name='cost'
+            inputText={addCost}
+            onChangeText={addCostInput}
+          />
 
-        <Button
-          style={styles.button}
-          type='submit'
-          method='post'
-          action='/trips'
-          title='Add Trip'
-          onPress={() => {
-            clickToAddTrip();
-          }}
-        ></Button>
+          <Button
+            style={styles.button}
+            type='submit'
+            method='post'
+            action='/trips'
+            title='Add Trip'
+            onPress={() => {
+              clickToAddTrip();
+            }}
+          ></Button>
+        </View>
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  addTripContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   addInfoFields: { width: 300, marginTop: 30 },
   addTripTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
   addInfo: {

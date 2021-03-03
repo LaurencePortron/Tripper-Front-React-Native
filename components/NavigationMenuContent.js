@@ -16,38 +16,44 @@ export default function NavigationMenuContent({ clickToCloseMenu }) {
 
   return (
     <View style={styles.container}>
-      <Feather
-        name='arrow-right-circle'
-        size={25}
-        color='orange'
-        onPress={clickToCloseMenu}
-        style={styles.arrowClose}
-      />
-      <Text style={styles.navItemStyle} onPress={navigateToSettings}>
-        Account Settings
-      </Text>
-      <Text style={styles.navItemStyle}>My Trips</Text>
-      <TouchableOpacity onPress={navigateToMessages}>
-        <Text style={styles.navItemStyle}>Messages</Text>
-      </TouchableOpacity>
+      <View style={styles.navSectionStyle}>
+        <Feather
+          name='arrow-right-circle'
+          size={25}
+          color='orange'
+          onPress={clickToCloseMenu}
+          style={styles.arrowClose}
+        />
+        <Text style={styles.navItemStyle} onPress={navigateToSettings}>
+          Account Settings
+        </Text>
+        <Text style={styles.navItemStyle}>My Trips</Text>
+        <TouchableOpacity onPress={navigateToMessages}>
+          <Text style={styles.navItemStyle}>Messages</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    marginLeft: 150,
-    padding: 10,
+    marginTop: 10,
     position: 'absolute',
-    backgroundColor: 'white',
+    backgroundColor: '#F9F9F9',
     zIndex: 2,
+    height: 700,
+    width: 200,
+    borderRadius: 10,
   },
   navItemStyle: {
     padding: 10,
     color: 'orange',
   },
-  navSectionStyle: {},
+  navSectionStyle: {
+    marginTop: 10,
+    marginLeft: 10,
+  },
   sectionHeadingStyle: {
     paddingVertical: 10,
     paddingHorizontal: 5,

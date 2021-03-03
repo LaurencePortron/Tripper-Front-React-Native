@@ -57,71 +57,78 @@ export default function AddActivity(props) {
       console.error('Error', error);
     }
   };
-  const backToDashboard = () => {
+  const backToTrip = () => {
     history.push(`/trip-details/${tripId}`);
   };
 
   return (
     <ScrollView>
       <Feather
-        style={styles.arrow}
-        name='arrow-left'
-        size={25}
-        color='black'
-        onPress={backToDashboard}
+        style={styles.backToTripButton}
+        name='arrow-left-circle'
+        size={32}
+        color='orange'
+        onPress={backToTrip}
       />
-      <Text style={styles.addTripTitle}>Add an activity</Text>
-      <View style={styles.addInfoFields}>
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Title'
-          name='title'
-          inputText={addActivityTitle}
-          onChangeText={addTitleForActivity}
-        />
+      <View style={styles.addActivityContainer}>
+        <Text style={styles.addActivityTitle}>Add an activity</Text>
+        <View style={styles.addInfoFields}>
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Title'
+            name='title'
+            inputText={addActivityTitle}
+            onChangeText={addTitleForActivity}
+          />
 
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Date'
-          name='date'
-          inputText={addActivityDate}
-          onChangeText={addDateForActivity}
-        />
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Date'
+            name='date'
+            inputText={addActivityDate}
+            onChangeText={addDateForActivity}
+          />
 
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Description'
-          name='description'
-          inputText={addActivityDescription}
-          onChangeText={addDescriptionForActivity}
-        />
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Description'
+            name='description'
+            inputText={addActivityDescription}
+            onChangeText={addDescriptionForActivity}
+          />
 
-        <TextInput
-          style={styles.addInfo}
-          placeholder='Cost'
-          name='cost'
-          inputText={addActivityCost}
-          onChangeText={addCostForActivity}
-        />
+          <TextInput
+            style={styles.addInfo}
+            placeholder='Cost'
+            name='cost'
+            inputText={addActivityCost}
+            onChangeText={addCostForActivity}
+          />
 
-        <Button
-          style={styles.button}
-          type='submit'
-          method='post'
-          action='/trips'
-          title='Add Activity'
-          onPress={() => {
-            clickToAddActivity();
-          }}
-        ></Button>
+          <Button
+            style={styles.button}
+            type='submit'
+            method='post'
+            action='/trips'
+            title='Add Activity'
+            onPress={() => {
+              clickToAddActivity();
+            }}
+          ></Button>
+        </View>
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  addActivityContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   addInfoFields: { width: 300, marginTop: 30 },
-  addTripTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
+  addActivityTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
   addInfo: {
     display: 'flex',
     padding: 15,
@@ -139,5 +146,9 @@ const styles = StyleSheet.create({
   },
   arrow: {
     marginTop: 30,
+  },
+  backToTripButton: {
+    marginTop: 20,
+    marginLeft: 10,
   },
 });

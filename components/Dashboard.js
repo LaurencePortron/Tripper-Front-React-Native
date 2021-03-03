@@ -332,7 +332,6 @@ const styles = StyleSheet.create({
   dashboardScrollView: {
     display: 'flex',
     flexDirection: 'row-reverse',
-
     zIndex: 1,
   },
   myTripsTitle: {

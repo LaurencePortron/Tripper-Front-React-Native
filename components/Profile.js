@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
-import { ScrollView, View, Text, StyleSheet, Button } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Image,
+} from 'react-native';
 import AccountHeader from './AccountHeader';
 
 export default function Friends(props) {
   return (
     <ScrollView style={styles.settingsContainer}>
       <AccountHeader />
+      {/* <Image
+        source={require('./images/avatar.png')}
+        style={styles.Image}
+        alt='random'
+      ></Image> */}
       <View>
         <View style={styles.profileSections}>
           <Text style={styles.sectionsTitle}>Laurence</Text>
@@ -43,4 +55,8 @@ const styles = StyleSheet.create({
   settingsContainer: {
     width: '100%',
   },
+  // Image: {
+  //   width: '50%',
+  //   height: '50%',
+  // },
 });
