@@ -13,6 +13,7 @@ export default function NavigationMenu(props) {
     Animated.timing(animatedValue, {
       toValue: 0.5,
       duration: 1200,
+      useNativeDriver: false,
       easing: Easing.ease,
     }).start();
   };
@@ -22,6 +23,7 @@ export default function NavigationMenu(props) {
     Animated.timing(animatedValue, {
       toValue: 1,
       duration: 1200,
+      useNativeDriver: false,
       easing: Easing.ease,
     }).start();
   };

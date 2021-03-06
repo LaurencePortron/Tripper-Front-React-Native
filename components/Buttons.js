@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-native';
 import { Feather } from '@expo/vector-icons';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default function BackToDashboardButton() {
   const history = useHistory();

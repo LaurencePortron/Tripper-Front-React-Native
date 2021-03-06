@@ -52,7 +52,13 @@ export default function Dashboard(props) {
       <View style={styles.dashboardScrollView}>
         <NavigationMenu />
       </View>
-      <Text style={styles.myTripsTitle}>My Trips</Text>
+      <View style={styles.myTripsTitle}>
+        <Image
+          source={require('./images/avatar.png')}
+          style={styles.myTripsTitleAvatar}
+          alt='random'
+        ></Image>
+      </View>
       <View style={styles.tabs}>
         <Text
           style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
@@ -336,10 +342,15 @@ const styles = StyleSheet.create({
   },
   myTripsTitle: {
     marginBottom: 20,
-    padding: 30,
+    padding: 20,
     fontSize: 20,
     color: 'orange',
     backgroundColor: '#38516d',
+  },
+  myTripsTitleAvatar: {
+    marginTop: 5,
+    width: 30,
+    height: 30,
   },
   tabs: { marginLeft: 20, display: 'flex', flexDirection: 'row' },
   tabAlone: {
