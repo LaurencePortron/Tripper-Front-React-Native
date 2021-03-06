@@ -16,6 +16,7 @@ import HelpCenter from './components/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import NotificationSettings from './components/NotificationSettings';
+import NavigationMenu from './components/NavigationMenu';
 import About from './components/About';
 
 const firebaseConfig = {
@@ -46,6 +47,7 @@ export default function App() {
   return (
     <UserContext.Provider value={user}>
       <NativeRouter>
+        <NavigationMenu />
         <View style={styles.container}>
           {user ? (
             <Redirect from='/' to='/dashboard' />

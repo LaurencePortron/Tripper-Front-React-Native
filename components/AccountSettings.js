@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#38516d',
+
     height: 80,
     padding: 10,
   },
   settingsTitle: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#38516d',
   },
   profileSection: {
     width: '100%',

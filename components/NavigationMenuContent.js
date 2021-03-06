@@ -18,7 +18,7 @@ export default function NavigationMenuContent({ clickToCloseMenu }) {
     <View style={styles.container}>
       <View style={styles.navSectionStyle}>
         <Feather
-          name='arrow-right-circle'
+          name='arrow-left-circle'
           size={25}
           color='orange'
           onPress={clickToCloseMenu}
@@ -50,13 +50,11 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'orange',
     fontSize: 20,
+    textAlign: 'right',
   },
   navSectionStyle: {
     marginTop: 10,
-    marginLeft: 10,
+    marginRight: 10,
   },
-  sectionHeadingStyle: {
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-  },
+  arrowClose: { marginLeft: 150 },
 });

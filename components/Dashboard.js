@@ -12,7 +12,6 @@ import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import { useFirestoreCollection } from './hooks';
-import NavigationMenu from './NavigationMenu';
 // import AccountHeader from './AccountHeader';
 
 export default function Dashboard(props) {
@@ -49,16 +48,7 @@ export default function Dashboard(props) {
 
   return (
     <ScrollView>
-      <View style={styles.dashboardScrollView}>
-        <NavigationMenu />
-      </View>
-      <View style={styles.myTripsTitle}>
-        <Image
-          source={require('./images/avatar.png')}
-          style={styles.myTripsTitleAvatar}
-          alt='random'
-        ></Image>
-      </View>
+      <Text style={styles.myTripsTitle}>My Trips</Text>
       <View style={styles.tabs}>
         <Text
           style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
@@ -328,38 +318,34 @@ export default function Dashboard(props) {
         </View>
       </View>
       <View style={styles.addTripButton}>
-        <Feather name='plus-circle' size={32} color='black' onPress={addTrip} />
+        <Feather
+          name='plus-circle'
+          size={32}
+          color='orange'
+          onPress={addTrip}
+        />
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  dashboardScrollView: {
-    display: 'flex',
-    flexDirection: 'row-reverse',
-    zIndex: 1,
-  },
   myTripsTitle: {
-    marginBottom: 20,
-    padding: 20,
-    fontSize: 20,
-    color: 'orange',
-    backgroundColor: '#38516d',
-  },
-  myTripsTitleAvatar: {
-    marginTop: 5,
-    width: 30,
-    height: 30,
+    marginTop: 10,
+    fontSize: 25,
+    marginLeft: 20,
+    color: '#38516d',
+    fontWeight: 'bold',
   },
   tabs: { marginLeft: 20, display: 'flex', flexDirection: 'row' },
   tabAlone: {
-    margin: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 10,
     fontSize: 20,
   },
   tabActive: {
     borderBottomWidth: 2,
-    borderColor: '#38516d',
     fontWeight: 'bold',
     color: '#38516d',
     textDecorationLine: 'underline',
