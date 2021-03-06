@@ -13,6 +13,7 @@ import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import { useFirestoreCollection } from './hooks';
 import NavigationMenu from './NavigationMenu';
+// import AccountHeader from './AccountHeader';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
@@ -117,7 +118,6 @@ export default function Dashboard(props) {
                     style={styles.infoButton}
                   />
                 </View>
-
                 <Text style={styles.status}>Active</Text>
               </View>
             );
@@ -335,20 +335,23 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   myTripsTitle: {
-    marginTop: 20,
     marginBottom: 20,
+    padding: 30,
     fontSize: 20,
-    color: '#38516d',
+    color: 'orange',
+    backgroundColor: '#38516d',
   },
-  tabs: { marginLeft: 0, display: 'flex', flexDirection: 'row' },
+  tabs: { marginLeft: 20, display: 'flex', flexDirection: 'row' },
   tabAlone: {
     margin: 10,
+    fontSize: 20,
   },
   tabActive: {
     borderBottomWidth: 2,
     borderColor: '#38516d',
     fontWeight: 'bold',
     color: '#38516d',
+    textDecorationLine: 'underline',
   },
   ImageList: {
     height: 90,
@@ -356,7 +359,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    margin: 10,
     marginLeft: 20,
     borderRadius: 10,
   },
@@ -364,16 +366,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: 330,
     height: 230,
+    marginLeft: 20,
   },
   fetchedTrip: {
     display: 'flex',
-    flexDirection: 'column-reverse',
-    alignItems: 'center',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   containerdatesDashboard: {
     display: 'flex',
     position: 'absolute',
-    top: 220,
+    top: 200,
     left: 30,
     color: 'white',
     fontWeight: 'bold',
@@ -385,15 +388,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     position: 'absolute',
-    top: 25,
-    right: 50,
+    bottom: 190,
+    left: 20,
   },
   infoButton: {
     marginLeft: 12,
-    width: 20,
     position: 'absolute',
-    top: 180,
-    left: 110,
+    bottom: 20,
+    left: 280,
   },
   status: {
     textAlign: 'left',
@@ -407,7 +409,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 13,
   },
-  tripsList: { flexDirection: 'row', marginTop: 30 },
+  tripsList: { flexDirection: 'row', marginTop: 20 },
   trips: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -425,7 +427,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     marginLeft: 20,
-    marginBottom: 30,
+    marginTop: 20,
   },
   titleDatesList: {
     display: 'flex',

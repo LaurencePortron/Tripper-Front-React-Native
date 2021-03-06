@@ -23,6 +23,10 @@ export default function NotificationSettings(props) {
     history.push('/helpCenter');
   };
 
+  const navigateToAbout = () => {
+    history.push('/about');
+  };
+
   const handleLogOut = (event) => {
     firebase
       .auth()
@@ -65,7 +69,7 @@ export default function NotificationSettings(props) {
         </View>
         <View style={styles.profileLinks}>
           <Feather name='help-circle' size={25} color='black' />
-          <Text>About</Text>
+          <Text onPress={navigateToAbout}>About</Text>
           <Feather name='chevron-right' size={25} color='black' />
         </View>
         <View style={styles.logOut}>

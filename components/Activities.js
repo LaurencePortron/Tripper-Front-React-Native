@@ -51,7 +51,7 @@ export default function Activites({ tripId }) {
         <Feather
           name='plus-circle'
           size={32}
-          color='black'
+          color='orange'
           onPress={addActivity}
           style={styles.addButton}
         />
@@ -100,8 +100,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   addButton: {
-    alignSelf: 'center',
-    marginBottom: 40,
-    marginLeft: 20,
+    marginTop: 15,
   },
 });

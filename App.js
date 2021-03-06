@@ -16,6 +16,7 @@ import HelpCenter from './components/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import NotificationSettings from './components/NotificationSettings';
+import About from './components/About';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -61,6 +62,7 @@ export default function App() {
           <Route path='/notifications' component={NotificationSettings} />
           <Route path='/messages' component={Messages} />
           <Route path='/helpCenter' component={HelpCenter} />
+          <Route path='/about' component={About} />
         </View>
       </NativeRouter>
     </UserContext.Provider>
