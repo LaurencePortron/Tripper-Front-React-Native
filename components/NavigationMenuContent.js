@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   navItemStyle: {
     padding: 10,
     color: 'orange',
+    fontSize: 20,
   },
   navSectionStyle: {
     marginTop: 10,
