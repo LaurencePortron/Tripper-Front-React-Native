@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View, StyleSheet } from 'react-native';
+import {
+  Button,
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 import 'firebase/auth';
 import firebase from 'firebase/app';
 
@@ -36,7 +43,7 @@ function LogIn(props) {
 
   return (
     <View style={styles.signUpContainer}>
-      <Text style={styles.welcomeTitle}>Welcome Back &#129523;</Text>
+      <Text style={styles.welcomeTitle}>Sign in &#129523;</Text>
 
       <View style={styles.container}>
         <TextInput
@@ -103,8 +110,8 @@ const styles = StyleSheet.create({
   },
 
   signUpContainer: {
-    margin: 0,
-    marginTop: 0,
+    flex: 1,
+    flexDirection: 'column',
   },
   SignUpText: {
     textDecorationLine: 'underline',

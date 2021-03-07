@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   dashboardScrollView: {
     display: 'flex',
     flexDirection: 'row',
-    zIndex: 1,
+
     backgroundColor: '#2E5E4E',
     padding: 20,
   },

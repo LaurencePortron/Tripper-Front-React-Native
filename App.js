@@ -16,8 +16,9 @@ import HelpCenter from './components/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import NotificationSettings from './components/NotificationSettings';
-import NavigationMenu from './components/NavigationMenu';
+// import NavigationMenu from './components/NavigationMenu';
 import About from './components/About';
+import WelcomePage from './components/WelcomePage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -47,13 +48,14 @@ export default function App() {
   return (
     <UserContext.Provider value={user}>
       <NativeRouter>
-        <NavigationMenu />
+        {/* <NavigationMenu /> */}
         <View style={styles.container}>
           {user ? (
             <Redirect from='/' to='/dashboard' />
           ) : (
-            <Route exact path='/' component={LogIn} />
+            <Route exact path='/login' component={LogIn} />
           )}
+          <Route exact path='/' component={WelcomePage} />
           <Route exact path='/signup' component={SignUp} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route path='/trip-details/:id' component={TripDetails} />
@@ -74,6 +76,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
   },
 });
