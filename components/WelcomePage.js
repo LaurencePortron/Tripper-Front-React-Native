@@ -18,7 +18,7 @@ export default function WelcomePage(props) {
   };
 
   const goToSignUp = () => {
-    history.push(`/login`);
+    history.push(`/signup`);
   };
 
   return (
@@ -28,6 +28,7 @@ export default function WelcomePage(props) {
     >
       <View style={styles.titleContainer}>
         <Text style={styles.welcomeTitle}>Welcome to Tripper &#129523;</Text>
+        <Text style={styles.welcomeDescription}>Your holidays at a glance</Text>
       </View>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity onPress={goToLogin}>
@@ -51,6 +52,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginTop: 100,
+  },
+  welcomeDescription: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 20,
+    marginTop: 10,
   },
   titleContainer: {
     display: 'flex',

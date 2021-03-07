@@ -1,25 +1,80 @@
-import Carousel from 'react-native-snap-carousel';
+import React, { useRef, useState, useEffect } from 'react';
+import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 
-export class MyCarousel extends Component {
-  _renderItem = ({ item, index }) => {
+const { width: screenWidth } = Dimensions.get('window');
+
+const MyCarousel = ({ fetchTrips }) => {
+  const [entries, setEntries] = useState([]);
+  const carouselRef = useRef(null);
+  console.log(entries);
+
+  const goForward = () => {
+    carouselRef.current.snapToNext();
+  };
+
+  useEffect(() => {
+    setEntries(fetchTrips);
+  }, []);
+
+  const renderItem = ({ item, index }, parallaxProps) => {
     return (
-      <View style={styles.slide}>
-        <Text style={styles.title}>{item.title}</Text>
+      <View style={styles.item}>
+        <ParallaxImage
+          source={{ uri: item.data.photo }}
+          containerStyle={styles.imageContainer}
+          style={styles.image}
+          parallaxFactor={0.4}
+          {...parallaxProps}
+        />
+
+        <Text style={styles.title} numberOfLines={2}>
+          {item.title}
+        </Text>
       </View>
     );
   };
 
-  render() {
-    return (
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={goForward}></TouchableOpacity>
       <Carousel
-        ref={(c) => {
-          this._carousel = c;
-        }}
-        data={this.state.entries}
-        renderItem={this._renderItem}
-        sliderWidth={sliderWidth}
-        itemWidth={itemWidth}
+        ref={carouselRef}
+        sliderWidth={screenWidth}
+        sliderHeight={screenWidth}
+        itemWidth={screenWidth - 60}
+        data={entries}
+        renderItem={renderItem}
+        hasParallaxImages={true}
       />
-    );
-  }
-}
+    </View>
+  );
+};
+
+export default MyCarousel;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  item: {
+    width: screenWidth - 50,
+    height: screenWidth - 50,
+  },
+  imageContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 8,
+  },
+  image: {
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: 'contain',
+  },
+});
