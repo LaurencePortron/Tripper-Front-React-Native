@@ -16,7 +16,7 @@ export default function AccountHeader(props) {
       <Feather
         name='arrow-left-circle'
         size={32}
-        color='orange'
+        color='#5B443E'
         style={styles.backToSettingsButton}
         onPress={backToSettings}
       />

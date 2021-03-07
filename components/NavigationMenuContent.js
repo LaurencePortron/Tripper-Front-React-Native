@@ -20,7 +20,7 @@ export default function NavigationMenuContent({ clickToCloseMenu }) {
         <Feather
           name='arrow-left-circle'
           size={25}
-          color='orange'
+          color='#2E5E4E'
           onPress={clickToCloseMenu}
           style={styles.arrowClose}
         />
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   navItemStyle: {
     padding: 10,
-    color: 'orange',
+    color: '#2E5E4E',
     fontSize: 20,
     textAlign: 'right',
   },

@@ -67,7 +67,7 @@ export default function AddActivity(props) {
         style={styles.backToTripButton}
         name='arrow-left-circle'
         size={32}
-        color='orange'
+        color='#5B443E'
         onPress={backToTrip}
       />
       <View style={styles.addActivityContainer}>

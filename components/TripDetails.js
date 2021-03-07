@@ -44,7 +44,7 @@ export default function TripDetails(props) {
         <Feather
           name='message-circle'
           size={32}
-          color='white'
+          color='#2E5E4E'
           style={styles.messageButton}
           onPress={goToMessages}
         />
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 190,
     left: 20,
-    color: 'orange',
+    color: '#93A7AA',
     fontSize: 15,
   },
   messageButton: {
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 120,
     left: 20,
-    color: 'white',
+    color: '#93A7AA',
     fontWeight: 'bold',
     fontSize: 30,
   },

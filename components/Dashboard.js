@@ -109,7 +109,7 @@ export default function Dashboard(props) {
                   <Feather
                     name='info'
                     size={20}
-                    color='white'
+                    color='#5B443E'
                     onPress={() => openTripDetails(fetchTrip.id)}
                     style={styles.infoButton}
                   />
@@ -147,7 +147,7 @@ export default function Dashboard(props) {
                   <Feather
                     name='info'
                     size={20}
-                    color='white'
+                    color='#5B443E'
                     onPress={() => openTripDetails(fetchTrip.id)}
                     style={styles.infoButton}
                   />
@@ -188,7 +188,7 @@ export default function Dashboard(props) {
                   <Feather
                     name='info'
                     size={20}
-                    color='white'
+                    color='#5B443E'
                     onPress={() => openTripDetails(fetchTrip.id)}
                     style={styles.infoButton}
                   />
@@ -321,7 +321,7 @@ export default function Dashboard(props) {
         <Feather
           name='plus-circle'
           size={32}
-          color='orange'
+          color='#2E5E4E'
           onPress={addTrip}
         />
       </View>
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 25,
     marginLeft: 20,
-    color: '#38516d',
+    color: '#93A7AA',
     fontWeight: 'bold',
   },
   tabs: { marginLeft: 20, display: 'flex', flexDirection: 'row' },
@@ -343,11 +343,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     fontSize: 20,
+    color: '#93A7AA',
   },
   tabActive: {
     borderBottomWidth: 2,
     fontWeight: 'bold',
-    color: '#38516d',
+    color: '#2E5E4E',
     textDecorationLine: 'underline',
   },
   ImageList: {
@@ -375,13 +376,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 200,
     left: 30,
-    color: 'white',
+    color: '#93A7AA',
     fontWeight: 'bold',
   },
   titleInfoSection: { display: 'flex', margin: 10 },
   containerTriptitle: {
     display: 'flex',
-    color: 'white',
+    color: '#93A7AA',
     fontWeight: 'bold',
     fontSize: 25,
     position: 'absolute',
@@ -399,11 +400,11 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#38516d',
+    color: '#93A7AA',
   },
   dates: {
     display: 'flex',
-    color: 'black',
+    color: '#93A7AA',
     fontSize: 13,
   },
   tripsList: { flexDirection: 'row', marginTop: 20 },
@@ -413,7 +414,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   TripTitle: {
-    color: 'black',
+    color: '#93A7AA',
     marginLeft: 10,
     marginRight: 20,
     marginBottom: 5,

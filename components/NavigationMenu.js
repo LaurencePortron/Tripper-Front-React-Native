@@ -21,7 +21,7 @@ export default function NavigationMenu(props) {
       <Feather
         name='menu'
         size={35}
-        color='orange'
+        color='white'
         style={styles.navigationMenu}
         onPress={clickToOpenMenu}
       />
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     zIndex: 1,
-    backgroundColor: '#38516d',
+    backgroundColor: '#2E5E4E',
     padding: 20,
   },
   myTripsTitleAvatar: {

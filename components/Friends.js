@@ -20,10 +20,10 @@ export default function Friends(props) {
     <ScrollView>
       <Text style={styles.friendsTitle}>Friends</Text>
       <View style={styles.avatars}>
-        <Feather name='user' size={30} color='black' />
-        <Feather name='user' size={30} color='black' />
+        <Feather name='user' size={30} color='#93A7AA' />
+        <Feather name='user' size={30} color='#93A7AA' />
         <TouchableOpacity onPress={() => setInviteModalOpen(true)}>
-          <Feather name='user-plus' size={30} color='black' />
+          <Feather name='user-plus' size={30} color='#2E5E4E' />
         </TouchableOpacity>
         <InviteModal
           show={inviteModalOpen}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#38516d',
+    color: '#2E5E4E',
     marginTop: 0,
   },
   avatars: {

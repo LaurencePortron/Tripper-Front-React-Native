@@ -10,42 +10,31 @@ import {
   TextInput,
 } from 'react-native';
 import AccountHeader from './AccountHeader';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Friends(props) {
   return (
     <ScrollView>
       <AccountHeader />
-      {/* <Image
-        source={require('./images/avatar.png')}
-        style={styles.Image}
-        alt='random'
-      ></Image> */}
-      <View>
-        <View style={styles.profileSections}>
+
+      <View style={styles.profileSections}>
+        <View style={styles.profileTextTitle}>
+          <AntDesign name='idcard' size={24} color='black' />
           <Text style={styles.sectionsTitle}>First name</Text>
-          <TextInput
-            style={styles.addInfo}
-            placeholder='Description'
-            name='description'
-          />
-          <Text style={styles.sectionsTitle}>Email</Text>
-          <TextInput
-            style={styles.addInfo}
-            placeholder='Description'
-            name='description'
-          />
-          <Text style={styles.sectionsTitle}>Change Password</Text>
-          <TextInput
-            style={styles.addInfo}
-            placeholder='Description'
-            name='description'
-          />
-          <Button
-            style={styles.profileButton}
-            type='submit'
-            title='Edit'
-          ></Button>
         </View>
+        <View style={styles.profileTextTitle}>
+          <Feather name='mail' size={24} color='black' />
+          <Text style={styles.sectionsTitle}>Email</Text>
+        </View>
+        <View style={styles.profileTextTitle}>
+          <Feather name='lock' size={24} color='black' />
+          <Text style={styles.sectionsTitle}>Change Password</Text>
+        </View>
+        <Button
+          style={styles.profileButton}
+          type='submit'
+          title='Edit'
+        ></Button>
       </View>
     </ScrollView>
   );
@@ -63,22 +52,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     marginTop: 20,
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
+  profileTextTitle: { display: 'flex', flexDirection: 'row', margin: 10 },
   sectionsTitle: {
     fontSize: 20,
   },
 
   settingsContainer: {
     width: '100%',
-  },
-  addInfo: {
-    display: 'flex',
-    padding: 15,
-    borderWidth: 1,
-    borderColor: '#535b63',
-    marginBottom: 15,
-    margin: 10,
-    width: 200,
   },
 });

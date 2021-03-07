@@ -48,32 +48,32 @@ export default function NotificationSettings(props) {
       </View>
       <View style={styles.profileSection}>
         <View style={styles.profileLinks}>
-          <Feather name='user' size={25} color='black' />
+          <Feather name='user' size={25} color='#5B443E' />
           <Text onPress={navigateToProfileInfo}>My info</Text>
           <Feather name='chevron-right' size={25} color='black' />
         </View>
         <View style={styles.profileLinks}>
-          <Feather name='bell' size={25} color='black' />
+          <Feather name='bell' size={25} color='#5B443E' />
           <Text onPress={navigateToNotifications}>Notifications</Text>
-          <Feather name='chevron-right' size={25} color='black' />
+          <Feather name='chevron-right' size={25} color='#5B443E' />
         </View>
         <View style={styles.profileLinks}>
-          <MaterialCommunityIcons name='piggy-bank' size={25} color='black' />
+          <MaterialCommunityIcons name='piggy-bank' size={25} color='#5B443E' />
           <Text>Splitwise</Text>
-          <Feather name='chevron-right' size={25} color='black' />
+          <Feather name='chevron-right' size={25} color='#5B443E' />
         </View>
         <View style={styles.profileLinks}>
-          <Feather name='headphones' size={25} color='black' />
+          <Feather name='headphones' size={25} color='#5B443E' />
           <Text onPress={navigateToHelpCenter}>Help</Text>
-          <Feather name='chevron-right' size={25} color='black' />
+          <Feather name='chevron-right' size={25} color='#5B443E' />
         </View>
         <View style={styles.profileLinks}>
-          <Feather name='help-circle' size={25} color='black' />
+          <Feather name='help-circle' size={25} color='#5B443E' />
           <Text onPress={navigateToAbout}>About</Text>
-          <Feather name='chevron-right' size={25} color='black' />
+          <Feather name='chevron-right' size={25} color='#5B443E' />
         </View>
         <View style={styles.logOut}>
-          <Feather name='log-out' size={25} color='orange' />
+          <Feather name='log-out' size={25} color='#5B443E' />
           <Text onPress={handleLogOut}>Log Out</Text>
         </View>
       </View>

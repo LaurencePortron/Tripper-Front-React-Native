@@ -36,9 +36,9 @@ function LogIn(props) {
 
   return (
     <View style={styles.signUpContainer}>
-      <Text style={styles.welcomeTitle}>Welcome to Back &#129523;</Text>
+      <Text style={styles.welcomeTitle}>Welcome Back &#129523;</Text>
 
-      <View>
+      <View style={styles.container}>
         <TextInput
           style={styles.inputStyle}
           textContentType='emailAddress'
@@ -76,8 +76,13 @@ function LogIn(props) {
 export default LogIn;
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   inputStyle: {
-    width: '100%',
+    width: '60%',
     padding: 15,
     borderWidth: 1,
     borderColor: '#dddddd',
@@ -92,12 +97,12 @@ const styles = StyleSheet.create({
   welcomeTitle: {
     textAlign: 'center',
     color: '#4d4d4d',
-    fontSize: 18,
+    fontSize: 30,
     marginBottom: 30,
+    marginTop: 40,
   },
 
   signUpContainer: {
-    width: 200,
     margin: 0,
     marginTop: 0,
   },

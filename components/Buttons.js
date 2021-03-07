@@ -12,7 +12,7 @@ export default function BackToDashboardButton() {
     <Feather
       name='arrow-left-circle'
       size={32}
-      color='orange'
+      color='#2E5E4E'
       style={styles.backToDashboardButton}
       onPress={backToDashboard}
     />
