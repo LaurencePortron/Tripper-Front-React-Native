@@ -12,7 +12,6 @@ import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import { useFirestoreCollection } from './hooks';
-// import AccountHeader from './AccountHeader';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
@@ -36,15 +35,6 @@ export default function Dashboard(props) {
   };
 
   var user = firebase.auth().currentUser;
-
-  // user
-  //   .sendEmailVerification()
-  //   .then(function () {
-  //     console.log('email sent');
-  //   })
-  //   .catch(function (error) {
-  //     console.log('not sent', error);
-  //   });
 
   return (
     <ScrollView>
@@ -337,7 +327,12 @@ const styles = StyleSheet.create({
     color: '#93A7AA',
     fontWeight: 'bold',
   },
-  tabs: { marginLeft: 20, display: 'flex', flexDirection: 'row' },
+  tabs: {
+    marginLeft: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 15,
+  },
   tabAlone: {
     marginRight: 10,
     marginTop: 10,
@@ -365,6 +360,7 @@ const styles = StyleSheet.create({
     width: 330,
     height: 230,
     marginLeft: 20,
+    marginTop: 15,
   },
   fetchedTrip: {
     display: 'flex',
@@ -376,13 +372,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 200,
     left: 30,
-    color: '#93A7AA',
+    color: '#2E5E4E',
     fontWeight: 'bold',
   },
   titleInfoSection: { display: 'flex', margin: 10 },
   containerTriptitle: {
     display: 'flex',
-    color: '#93A7AA',
+    color: '#2E5E4E',
     fontWeight: 'bold',
     fontSize: 25,
     position: 'absolute',
@@ -400,7 +396,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#93A7AA',
+    color: '#2E5E4E',
   },
   dates: {
     display: 'flex',
@@ -414,7 +410,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   TripTitle: {
-    color: '#93A7AA',
+    color: '#2E5E4E',
     marginLeft: 10,
     marginRight: 20,
     marginBottom: 5,
