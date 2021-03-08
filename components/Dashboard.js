@@ -160,10 +160,9 @@ export default function Dashboard(props) {
 
             .map((fetchTrip) => {
               return (
-                <View>
+                <View style={styles.Image}>
                   <Image
                     source={{ uri: fetchTrip.data.photo }}
-                    style={styles.Image}
                     alt='random'
                   ></Image>
                   <Text style={styles.containerdatesDashboard}>
@@ -182,7 +181,7 @@ export default function Dashboard(props) {
                     name='chevron-right'
                     size={35}
                     color='white'
-                    style={styles.infoButton}
+                    style={styles.rightChevron}
                   />
                 </View>
               );

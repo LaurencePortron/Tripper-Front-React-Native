@@ -12,7 +12,7 @@ export default function BackToDashboardButton() {
     <Feather
       name='arrow-left-circle'
       size={32}
-      color='#2E5E4E'
+      color='white'
       style={styles.backToDashboardButton}
       onPress={backToDashboard}
     />
@@ -20,6 +20,8 @@ export default function BackToDashboardButton() {
 }
 const styles = StyleSheet.create({
   backToDashboardButton: {
-    marginRight: 30,
+    marginTop: 40,
+    marginLeft: 20,
+    position: 'absolute',
   },
 });

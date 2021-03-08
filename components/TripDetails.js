@@ -27,70 +27,118 @@ export default function TripDetails(props) {
   }
 
   return (
-    <ScrollView>
+    <View>
       <View style={styles.tripHeader}>
         <Image
           source={{ uri: fetchTripDetails.data.photo }}
           style={styles.photo}
           alt='random'
         />
-        <View style={styles.arrowLeft}>
-          <BackToDashboardButton />
-        </View>
-        <Text style={styles.containerDates}>
-          {moment(fetchTripDetails.data.startDate).format('MMM Do')} -
-          {moment(fetchTripDetails.data.endDate).format('MMM Do')}
-        </Text>
-        <Feather
-          name='message-circle'
-          size={32}
-          color='#2E5E4E'
-          style={styles.messageButton}
-          onPress={goToMessages}
-        />
+        <BackToDashboardButton />
       </View>
 
-      <Text style={styles.tripTitle}>{fetchTripDetails.data.title}</Text>
-      <View>
+      <View style={styles.tripDetails}>
+        <View style={styles.locationSection}>
+          <Feather name='map-pin' size={24} color='#9D9996' />
+          <Text style={styles.tripTitle}>{fetchTripDetails.data.title}</Text>
+          <Text style={styles.containerDates}>
+            {moment(fetchTripDetails.data.startDate).format('MMM Do')} -
+            {moment(fetchTripDetails.data.endDate).format('MMM Do')}
+          </Text>
+        </View>
+        <View>
+          <View style={styles.menuItemsSection}>
+            <View style={styles.menuItem}>
+              <Feather name='users' size={24} color='#93A7AA' />
+              <Text>2 friends</Text>
+            </View>
+            <View style={styles.menuItem}>
+              <Feather name='map' size={24} color='#93A7AA' />
+              <Text>5 stops</Text>
+            </View>
+            <View style={styles.menuItem}>
+              <Feather name='activity' size={24} color='#93A7AA' />
+              <Text>10 activities</Text>
+            </View>
+          </View>
+          <View style={styles.descriptionSection}>
+            <Text style={styles.descriptionTitle}>Description:</Text>
+            <Text style={styles.description}>
+              {fetchTripDetails.data.description}
+            </Text>
+          </View>
+        </View>
+      </View>
+      {/* <View>
         <Friends />
       </View>
       <View>
         <Activities tripId={tripId} />
-      </View>
-    </ScrollView>
+      </View> */}
+      {/* <Footer /> */}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  tripHeader: {
-    position: 'relative',
-  },
   photo: {
-    position: 'relative',
-    width: 400,
-    height: 230,
-    opacity: 0.7,
+    height: 700,
+    resizeMode: 'cover',
   },
-  arrowLeft: { position: 'absolute', top: 20, left: 8 },
   containerDates: {
     display: 'flex',
-    position: 'absolute',
-    top: 190,
-    left: 20,
+    marginLeft: 20,
     color: '#93A7AA',
     fontSize: 15,
   },
-  messageButton: {
-    position: 'relative',
-    bottom: 50,
-    left: 320,
-  },
+
   tripTitle: {
-    position: 'absolute',
-    top: 120,
-    left: 20,
     color: '#93A7AA',
     fontWeight: 'bold',
     fontSize: 30,
+    marginLeft: 10,
+  },
+  locationSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  tripDetails: {
+    backgroundColor: 'white',
+    zIndex: 1,
+    bottom: 0,
+    width: '100%',
+    height: 300,
+    padding: 20,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    position: 'absolute',
+  },
+  menuItemsSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 20,
+  },
+  menuItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  descriptionSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: 20,
+    marginLeft: 10,
+  },
+  descriptionTitle: {
+    textAlign: 'left',
+    color: '#93A7AA',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  description: {
+    marginTop: 10,
   },
 });
