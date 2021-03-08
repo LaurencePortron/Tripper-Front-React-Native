@@ -27,8 +27,8 @@ export default function TripDetails(props) {
   }
 
   return (
-    <View>
-      <View style={styles.tripHeader}>
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <Image
           source={{ uri: fetchTripDetails.data.photo }}
           style={styles.photo}
@@ -36,7 +36,6 @@ export default function TripDetails(props) {
         />
         <BackToDashboardButton />
       </View>
-
       <View style={styles.tripDetails}>
         <View style={styles.locationSection}>
           <Feather name='map-pin' size={24} color='#9D9996' />
@@ -60,30 +59,35 @@ export default function TripDetails(props) {
               <Feather name='activity' size={24} color='#93A7AA' />
               <Text>10 activities</Text>
             </View>
+            <View style={styles.menuItem}>
+              <Feather name='credit-card' size={24} color='#93A7AA' />
+              <Text> {fetchTripDetails.data.cost}</Text>
+            </View>
           </View>
           <View style={styles.descriptionSection}>
             <Text style={styles.descriptionTitle}>Description:</Text>
             <Text style={styles.description}>
               {fetchTripDetails.data.description}
             </Text>
+            <View style={styles.overviewNavigationSection}>
+              <Text style={styles.overviewNavigationText}>
+                Click here to see overview
+              </Text>
+              <Feather name='arrow-right' size={24} color='#B37650' />
+            </View>
           </View>
         </View>
       </View>
-      {/* <View>
-        <Friends />
-      </View>
-      <View>
-        <Activities tripId={tripId} />
-      </View> */}
-      {/* <Footer /> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   photo: {
-    height: 700,
+    flex: 1,
+    width: '100%',
     resizeMode: 'cover',
+    marginBottom: 200,
   },
   containerDates: {
     display: 'flex',
@@ -140,5 +144,17 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 10,
+  },
+  overviewNavigationSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  overviewNavigationText: {
+    color: '#B37650',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginRight: 10,
   },
 });

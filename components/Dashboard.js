@@ -160,10 +160,11 @@ export default function Dashboard(props) {
 
             .map((fetchTrip) => {
               return (
-                <View style={styles.Image}>
+                <View>
                   <Image
                     source={{ uri: fetchTrip.data.photo }}
                     alt='random'
+                    style={styles.Image}
                   ></Image>
                   <Text style={styles.containerdatesDashboard}>
                     {moment(fetchTrip.data.startDate).format('MMM Do')}
@@ -188,6 +189,13 @@ export default function Dashboard(props) {
             })}
         </ScrollView>
       </View>
+      <Feather
+        name='info'
+        size={35}
+        color='black'
+        onPress={addTrip}
+        style={styles.infoButton}
+      />
       <Footer />
     </ScrollView>
   );
@@ -265,5 +273,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginLeft: 20,
     marginTop: 20,
+    position: 'absolute',
   },
 });
