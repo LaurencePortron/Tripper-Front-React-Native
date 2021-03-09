@@ -79,8 +79,8 @@ export default function Dashboard(props) {
             .filter((fetchTrip) => {
               if (tab === 'active') {
                 return (
-                  new Date(fetchTrip.data.startDate) <= new Date() &&
-                  new Date(fetchTrip.data.endDate) >= new Date()
+                  fetchTrip.data.startDate.toDate() <= new Date() &&
+                  fetchTrip.data.endDate.toDate() >= new Date()
                 );
               }
             })
@@ -93,8 +93,8 @@ export default function Dashboard(props) {
                     alt='random'
                   ></Image>
                   <Text style={styles.containerdatesDashboard}>
-                    {moment(fetchTrip.data.startDate).format('MMM Do')} -
-                    {moment(fetchTrip.data.endDate).format('MMM Do')}
+                    {moment(fetchTrip.data.startDate.toDate()).format('MMM Do')}{' '}
+                    -{moment(fetchTrip.data.endDate.toDate()).format('MMM Do')}
                   </Text>
                   <View style={styles.containerTriptitle}>
                     <Feather name='map-pin' size={24} color='#9D9996' />
@@ -113,9 +113,7 @@ export default function Dashboard(props) {
           {fetchTrips
             .filter((fetchTrip) => {
               if (tab === 'upcoming') {
-                return (
-                  Date.parse(fetchTrip.data.endDate) > Date.parse(new Date())
-                );
+                return fetchTrip.data.endDate.toDate() > new Date();
               }
             })
 
@@ -128,9 +126,9 @@ export default function Dashboard(props) {
                     alt='random'
                   ></Image>
                   <Text style={styles.containerdatesDashboard}>
-                    {moment(fetchTrip.data.startDate).format('MMM Do')}{' '}
+                    {moment(fetchTrip.data.startDate.toDate()).format('MMM Do')}{' '}
                     <Text> - </Text>
-                    {moment(fetchTrip.data.endDate).format('MMM Do')}
+                    {moment(fetchTrip.data.endDate.toDate()).format('MMM Do')}
                   </Text>
 
                   <View style={styles.containerTriptitle}>
@@ -152,9 +150,7 @@ export default function Dashboard(props) {
           {fetchTrips
             .filter((fetchTrip) => {
               if (tab === 'past') {
-                return (
-                  Date.parse(fetchTrip.data.endDate) < Date.parse(new Date())
-                );
+                return fetchTrip.data.endDate.toDate() < new Date();
               }
             })
 
@@ -167,9 +163,9 @@ export default function Dashboard(props) {
                     style={styles.Image}
                   ></Image>
                   <Text style={styles.containerdatesDashboard}>
-                    {moment(fetchTrip.data.startDate).format('MMM Do')}
+                    {moment(fetchTrip.data.startDate.toDate()).format('MMM Do')}
                     <Text> - </Text>
-                    {moment(fetchTrip.data.endDate).format('MMM Do')}
+                    {moment(fetchTrip.data.endDate.toDate()).format('MMM Do')}
                   </Text>
 
                   <View style={styles.containerTriptitle}>
@@ -190,11 +186,11 @@ export default function Dashboard(props) {
         </ScrollView>
       </View>
       <Feather
-        name='info'
+        name='plus'
         size={35}
         color='black'
         onPress={addTrip}
-        style={styles.infoButton}
+        style={styles.addTripButton}
       />
       <Footer />
     </ScrollView>

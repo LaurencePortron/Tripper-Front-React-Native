@@ -48,8 +48,8 @@ export default function AddTrip(props) {
 
       await db.collection('trips').add({
         title: addTripTitle,
-        startDate: addStartDate,
-        endDate: addEndDate,
+        startDate: new Date(addStartDate),
+        endDate: new Date(addEndDate),
         description: addDescription,
         cost: addCost,
         photo: result.data.url,
