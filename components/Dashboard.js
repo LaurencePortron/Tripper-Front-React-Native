@@ -38,141 +38,127 @@ export default function Dashboard(props) {
   var user = firebase.auth().currentUser;
 
   return (
-    <ScrollView>
-      <View style={styles.dashboardContainer}>
-        <Text style={styles.myTripsTitle}>My Trips</Text>
-        <View style={styles.tabs}>
-          <Text
-            style={[
-              styles.tabAlone,
-              tab === 'active' ? styles.tabActive : null,
-            ]}
-            onPress={() => {
-              setTab('active');
-            }}
-          >
-            Active
-          </Text>
-          <Text
-            style={[
-              styles.tabAlone,
-              tab === 'upcoming' ? styles.tabActive : null,
-            ]}
-            onPress={() => {
-              setTab('upcoming');
-            }}
-          >
-            Upcoming
-          </Text>
-          <Text
-            style={[styles.tabAlone, tab === 'past' ? styles.tabActive : null]}
-            onPress={() => {
-              setTab('past');
-            }}
-          >
-            Past
-          </Text>
-        </View>
+    <View style={styles.dashboardContainer}>
+      <Text style={styles.myTripsTitle}>My Trips</Text>
+      <View style={styles.tabs}>
+        <Text
+          style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
+          onPress={() => {
+            setTab('active');
+          }}
+        >
+          Active
+        </Text>
+        <Text
+          style={[
+            styles.tabAlone,
+            tab === 'upcoming' ? styles.tabActive : null,
+          ]}
+          onPress={() => {
+            setTab('upcoming');
+          }}
+        >
+          Upcoming
+        </Text>
+        <Text
+          style={[styles.tabAlone, tab === 'past' ? styles.tabActive : null]}
+          onPress={() => {
+            setTab('past');
+          }}
+        >
+          Past
+        </Text>
+      </View>
 
-        <ScrollView horizontal>
-          {fetchTrips
-            .filter((fetchTrip) => {
-              if (tab === 'active') {
-                return (
-                  fetchTrip.data.startDate.toDate() <= new Date() &&
-                  fetchTrip.data.endDate.toDate() >= new Date()
-                );
-              }
-            })
-            .map((fetchTrip) => {
+      <ScrollView horizontal>
+        {fetchTrips
+          .filter((fetchTrip) => {
+            if (tab === 'active') {
               return (
-                <View>
-                  <Image
-                    source={{ uri: fetchTrip.data.photo }}
-                    style={styles.Image}
-                    alt='random'
-                  ></Image>
-                  <Text style={styles.containerdatesDashboard}>
-                    {moment(fetchTrip.data.startDate.toDate()).format('MMM Do')}{' '}
-                    -{moment(fetchTrip.data.endDate.toDate()).format('MMM Do')}
-                  </Text>
-                  <View style={styles.containerTriptitle}>
-                    <Feather name='map-pin' size={24} color='#9D9996' />
-                    <Text>{fetchTrip.data.title}</Text>
-                  </View>
+                fetchTrip.data.startDate.toDate() <= new Date() &&
+                fetchTrip.data.endDate.toDate() >= new Date()
+              );
+            }
+          })
+          .map((fetchTrip) => {
+            return (
+              <View>
+                <Image
+                  source={{ uri: fetchTrip.data.photo }}
+                  style={styles.Image}
+                  alt='random'
+                ></Image>
+
+                <View style={styles.containerTriptitle}>
+                  <Feather name='map-pin' size={24} color='#9D9996' />
+                  <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                </View>
+                <View style={styles.containerRightChevron}>
                   <Feather
                     name='chevron-right'
                     size={35}
                     color='white'
                     onPress={() => openTripDetails(fetchTrip.id)}
-                    style={styles.infoButton}
+                    style={styles.rightChevron}
                   />
                 </View>
-              );
-            })}
-          {fetchTrips
-            .filter((fetchTrip) => {
-              if (tab === 'upcoming') {
-                return fetchTrip.data.endDate.toDate() > new Date();
-              }
-            })
+              </View>
+            );
+          })}
+        {fetchTrips
+          .filter((fetchTrip) => {
+            if (tab === 'upcoming') {
+              return fetchTrip.data.endDate.toDate() > new Date();
+            }
+          })
 
-            .map((fetchTrip) => {
-              return (
-                <View>
-                  <Image
-                    source={{ uri: fetchTrip.data.photo }}
-                    style={styles.Image}
-                    alt='random'
-                  ></Image>
-                  <Text style={styles.containerdatesDashboard}>
-                    {moment(fetchTrip.data.startDate.toDate()).format('MMM Do')}{' '}
-                    <Text> - </Text>
-                    {moment(fetchTrip.data.endDate.toDate()).format('MMM Do')}
-                  </Text>
+          .map((fetchTrip) => {
+            return (
+              <View>
+                <Image
+                  source={{ uri: fetchTrip.data.photo }}
+                  style={styles.Image}
+                  alt='random'
+                ></Image>
 
-                  <View style={styles.containerTriptitle}>
-                    <Feather name='map-pin' size={24} color='#9D9996' />
-                    <Text>{fetchTrip.data.title}</Text>
-                  </View>
-
+                <View style={styles.containerTriptitle}>
+                  <Feather name='map-pin' size={24} color='#9D9996' />
+                  <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                </View>
+                <View style={styles.containerRightChevron}>
                   <Feather
                     name='chevron-right'
                     size={35}
                     color='white'
                     onPress={() => openTripDetails(fetchTrip.id)}
-                    style={styles.infoButton}
+                    style={styles.rightChevron}
                   />
                 </View>
-              );
-            })}
+              </View>
+            );
+          })}
 
-          {fetchTrips
-            .filter((fetchTrip) => {
-              if (tab === 'past') {
-                return fetchTrip.data.endDate.toDate() < new Date();
-              }
-            })
+        {fetchTrips
+          .filter((fetchTrip) => {
+            if (tab === 'past') {
+              return fetchTrip.data.endDate.toDate() < new Date();
+            }
+          })
 
-            .map((fetchTrip) => {
-              return (
-                <View>
-                  <Image
-                    source={{ uri: fetchTrip.data.photo }}
-                    alt='random'
-                    style={styles.Image}
-                  ></Image>
-                  <Text style={styles.containerdatesDashboard}>
-                    {moment(fetchTrip.data.startDate.toDate()).format('MMM Do')}
-                    <Text> - </Text>
-                    {moment(fetchTrip.data.endDate.toDate()).format('MMM Do')}
-                  </Text>
+          .map((fetchTrip) => {
+            return (
+              <View>
+                <Image
+                  source={{ uri: fetchTrip.data.photo }}
+                  alt='random'
+                  style={styles.Image}
+                ></Image>
 
-                  <View style={styles.containerTriptitle}>
-                    <Feather name='map-pin' size={24} color='#9D9996' />
-                    <Text>{fetchTrip.data.title}</Text>
-                  </View>
-
+                <View style={styles.containerTriptitle}>
+                  <Feather name='map-pin' size={24} color='#9D9996' />
+                  <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                </View>
+                <View style={styles.containerRightChevron}>
                   <Feather
                     onPress={() => openTripDetails(fetchTrip.id)}
                     name='chevron-right'
@@ -181,42 +167,44 @@ export default function Dashboard(props) {
                     style={styles.rightChevron}
                   />
                 </View>
-              );
-            })}
-        </ScrollView>
-      </View>
-      <Feather
-        name='plus'
-        size={35}
-        color='black'
-        onPress={addTrip}
-        style={styles.addTripButton}
-      />
+              </View>
+            );
+          })}
+      </ScrollView>
+      <TouchableOpacity style={styles.clickForDetailsSection} onPress={addTrip}>
+        <Text style={styles.clickForDetailsText}>Click here to add trip</Text>
+        <Feather
+          name='plus-circle'
+          size={24}
+          color='#2E5E4E'
+          style={styles.addTripButton}
+        />
+      </TouchableOpacity>
+
       <Footer />
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   dashboardContainer: { width: '100%', height: '100%' },
   myTripsTitle: {
-    marginTop: 10,
+    marginTop: 25,
     fontSize: 25,
     marginLeft: 20,
-    color: '#93A7AA',
+    color: '#2E5E4E',
     fontWeight: 'bold',
   },
   tabs: {
     marginLeft: 20,
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: 25,
+    marginBottom: 25,
   },
   tabAlone: {
     marginRight: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    fontSize: 20,
+    fontSize: 25,
     color: '#93A7AA',
   },
   tabActive: {
@@ -229,7 +217,7 @@ const styles = StyleSheet.create({
   Image: {
     borderRadius: 20,
     width: 350,
-    height: 450,
+    height: 400,
     marginRight: 10,
     marginLeft: 10,
   },
@@ -251,24 +239,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
-    top: 350,
+    top: 330,
     right: 250,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: 9,
     padding: 10,
   },
-  infoButton: {
+  tripTitle: { fontWeight: 'bold', marginLeft: 5 },
+  containerRightChevron: {
     position: 'absolute',
-    top: 350,
-    right: 90,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    top: 330,
+    right: 30,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: 9,
   },
   addTripButton: {
     display: 'flex',
     justifyContent: 'flex-start',
     marginLeft: 20,
-    marginTop: 20,
-    position: 'absolute',
   },
+  clickForDetailsSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 20,
+    marginBottom: 10,
+  },
+  clickForDetailsText: { fontWeight: 'bold', color: '#93A7AA' },
 });

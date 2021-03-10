@@ -9,28 +9,40 @@ export default function Footer(props) {
   const backToHome = () => {
     history.push(`/dashboard`);
   };
+
+  const navigateToSettings = () => {
+    history.push(`/settings`);
+  };
+
   return (
     <View style={styles.footer}>
       <View style={styles.menuItems}>
-        <Feather
-          onPress={backToHome}
-          name='home'
-          size={25}
-          color='#9D9996'
-          style={styles.arrowClose}
-        />
-        <Feather
-          name='arrow-left-circle'
-          size={25}
-          color='#9D9996'
-          style={styles.arrowClose}
-        />
-        <Feather
-          name='arrow-left-circle'
-          size={25}
-          color='#9D9996'
-          style={styles.arrowClose}
-        />
+        <View style={styles.item}>
+          <Feather
+            onPress={backToHome}
+            name='home'
+            size={25}
+            color='#9D9996'
+            style={styles.arrowClose}
+          />
+        </View>
+        <View style={styles.item}>
+          <Feather
+            name='user'
+            size={25}
+            color='#9D9996'
+            style={styles.arrowClose}
+          />
+        </View>
+        <View style={styles.item}>
+          <Feather
+            onPress={navigateToSettings}
+            name='settings'
+            size={25}
+            color='#9D9996'
+            style={styles.arrowClose}
+          />
+        </View>
       </View>
     </View>
   );
@@ -38,16 +50,22 @@ export default function Footer(props) {
 const styles = StyleSheet.create({
   footer: {
     width: '100%',
-    height: 60,
+    height: '10%',
     backgroundColor: '#ececec',
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
   },
   menuItems: {
     display: 'flex',
     flexDirection: 'row',
+  },
+
+  item: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: 30,
+    marginRight: 30,
   },
 });

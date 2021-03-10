@@ -34,15 +34,14 @@ export default function TripDetails(props) {
           style={styles.photo}
           alt='random'
         />
-        <BackToDashboardButton />
       </View>
       <View style={styles.tripDetails}>
         <View style={styles.locationSection}>
           <Feather name='map-pin' size={24} color='#9D9996' />
           <Text style={styles.tripTitle}>{fetchTripDetails.data.title}</Text>
           <Text style={styles.containerDates}>
-            {moment(fetchTripDetails.data.startDate).format('MMM Do')} -
-            {moment(fetchTripDetails.data.endDate).format('MMM Do')}
+            {moment(fetchTripDetails.data.startDate.toDate()).format('MMM Do')}{' '}
+            -{moment(fetchTripDetails.data.endDate.toDate()).format('MMM Do')}
           </Text>
         </View>
         <View>
@@ -76,6 +75,7 @@ export default function TripDetails(props) {
               <Feather name='arrow-right' size={24} color='#B37650' />
             </View>
           </View>
+          <BackToDashboardButton />
         </View>
       </View>
     </View>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
 
   tripTitle: {
-    color: '#93A7AA',
+    color: '#2E5E4E',
     fontWeight: 'bold',
     fontSize: 30,
     marginLeft: 10,
