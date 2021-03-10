@@ -7,7 +7,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import AccountHeader from './AccountHeader';
+import Footer from './Footer';
 import { Feather } from '@expo/vector-icons';
 
 export default function HelpCenter(props) {
@@ -40,71 +40,73 @@ export default function HelpCenter(props) {
     },
   ];
   return (
-    <ScrollView>
-      <AccountHeader />
-      <View>
+    <View>
+      <View style={styles.faqContainer}>
         <Text style={styles.sectionsTitle}>FAQ</Text>
+        {freqAskedQuestions.map((freqAskedQuestion, index) => {
+          return (
+            <View key={index} style={styles.questionContainer}>
+              <View style={styles.questionsSection}>
+                <Text style={styles.question}>
+                  {freqAskedQuestion.question}
+                </Text>
 
-        <View>
-          {freqAskedQuestions.map((freqAskedQuestion, index) => {
-            return (
-              <View key={index} style={styles.questionContainer}>
-                <View style={styles.questionsSection}>
-                  <Text style={styles.question}>
-                    {freqAskedQuestion.question}
-                  </Text>
-
+                <Feather
+                  name='chevron-down'
+                  size={32}
+                  color='black'
+                  onPress={openAnswerOfQuestion}
+                />
+              </View>
+              {clickedOnQuestion ? (
+                <View style={styles.answersSection}>
+                  <Text style={styles.answer}>{freqAskedQuestion.answer}</Text>
                   <Feather
-                    name='chevron-down'
+                    name='chevron-up'
                     size={32}
                     color='black'
                     onPress={openAnswerOfQuestion}
                   />
                 </View>
-                {clickedOnQuestion ? (
-                  <View style={styles.answersSection}>
-                    <Text style={styles.answer}>
-                      {freqAskedQuestion.answer}
-                    </Text>
-                    <Feather
-                      name='chevron-up'
-                      size={32}
-                      color='black'
-                      onPress={openAnswerOfQuestion}
-                    />
-                  </View>
-                ) : null}
-              </View>
-            );
-          })}
-        </View>
+              ) : null}
+            </View>
+          );
+        })}
       </View>
-    </ScrollView>
+      <Footer />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  faqContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+
+    width: 300,
+    height: 300,
+    margin: 30,
+  },
   sectionsTitle: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 20,
     marginTop: 10,
   },
   questionsSection: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   answersSection: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   questionContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-
-    padding: 20,
   },
   question: {
     fontSize: 20,

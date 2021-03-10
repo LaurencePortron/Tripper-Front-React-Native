@@ -14,6 +14,14 @@ export default function Footer(props) {
     history.push(`/settings`);
   };
 
+  const navigateToHelpCenter = () => {
+    history.push(`/helpCenter`);
+  };
+
+  const navigateToAbout = () => {
+    history.push(`/about`);
+  };
+
   return (
     <View style={styles.footer}>
       <View style={styles.menuItems}>
@@ -28,7 +36,8 @@ export default function Footer(props) {
         </View>
         <View style={styles.item}>
           <Feather
-            name='user'
+            onPress={navigateToSettings}
+            name='settings'
             size={25}
             color='#9D9996'
             style={styles.arrowClose}
@@ -36,8 +45,17 @@ export default function Footer(props) {
         </View>
         <View style={styles.item}>
           <Feather
-            onPress={navigateToSettings}
-            name='settings'
+            onPress={navigateToHelpCenter}
+            name='help-circle'
+            size={25}
+            color='#9D9996'
+            style={styles.arrowClose}
+          />
+        </View>
+        <View style={styles.item}>
+          <Feather
+            onPress={navigateToAbout}
+            name='info'
             size={25}
             color='#9D9996'
             style={styles.arrowClose}
