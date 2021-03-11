@@ -4,7 +4,6 @@ import { NativeRouter, Redirect, Route } from 'react-router-native';
 import LogIn from './components/LogIn';
 import TripDetails from './components/TripDetails';
 import Dashboard from './components/Dashboard';
-import { NavigationContainer } from '@react-navigation/native';
 import { UserContext } from './context/Context';
 import AddTrip from './components/AddTrip';
 import AddActivity from './components/AddActivity';
@@ -16,9 +15,9 @@ import HelpCenter from './components/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import NotificationSettings from './components/NotificationSettings';
-// import NavigationMenu from './components/NavigationMenu';
 import About from './components/About';
 import WelcomePage from './components/WelcomePage';
+import TripOverview from './components/TripOverview';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -67,6 +66,7 @@ export default function App() {
           <Route path='/messages' component={Messages} />
           <Route path='/helpCenter' component={HelpCenter} />
           <Route path='/about' component={About} />
+          <Route path='/trip-overview/:id' component={TripOverview} />
         </View>
       </NativeRouter>
     </UserContext.Provider>

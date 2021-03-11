@@ -18,7 +18,6 @@ export default function AddActivity(props) {
   const [addActivityDescription, setAddActivityDescription] = useState('');
   const [addActivityCost, setAddActivityCost] = useState('');
   const history = useHistory();
-  const [isClicked, setIsClicked] = useState(false);
   var db = firebase.firestore();
   require('firebase/firestore');
 
@@ -52,7 +51,7 @@ export default function AddActivity(props) {
         photo: result.data.url,
       });
 
-      history.push(`/dashboard`);
+      history.push(`/trip-overview/${tripId}`);
     } catch (error) {
       console.error('Error', error);
     }

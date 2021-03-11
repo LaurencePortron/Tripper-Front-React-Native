@@ -8,6 +8,7 @@ import firebase from 'firebase/app';
 import Friends from './Friends';
 import { useFirestoreDocument } from './hooks';
 import BackToDashboardButton from './Buttons';
+import { TouchableOpacity } from 'react-native';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
@@ -20,6 +21,10 @@ export default function TripDetails(props) {
 
   const goToMessages = () => {
     history.push(`/messages`);
+  };
+
+  const navigateToTripOverview = () => {
+    history.push(`/trip-overview/${tripId}`);
   };
 
   if (!fetchTripDetails) {
@@ -68,12 +73,16 @@ export default function TripDetails(props) {
             <Text style={styles.description}>
               {fetchTripDetails.data.description}
             </Text>
-            <View style={styles.overviewNavigationSection}>
+
+            <TouchableOpacity
+              style={styles.overviewNavigationSection}
+              onPress={navigateToTripOverview}
+            >
               <Text style={styles.overviewNavigationText}>
                 Click here to see overview
               </Text>
               <Feather name='arrow-right' size={24} color='#B37650' />
-            </View>
+            </TouchableOpacity>
           </View>
           <BackToDashboardButton />
         </View>

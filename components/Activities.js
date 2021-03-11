@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-native';
-import API from '../services/API';
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFirestoreCollection, useFirestoreDocument } from './hooks';
@@ -27,36 +26,41 @@ export default function Activites({ tripId }) {
   }
 
   return (
-    <ScrollView>
+    <View>
       <Text style={styles.activitiesTitle}>Activities</Text>
-      <View style={styles.activityContainer}>
-        {fetchActivities.map((fetchActivity) => {
-          return (
-            <View>
-              <Image
-                source={{ uri: fetchActivity.data.photo }}
-                style={styles.activityPhoto}
-                alt='random'
-              />
+      <ScrollView horizontal>
+        <View style={styles.activityContainer}>
+          {fetchActivities.map((fetchActivity) => {
+            return (
+              <View>
+                <Image
+                  source={{ uri: fetchActivity.data.photo }}
+                  style={styles.activityPhoto}
+                  alt='random'
+                />
 
-              <Text style={styles.activityTitle} key={fetchActivity.id}>
-                {fetchActivity.data.title}
-              </Text>
-              <Text style={styles.activityCost} key={fetchActivity.data.title}>
-                {fetchActivity.data.cost}
-              </Text>
-            </View>
-          );
-        })}
-        <Feather
-          name='plus-circle'
-          size={32}
-          color='#2E5E4E'
-          onPress={addActivity}
-          style={styles.addButton}
-        />
-      </View>
-    </ScrollView>
+                <Text style={styles.activityTitle} key={fetchActivity.id}>
+                  {fetchActivity.data.title}
+                </Text>
+                <Text
+                  style={styles.activityCost}
+                  key={fetchActivity.data.title}
+                >
+                  {fetchActivity.data.cost}
+                </Text>
+              </View>
+            );
+          })}
+          <Feather
+            name='plus-circle'
+            size={32}
+            color='#2E5E4E'
+            onPress={addActivity}
+            style={styles.addButton}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -73,22 +77,23 @@ const styles = StyleSheet.create({
   activityContainer: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignItems: 'center',
   },
   activityPhoto: {
     display: 'flex',
-    height: 70,
-    width: 140,
+    height: 160,
+    width: 240,
     borderRadius: 5,
     marginLeft: 20,
   },
   activityTitle: {
-    color: '#93A7AA',
+    color: '#2E5E4E',
     marginLeft: 30,
     marginRight: 20,
     alignSelf: 'center',
     fontSize: 13,
     marginTop: 10,
+    fontWeight: 'bold',
   },
   activityCost: {
     color: '#93A7AA',
@@ -100,6 +105,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   addButton: {
-    marginTop: 15,
+    marginLeft: 10,
+    marginBottom: 45,
   },
 });
