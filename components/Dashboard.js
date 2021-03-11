@@ -23,8 +23,8 @@ export default function Dashboard(props) {
     []
   );
 
-  const openTripDetails = (id) => {
-    history.push(`/trip-details/${id}`);
+  const openTripOverview = (id) => {
+    history.push(`/trip-overview/${id}`);
   };
 
   const addTrip = () => {
@@ -98,7 +98,7 @@ export default function Dashboard(props) {
                     name='chevron-right'
                     size={35}
                     color='white'
-                    onPress={() => openTripDetails(fetchTrip.id)}
+                    onPress={() => openTripOverview(fetchTrip.id)}
                     style={styles.rightChevron}
                   />
                 </View>
@@ -130,7 +130,7 @@ export default function Dashboard(props) {
                     name='chevron-right'
                     size={35}
                     color='white'
-                    onPress={() => openTripDetails(fetchTrip.id)}
+                    onPress={() => openTripOverview(fetchTrip.id)}
                     style={styles.rightChevron}
                   />
                 </View>
@@ -160,7 +160,7 @@ export default function Dashboard(props) {
                 </View>
                 <View style={styles.containerRightChevron}>
                   <Feather
-                    onPress={() => openTripDetails(fetchTrip.id)}
+                    onPress={() => openTripOverview(fetchTrip.id)}
                     name='chevron-right'
                     size={35}
                     color='white'

@@ -39,7 +39,6 @@ export default function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log('user changed', user);
       setUser(user);
     });
   }, []);
@@ -47,7 +46,6 @@ export default function App() {
   return (
     <UserContext.Provider value={user}>
       <NativeRouter>
-        {/* <NavigationMenu /> */}
         <View style={styles.container}>
           {user ? (
             <Redirect from='/' to='/dashboard' />
