@@ -54,7 +54,6 @@ export default function InviteModal({ show, handleInviteModalClosure }) {
 const styles = StyleSheet.create({
   modalContainer: {
     display: 'flex',
-
     justifyContent: 'center',
   },
   modalMainDisplay: {
@@ -70,9 +69,7 @@ const styles = StyleSheet.create({
     width: 300,
     padding: 10,
   },
-  modalMainNoDisplay: {
-    display: 'none',
-  },
+
   inviteText: {
     textAlign: 'left',
     marginLeft: 20,

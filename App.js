@@ -18,6 +18,7 @@ import NotificationSettings from './components/NotificationSettings';
 import About from './components/About';
 import WelcomePage from './components/WelcomePage';
 import TripOverview from './components/TripOverview';
+import SplitWise from './components/SplitWise';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -65,6 +66,7 @@ export default function App() {
           <Route path='/helpCenter' component={HelpCenter} />
           <Route path='/about' component={About} />
           <Route path='/trip-overview/:id' component={TripOverview} />
+          <Route path='/splitwise/:id' component={SplitWise} />
         </View>
       </NativeRouter>
     </UserContext.Provider>

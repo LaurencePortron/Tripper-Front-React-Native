@@ -15,9 +15,9 @@ export default function Friends(props) {
   const handleInviteModalClosure = (inviteSent) => {
     setInviteModalOpen(false);
   };
-
+  // add tripId to inviteModal as props
   return (
-    <ScrollView>
+    <View style={styles.friendsContainer}>
       <Text style={styles.friendsTitle}>Friends</Text>
       <View style={styles.avatars}>
         <Feather name='user' size={30} color='#93A7AA' />
@@ -30,11 +30,19 @@ export default function Friends(props) {
           handleInviteModalClosure={handleInviteModalClosure}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  friendsContainer: {
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+  },
   friendsTitle: {
     textAlign: 'left',
     marginLeft: 20,

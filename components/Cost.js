@@ -1,15 +1,17 @@
 import React from 'react';
 import { useHistory } from 'react-router-native';
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFirestoreDocument, useFirestoreCollection } from './hooks';
 import firebase from 'firebase/app';
 
 export default function Cost({ tripId }) {
+  const history = useHistory();
   const fetchTripDetails = useFirestoreDocument(
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
   );
+  console.log('cost', tripId);
 
   const fetchActivities = useFirestoreCollection(
     firebase
@@ -28,6 +30,10 @@ export default function Cost({ tripId }) {
   },
   0);
 
+  const navigateToSplitWise = () => {
+    history.push(`/splitwise/${tripId}`);
+  };
+
   if (!fetchTripDetails) {
     return null;
   }
@@ -38,20 +44,29 @@ export default function Cost({ tripId }) {
 
   return (
     <View style={styles.costContainer}>
-      <Text style={styles.activitiesTitle}>Cost</Text>
+      <Text style={styles.costTitle}>Cost</Text>
 
       <Text style={styles.costSubcategory}>
-        Total Cost: {fetchTripDetails.data.cost}
+        Total Cost: ${fetchTripDetails.data.cost}
       </Text>
       <View style={styles.costCategory}>
         <Text style={styles.costSubcategory}>
-          Total trip cost: {fetchTripDetails.data.cost}
+          Total trip cost: ${fetchTripDetails.data.cost}
         </Text>
 
         <Text style={styles.costSubcategory}>
-          Total activities cost:{TotalActivityCost}
+          Total activities cost: ${TotalActivityCost}
         </Text>
       </View>
+      <TouchableOpacity
+        style={styles.overviewNavigationSection}
+        onPress={navigateToSplitWise}
+      >
+        <Text style={styles.overviewNavigationText}>
+          Click here to add costs
+        </Text>
+        <Feather name='arrow-right' size={24} color='#B37650' />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -59,11 +74,16 @@ export default function Cost({ tripId }) {
 const styles = StyleSheet.create({
   costContainer: {
     margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
   },
-  activitiesTitle: {
+  costTitle: {
     textAlign: 'left',
     marginTop: 10,
-    marginLeft: 20,
+    marginLeft: 10,
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
@@ -71,10 +91,22 @@ const styles = StyleSheet.create({
   },
   costCategory: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    marginLeft: 10,
   },
   costSubcategory: {
-    marginBottom: 10,
-    borderWidth: 1,
+    marginLeft: 10,
+  },
+  overviewNavigationSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  overviewNavigationText: {
+    color: '#B37650',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginRight: 10,
   },
 });
