@@ -14,15 +14,15 @@ Users will be able to:
 
 ## Tech
 
-Tripper is a react-app and its back is run with express/mySQL.
+Tripper is a react-native-app (Expo) and its back is run with Firestore/FireBase.
 Simply run npm start to get started.
 
 Link to back: [BackEnd](https://github.com/LaurencePortron/Tripper_-Back-)
 
 ## Wireframes/MockUps
 
-![Screenshot](FronPage.png)
-![Screenshot](TripOverview.png)
+![Screenshot](FronPage.PNG)
+![Screenshot](TripOverview.PNG)
 
 ## BackEnd
 
