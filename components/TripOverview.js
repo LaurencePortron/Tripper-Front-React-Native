@@ -65,7 +65,7 @@ export default function TripOverview(props) {
             </View>
             <View style={styles.menuItem}>
               <Feather name='credit-card' size={24} color='#93A7AA' />
-              <Text> {fetchTripDetails.data.cost}</Text>
+              <Text> ${fetchTripDetails.data.cost}</Text>
             </View>
           </View>
           <View style={styles.descriptionSection}>
@@ -164,6 +164,5 @@ const styles = StyleSheet.create({
     color: '#B37650',
     fontWeight: 'bold',
     fontSize: 15,
-    marginRight: 10,
   },
 });

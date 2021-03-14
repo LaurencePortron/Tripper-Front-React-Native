@@ -21,7 +21,7 @@ export default function TripDetails(props) {
       <Text style={styles.overviewTitle}>Overview</Text>
       <Cost tripId={tripId} />
       <Stops tripId={tripId} />
-      <Friends />
+      <Friends tripId={tripId} />
       <Activities tripId={tripId} />
       <Footer />
     </View>

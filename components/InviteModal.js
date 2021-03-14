@@ -3,7 +3,11 @@ import { View, StyleSheet, Modal, Text, TextInput, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import API from '../services/API';
 
-export default function InviteModal({ show, handleInviteModalClosure }) {
+export default function InviteModal({
+  tripId,
+  show,
+  handleInviteModalClosure,
+}) {
   const [getEmail, setGetEmail] = useState('');
 
   const getEmailInput = (inputText) => {
@@ -11,7 +15,7 @@ export default function InviteModal({ show, handleInviteModalClosure }) {
   };
 
   const handleSendInvite = () => {
-    API.post(`/invites`, {
+    API.post(`/invites/${tripId}`, {
       to: getEmail,
     });
   };

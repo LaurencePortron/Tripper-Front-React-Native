@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import InviteModal from './InviteModal';
 
-export default function Friends(props) {
+export default function Friends({ tripId }) {
+  console.log(tripId);
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
 
   const handleInviteModalClosure = (inviteSent) => {
@@ -26,6 +27,7 @@ export default function Friends(props) {
           <Feather name='user-plus' size={30} color='#2E5E4E' />
         </TouchableOpacity>
         <InviteModal
+          tripId={tripId}
           show={inviteModalOpen}
           handleInviteModalClosure={handleInviteModalClosure}
         />

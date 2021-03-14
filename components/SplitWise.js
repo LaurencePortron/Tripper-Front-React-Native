@@ -37,17 +37,20 @@ export default function SplitWise(props) {
         style={styles.backToTripDetailsButton}
         onPress={BackToTripDetails}
       />
+
       <Text style={styles.splitWiseTitle}>SplitWise</Text>
       <Text style={styles.currentExpensesTitle}>Current Expenses</Text>
-      {fetchExpenses.map((expense) => {
-        return (
-          <View key={expense.id} style={styles.expenseContainer}>
-            <Text style={styles.expenseTitle}>{expense.data.title}</Text>
-            <Text style={styles.expenseSections}>{expense.data.person}</Text>
-            <Text style={styles.expenseSections}>{expense.data.amount}</Text>
-          </View>
-        );
-      })}
+      <View style={styles.splitWiseContainer}>
+        {fetchExpenses.map((expense) => {
+          return (
+            <View key={expense.id} style={styles.expenseContainer}>
+              <Text style={styles.expenseTitle}>{expense.data.title}</Text>
+              <Text style={styles.expenseSections}>{expense.data.person}</Text>
+              <Text style={styles.expenseSections}>${expense.data.amount}</Text>
+            </View>
+          );
+        })}
+      </View>
       <TouchableOpacity
         style={styles.overviewNavigationSection}
         onPress={() => setExpenseModalOpen(true)}
@@ -65,17 +68,22 @@ export default function SplitWise(props) {
 }
 
 const styles = StyleSheet.create({
-  expenseContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: 20,
+  splitWiseContainer: {
     backgroundColor: 'white',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    width: 100,
+    width: '80%',
+    marginLeft: 20,
+  },
+  expenseContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: 20,
     marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
   },
   splitWiseTitle: {
     color: '#2E5E4E',
@@ -116,7 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#2E5E4E',
-    marginTop: 0,
+    margin: 10,
   },
   overviewNavigationSection: {
     display: 'flex',
