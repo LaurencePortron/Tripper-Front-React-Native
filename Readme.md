@@ -21,8 +21,8 @@ Link to back: [BackEnd](https://github.com/LaurencePortron/Tripper_-Back-)
 
 ## Wireframes/MockUps
 
-![Screenshot](FronPage.PNG =100x20)
-![Screenshot](TripOverView.PNG =100x20)
+![Screenshot](FronPage.PNG) {:height="200px" width="500px"}
+![Screenshot](TripOverView.PNG) {:height="200px" width="500px"}
 
 ## BackEnd
 
