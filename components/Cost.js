@@ -63,7 +63,7 @@ export default function Cost({ tripId }) {
         onPress={navigateToSplitWise}
       >
         <Text style={styles.overviewNavigationText}>
-          Click here to add costs
+          Click here to see expenses
         </Text>
         <Feather name='arrow-right' size={24} color='#B37650' />
       </TouchableOpacity>

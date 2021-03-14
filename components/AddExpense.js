@@ -12,9 +12,11 @@ export default function AddExpense({
   const [addExpenseTitle, setAddExpenseTitle] = useState('');
   const [addExpensePerson, setAddExpensePerson] = useState('');
   const [addExpenseAmount, setAddExpenseAmount] = useState('');
+  const [addExpenseParticipants, setAddExpenseParticipants] = useState('');
   var db = firebase.firestore();
   require('firebase/firestore');
   const history = useHistory();
+  console.log('addExpense', tripId);
 
   const handleExpenseTitle = (inputText) => {
     setAddExpenseTitle(inputText);
@@ -26,6 +28,9 @@ export default function AddExpense({
   const handleExpenseAmount = (inputText) => {
     setAddExpenseAmount(inputText);
   };
+  const handleExpenseParticipants = (inputText) => {
+    setAddExpenseParticipants(inputText);
+  };
 
   const clickToAddExpense = () => {
     db.collection('trips')
@@ -35,10 +40,10 @@ export default function AddExpense({
         title: addExpenseTitle,
         person: addExpensePerson,
         amount: Number(addExpenseAmount),
+        participants: addExpenseParticipants,
         trip_id: tripId,
       });
-
-    history.push(`/splitwise/${tripId}`);
+    history.push(`/trip-details/${tripId}`);
   };
 
   // what we need: friends (associate costs), option to add costs (such as groceries, other activities etc: 1 textInput to add with different titles)
@@ -77,10 +82,19 @@ export default function AddExpense({
           inputText={addExpenseAmount}
           onChangeText={handleExpenseAmount}
         />
+        <TextInput
+          style={styles.addExpense}
+          placeholder='Participants'
+          name='Amount'
+          inputText={addExpenseParticipants}
+          onChangeText={handleExpenseParticipants}
+        />
         <Button
           style={styles.expenseButton}
           type='submit'
           title='Submit Expense'
+          method='post'
+          action='/splitwise'
           onPress={() => {
             clickToAddExpense();
           }}

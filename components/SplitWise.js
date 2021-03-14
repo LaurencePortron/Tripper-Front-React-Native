@@ -41,10 +41,10 @@ export default function SplitWise(props) {
       <Text style={styles.currentExpensesTitle}>Current Expenses</Text>
       {fetchExpenses.map((expense) => {
         return (
-          <View key={expense.id}>
-            <Text>{expense.data.title}</Text>
-            <Text>{expense.data.person}</Text>
-            <Text>{expense.data.amount}</Text>
+          <View key={expense.id} style={styles.expenseContainer}>
+            <Text style={styles.expenseTitle}>{expense.data.title}</Text>
+            <Text style={styles.expenseSections}>{expense.data.person}</Text>
+            <Text style={styles.expenseSections}>{expense.data.amount}</Text>
           </View>
         );
       })}
@@ -65,13 +65,36 @@ export default function SplitWise(props) {
 }
 
 const styles = StyleSheet.create({
+  expenseContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    width: 100,
+    marginTop: 10,
+  },
   splitWiseTitle: {
     color: '#2E5E4E',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 30,
-    marginLeft: 10,
     marginTop: 20,
+  },
+  expenseTitle: {
+    textAlign: 'left',
+    fontWeight: 'bold',
+    color: '#2E5E4E',
+    marginLeft: 5,
+  },
+
+  expenseSections: {
+    textAlign: 'left',
+    color: 'black',
+    marginLeft: 5,
   },
   backToTripDetailsButton: {
     marginTop: 20,
