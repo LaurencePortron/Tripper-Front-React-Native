@@ -22,7 +22,7 @@ Link to back: [BackEnd](https://github.com/LaurencePortron/Tripper_-Back-)
 ## Wireframes/MockUps
 
 ![Screenshot](FronPage.PNG)
-![Screenshot](TripOverview.PNG)
+![Screenshot](TripOverView.PNG)
 
 ## BackEnd
 
