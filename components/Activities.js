@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-native';
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useFirestoreCollection, useFirestoreDocument } from './hooks';
+import { useFirestoreCollection } from './hooks';
 import firebase from 'firebase/app';
 
 export default function Activites({ tripId }) {
@@ -32,14 +32,14 @@ export default function Activites({ tripId }) {
         <View style={styles.activityContainer}>
           {fetchActivities.map((fetchActivity) => {
             return (
-              <View>
+              <View key={fetchActivity.id}>
                 <Image
                   source={{ uri: fetchActivity.data.photo }}
                   style={styles.activityPhoto}
                   alt='random'
                 />
 
-                <Text style={styles.activityTitle} key={fetchActivity.id}>
+                <Text style={styles.activityTitle}>
                   {fetchActivity.data.title}
                 </Text>
                 <Text

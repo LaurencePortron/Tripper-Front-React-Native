@@ -12,6 +12,7 @@ import { Feather } from '@expo/vector-icons';
 import Activities from './Activities';
 import Cost from './Cost';
 import Stops from './Stops';
+import Friends from './Friends';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
@@ -20,6 +21,7 @@ export default function TripDetails(props) {
       <Text style={styles.overviewTitle}>Overview</Text>
       <Cost tripId={tripId} />
       <Stops tripId={tripId} />
+      <Friends />
       <Activities tripId={tripId} />
       <Footer />
     </View>

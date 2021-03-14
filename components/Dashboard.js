@@ -82,7 +82,7 @@ export default function Dashboard(props) {
           })
           .map((fetchTrip) => {
             return (
-              <View>
+              <View key={fetchTrip.id}>
                 <Image
                   source={{ uri: fetchTrip.data.photo }}
                   style={styles.Image}
@@ -114,7 +114,7 @@ export default function Dashboard(props) {
 
           .map((fetchTrip) => {
             return (
-              <View>
+              <View key={fetchTrip.id}>
                 <Image
                   source={{ uri: fetchTrip.data.photo }}
                   style={styles.Image}
@@ -147,7 +147,7 @@ export default function Dashboard(props) {
 
           .map((fetchTrip) => {
             return (
-              <View>
+              <View key={fetchTrip.id}>
                 <Image
                   source={{ uri: fetchTrip.data.photo }}
                   alt='random'

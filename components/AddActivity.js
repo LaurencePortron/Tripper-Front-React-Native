@@ -42,14 +42,18 @@ export default function AddActivity(props) {
     try {
       const result = await API.post('/images', { title: addActivityTitle });
 
-      await db.collection('trips').doc(tripId).collection('activities').add({
-        title: addActivityTitle,
-        date: addActivityDate,
-        description: addActivityDescription,
-        cost: addActivityCost,
-        trip_id: tripId,
-        photo: result.data.url,
-      });
+      await db
+        .collection('trips')
+        .doc(tripId)
+        .collection('activities')
+        .add({
+          title: addActivityTitle,
+          date: new Date(addActivityDate),
+          description: addActivityDescription,
+          cost: Number(addActivityCost),
+          trip_id: tripId,
+          photo: result.data.url,
+        });
 
       history.push(`/trip-overview/${tripId}`);
     } catch (error) {

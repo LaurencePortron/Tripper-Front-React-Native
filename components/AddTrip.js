@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import firebase from 'firebase/app';
 import BackToDashboardButton from './Buttons';
+import { TouchableOpacity } from 'react-native';
 
 export default function AddTrip(props) {
   const [addTripTitle, setAddTripTitle] = useState('');
@@ -18,6 +19,7 @@ export default function AddTrip(props) {
   const [addEndDate, setAddEndDate] = useState('');
   const [addDescription, setAddDescription] = useState('');
   const [addCost, setAddCost] = useState('');
+
   var db = firebase.firestore();
   require('firebase/firestore');
 
@@ -51,7 +53,7 @@ export default function AddTrip(props) {
         startDate: new Date(addStartDate),
         endDate: new Date(addEndDate),
         description: addDescription,
-        cost: addCost,
+        cost: Number(addCost),
         photo: result.data.url,
       });
 
@@ -107,16 +109,14 @@ export default function AddTrip(props) {
             onChangeText={addCostInput}
           />
 
-          <Button
+          <TouchableOpacity
             style={styles.button}
-            type='submit'
-            method='post'
-            action='/trips'
-            title='Add Trip'
             onPress={() => {
               clickToAddTrip();
             }}
-          ></Button>
+          >
+            <Text style={styles.buttonColor}>Add Trip</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -130,21 +130,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addInfoFields: { width: 300, marginTop: 30 },
-  addTripTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
+  addTripTitle: {
+    textAlign: 'center',
+    color: '#2E5E4E',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   addInfo: {
     display: 'flex',
     padding: 15,
-    borderWidth: 1,
-    borderColor: '#535b63',
+    borderBottomWidth: 1,
     marginBottom: 15,
     margin: 10,
   },
   button: {
-    width: 80,
-    padding: 15,
-    backgroundColor: '#1b3332',
+    padding: 20,
+    backgroundColor: 'white',
+    borderColor: '#2E5E4E',
+    borderWidth: 1,
     fontWeight: 'bold',
-    color: '#ffffff',
+  },
+  buttonColor: {
+    color: '#2E5E4E',
   },
   arrow: { marginTop: 30 },
 });

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#38516d',
+    color: '#2E5E4E',
     marginTop: 0,
   },
   avatars: {

@@ -7,7 +7,6 @@ export default function Cost({ tripId }) {
   return (
     <View>
       <Text style={styles.activitiesTitle}>Stops</Text>
-      <Text style={styles.costSubcategory}>Total trip cost:</Text>
     </View>
   );
 }
