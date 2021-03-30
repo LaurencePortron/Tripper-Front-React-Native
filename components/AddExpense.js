@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Modal, StyleSheet, TextInput, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
+import DropDownSelector from './DropDownSelector';
 import { useHistory } from 'react-router-native';
 
 export default function AddExpense({
@@ -16,7 +17,6 @@ export default function AddExpense({
   var db = firebase.firestore();
   require('firebase/firestore');
   const history = useHistory();
-  console.log('addExpense', tripId);
 
   const handleExpenseTitle = (inputText) => {
     setAddExpenseTitle(inputText);
@@ -82,10 +82,8 @@ export default function AddExpense({
           inputText={addExpenseAmount}
           onChangeText={handleExpenseAmount}
         />
-        <TextInput
-          style={styles.addExpense}
-          placeholder='Participants'
-          name='Amount'
+        <DropDownSelector
+          tripId={tripId}
           inputText={addExpenseParticipants}
           onChangeText={handleExpenseParticipants}
         />

@@ -11,7 +11,6 @@ export default function Cost({ tripId }) {
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
   );
-  console.log('cost', tripId);
 
   const fetchActivities = useFirestoreCollection(
     firebase

@@ -14,7 +14,7 @@ import AccountSettings from './components/AccountSettings';
 import HelpCenter from './components/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import NotificationSettings from './components/NotificationSettings';
+
 import About from './components/About';
 import WelcomePage from './components/WelcomePage';
 import TripOverview from './components/TripOverview';
@@ -61,7 +61,7 @@ export default function App() {
           <Route path='/add-activities/:id' component={AddActivity} />
           <Route path='/settings' component={AccountSettings} />
           <Route path='/myprofile' component={Profile} />
-          <Route path='/notifications' component={NotificationSettings} />
+
           <Route path='/messages' component={Messages} />
           <Route path='/helpCenter' component={HelpCenter} />
           <Route path='/about' component={About} />

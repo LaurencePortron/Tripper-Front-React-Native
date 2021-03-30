@@ -10,8 +10,8 @@ export default function Footer(props) {
     history.push(`/dashboard`);
   };
 
-  const navigateToSettings = () => {
-    history.push(`/settings`);
+  const navigateToProfile = () => {
+    history.push(`/myprofile`);
   };
 
   const navigateToHelpCenter = () => {
@@ -36,7 +36,7 @@ export default function Footer(props) {
         </View>
         <View style={styles.item}>
           <Feather
-            onPress={navigateToSettings}
+            onPress={navigateToProfile}
             name='settings'
             size={25}
             color='#9D9996'

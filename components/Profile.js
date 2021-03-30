@@ -1,65 +1,70 @@
 import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
-import {
-  ScrollView,
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  Image,
-  TextInput,
-} from 'react-native';
-import AccountHeader from './AccountHeader';
-import { AntDesign } from '@expo/vector-icons';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Footer from './Footer';
 
-export default function Friends(props) {
+export default function Profile(props) {
   return (
-    <ScrollView>
-      <AccountHeader />
-
-      <View style={styles.profileSections}>
-        <View style={styles.profileTextTitle}>
-          <AntDesign name='idcard' size={24} color='black' />
-          <Text style={styles.sectionsTitle}>First name</Text>
-        </View>
-        <View style={styles.profileTextTitle}>
-          <Feather name='mail' size={24} color='black' />
-          <Text style={styles.sectionsTitle}>Email</Text>
-        </View>
-        <View style={styles.profileTextTitle}>
-          <Feather name='lock' size={24} color='black' />
-          <Text style={styles.sectionsTitle}>Change Password</Text>
-        </View>
-        <Button
-          style={styles.profileButton}
-          type='submit'
-          title='Edit'
-        ></Button>
+    <View style={styles.profileContainer}>
+      <Text style={styles.profileContainerTitle}>My Profile</Text>
+      <View style={styles.infoSection}>
+        <Text style={styles.infoTitle}>Information</Text>
+        <TouchableOpacity style={styles.editInfoButton}>
+          <Text>Edit Info</Text>
+          <Feather name='edit' size={24} color='#2E5E4E' />
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+      <View style={styles.notificationSection}>
+        <Text style={styles.notificationTitle}>Notifications</Text>
+      </View>
+      <Footer />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  myProfile: {
-    textAlign: 'center',
-    marginTop: 20,
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: '#38516d',
-  },
-  profileSections: {
+  profileContainer: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 20,
     alignItems: 'flex-start',
+    marginTop: 40,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    height: '80%',
   },
-  profileTextTitle: { display: 'flex', flexDirection: 'row', margin: 10 },
-  sectionsTitle: {
+  profileContainerTitle: {
+    marginTop: 40,
+    marginLeft: 20,
     fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2E5E4E',
+    fontSize: 25,
   },
-
-  settingsContainer: {
-    width: '100%',
+  infoSection: {},
+  infoTitle: {
+    marginTop: 40,
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2E5E4E',
+    fontSize: 18,
+  },
+  notificationSection: {},
+  notificationTitle: {
+    marginTop: 40,
+    marginBottom: 40,
+    marginLeft: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2E5E4E',
+    fontSize: 18,
+  },
+  editInfoButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: 20,
   },
 });
