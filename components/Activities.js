@@ -4,22 +4,28 @@ import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFirestoreCollection } from './hooks';
 import firebase from 'firebase/app';
+import moment from 'moment';
 
 export default function Activites({ tripId }) {
   const history = useHistory();
+
+  const collectionRef = firebase
+    .firestore()
+    .collection('trips')
+    .doc(tripId)
+    .collection('activities');
 
   const addActivity = () => {
     history.push(`/add-activities/${tripId}`);
   };
 
-  const fetchActivities = useFirestoreCollection(
-    firebase
-      .firestore()
-      .collection('trips')
-      .doc(tripId)
-      .collection('activities'),
-    [tripId]
-  );
+  const archiveActivity = (activityId) => {
+    collectionRef.doc(activityId).update({
+      archived: true,
+    });
+  };
+
+  const fetchActivities = useFirestoreCollection(collectionRef, [tripId]);
 
   if (!fetchActivities) {
     return null;
@@ -39,14 +45,31 @@ export default function Activites({ tripId }) {
                   alt='random'
                 />
 
+                {fetchActivity.data.archived ? (
+                  <Text style={styles.archiveContainer}>Cancelled</Text>
+                ) : (
+                  <View style={styles.archiveContainer}>
+                    <Feather
+                      name='archive'
+                      size={25}
+                      color='white'
+                      onPress={() => archiveActivity(fetchActivity.id)}
+                    />
+
+                    <Text style={styles.archiveText}>Archive</Text>
+                  </View>
+                )}
                 <Text style={styles.activityTitle}>
                   {fetchActivity.data.title}
+                </Text>
+                <Text style={styles.activityCost}>
+                  {moment(fetchActivity.data.date.toDate()).format('MMM Do')}
                 </Text>
                 <Text
                   style={styles.activityCost}
                   key={fetchActivity.data.title}
                 >
-                  {fetchActivity.data.cost}
+                  ${fetchActivity.data.cost}
                 </Text>
               </View>
             );
@@ -86,6 +109,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginLeft: 20,
   },
+  archiveContainer: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 30,
+    top: 10,
+    color: 'white',
+  },
+  archiveText: { fontSize: 10, color: 'white' },
   activityTitle: {
     color: '#2E5E4E',
     marginLeft: 30,
@@ -101,7 +135,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     alignSelf: 'center',
     fontSize: 10,
-    marginTop: 3,
     marginBottom: 10,
   },
   addButton: {

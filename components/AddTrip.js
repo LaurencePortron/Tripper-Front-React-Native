@@ -59,7 +59,7 @@ export default function AddTrip(props) {
 
       history.push(`/dashboard`);
     } catch (error) {
-      console.error('Error', error);
+      console.error('Error cannot add trip', error);
     }
   };
 

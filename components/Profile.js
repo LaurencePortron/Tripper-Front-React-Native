@@ -2,8 +2,24 @@ import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Footer from './Footer';
+import firebase from 'firebase/app';
 
 export default function Profile(props) {
+  var db = firebase.firestore();
+  require('firebase/firestore');
+
+  const handleLogOut = (event) => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log('successfully logged out');
+        history.push(`/`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <View style={styles.profileContainer}>
       <Text style={styles.profileContainerTitle}>My Profile</Text>
@@ -16,6 +32,10 @@ export default function Profile(props) {
       </View>
       <View style={styles.notificationSection}>
         <Text style={styles.notificationTitle}>Notifications</Text>
+      </View>
+      <View style={styles.logOut}>
+        <Feather name='log-out' size={25} color='#5B443E' />
+        <Text onPress={handleLogOut}>Log Out</Text>
       </View>
       <Footer />
     </View>

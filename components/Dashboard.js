@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useHistory } from 'react-router-native';
-import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import { useFirestoreCollection } from './hooks';

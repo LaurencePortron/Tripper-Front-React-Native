@@ -1,11 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-native';
 import moment from 'moment';
-import Activities from './Activities';
-import { ScrollView, View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
-import Friends from './Friends';
 import { useFirestoreDocument } from './hooks';
 import BackToDashboardButton from './Buttons';
 import { TouchableOpacity } from 'react-native';
@@ -19,8 +17,10 @@ export default function TripOverview(props) {
     [tripId]
   );
 
-  const goToMessages = () => {
-    history.push(`/messages`);
+  const archiveTrip = (tripId) => {
+    firebase.firestore().collection('trips').doc(tripId).update({
+      archived: true,
+    });
   };
 
   const navigateToTripDetails = () => {
@@ -39,6 +39,21 @@ export default function TripOverview(props) {
           style={styles.photo}
           alt='random'
         />
+        {fetchTripDetails.data.archived ? (
+          <Text style={styles.archiveContainer}>Cancelled</Text>
+        ) : (
+          <View style={styles.archiveContainer}>
+            <Feather
+              name='archive'
+              size={25}
+              color='white'
+              onPress={() => archiveTrip(fetchTripDetails.id)}
+            />
+
+            <Text style={styles.archiveText}>Archive</Text>
+          </View>
+        )}
+        <BackToDashboardButton />
       </View>
       <View style={styles.tripDetails}>
         <View style={styles.locationSection}>
@@ -84,7 +99,6 @@ export default function TripOverview(props) {
               <Feather name='arrow-right' size={24} color='#B37650' />
             </TouchableOpacity>
           </View>
-          <BackToDashboardButton />
         </View>
       </View>
     </View>
@@ -104,7 +118,16 @@ const styles = StyleSheet.create({
     color: '#93A7AA',
     fontSize: 15,
   },
-
+  archiveContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 300,
+    left: 300,
+    backgroundColor: '#2E5E4E',
+  },
+  archiveText: { fontSize: 10, color: 'white' },
   tripTitle: {
     color: '#2E5E4E',
     fontWeight: 'bold',

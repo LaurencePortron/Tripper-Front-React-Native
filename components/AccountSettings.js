@@ -6,10 +6,8 @@ import { useHistory } from 'react-router-native';
 import firebase from 'firebase/app';
 import BackToDashboardButton from './Buttons';
 
-export default function NotificationSettings(props) {
+export default function AccountSettings(props) {
   const history = useHistory();
-  var db = firebase.firestore();
-  require('firebase/firestore');
 
   const navigateToProfileInfo = () => {
     history.push('/myprofile');
@@ -25,19 +23,6 @@ export default function NotificationSettings(props) {
 
   const navigateToAbout = () => {
     history.push('/about');
-  };
-
-  const handleLogOut = (event) => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.log('successfully logged out');
-        history.push(`/`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   return (
@@ -71,10 +56,6 @@ export default function NotificationSettings(props) {
           <Feather name='help-circle' size={25} color='#5B443E' />
           <Text onPress={navigateToAbout}>About</Text>
           <Feather name='chevron-right' size={25} color='#5B443E' />
-        </View>
-        <View style={styles.logOut}>
-          <Feather name='log-out' size={25} color='#5B443E' />
-          <Text onPress={handleLogOut}>Log Out</Text>
         </View>
       </View>
     </ScrollView>
