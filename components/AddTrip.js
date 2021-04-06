@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import API from '../services/API';
 import { useHistory } from 'react-router-native';
-import {
-  TextInput,
-  View,
-  Button,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { TextInput, View, Text, StyleSheet, ScrollView } from 'react-native';
 import firebase from 'firebase/app';
 import BackToDashboardButton from './Buttons';
 import { TouchableOpacity } from 'react-native';
@@ -64,7 +57,7 @@ export default function AddTrip(props) {
   };
 
   return (
-    <ScrollView>
+    <View>
       <BackToDashboardButton />
       <View style={styles.addTripContainer}>
         <Text style={styles.addTripTitle}>Add your trip</Text>
@@ -119,7 +112,7 @@ export default function AddTrip(props) {
           </TouchableOpacity>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -128,6 +121,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginTop: 40,
   },
   addInfoFields: { width: 300, marginTop: 30 },
   addTripTitle: {

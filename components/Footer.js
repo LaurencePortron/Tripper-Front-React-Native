@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
+    position: 'absolute',
+    bottom: 0,
   },
   menuItems: {
     display: 'flex',

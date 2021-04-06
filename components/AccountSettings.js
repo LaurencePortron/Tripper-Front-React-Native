@@ -3,7 +3,6 @@ import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { useHistory } from 'react-router-native';
-import firebase from 'firebase/app';
 import BackToDashboardButton from './Buttons';
 
 export default function AccountSettings(props) {
