@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-native';
 import { Feather } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 export default function BackToDashboardButton() {
   const history = useHistory();
+
   const backToDashboard = () => {
     history.push('/dashboard');
   };
@@ -18,6 +19,7 @@ export default function BackToDashboardButton() {
     />
   );
 }
+
 const styles = StyleSheet.create({
   backToDashboardButton: {
     position: 'absolute',

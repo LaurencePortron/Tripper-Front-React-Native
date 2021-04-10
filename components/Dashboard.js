@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   Text,
@@ -12,6 +12,7 @@ import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import { useFirestoreCollection } from './hooks';
 import Footer from './Footer';
+import NotificationAlertButton from './NotificationAlertButton';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
@@ -39,6 +40,7 @@ export default function Dashboard(props) {
   return (
     <View style={styles.dashboardContainer}>
       <Text style={styles.myTripsTitle}>My Trips</Text>
+      <NotificationAlertButton />
       <View style={styles.tabs}>
         <Text
           style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
