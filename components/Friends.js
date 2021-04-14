@@ -49,11 +49,6 @@ export default function Friends({ tripId }) {
 const styles = StyleSheet.create({
   friendsContainer: {
     margin: 10,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
   },
   friendsTitle: {
     textAlign: 'left',

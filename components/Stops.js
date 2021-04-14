@@ -3,31 +3,29 @@ import { useHistory } from 'react-router-native';
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-export default function Cost({ tripId }) {
-  return <View style={styles.costContainer}></View>;
+export default function Stops({ tripId }) {
+  return (
+    <View style={styles.stopContainer}>
+      <Text style={styles.stopTitle}>Stops</Text>
+      <Text style={styles.stopText}>Here is your itinerary</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  costContainer: {
+  stopContainer: {
     margin: 10,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
   },
-  activitiesTitle: {
+  stopTitle: {
     textAlign: 'left',
-    marginTop: 20,
-    marginLeft: 20,
+    marginTop: 10,
+    marginLeft: 10,
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
     color: '#2E5E4E',
   },
-  costSubcategory: {
-    marginTop: 20,
-    marginLeft: 20,
-    marginBottom: 10,
+  stopText: {
+    margin: 10,
   },
 });
