@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import NotificationDetails from './NotificationDetails';
 
 export default function NotificationAlertButton() {

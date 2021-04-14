@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, ScrollView } from 'react-native';
 import Footer from '../Footer';
 import Activities from '../Activities/Activities';
-import Cost from '../Splitwise/Cost';
+import Expenses from '../Splitwise/Expenses';
 import Stops from '../Stops/Stops';
 import Friends from '../Friends/Friends';
 import { useFirestoreDocument } from '../hooks';
@@ -23,7 +23,7 @@ export default function TripDetails(props) {
   return (
     <ScrollView style={styles.tripDetailsContainer}>
       <Text style={styles.overviewTitle}>{fetchTripDetails.data.title}</Text>
-      <Cost tripId={tripId} />
+      <Expenses tripId={tripId} />
       <Stops tripId={tripId} />
       <Friends tripId={tripId} />
       <Activities tripId={tripId} />

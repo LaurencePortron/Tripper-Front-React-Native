@@ -143,6 +143,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#ffffff',
   },
-
   arrow: { marginTop: 30 },
 });
