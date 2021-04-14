@@ -5,12 +5,24 @@ import Activities from './Activities';
 import Cost from './Cost';
 import Stops from './Stops';
 import Friends from './Friends';
+import { useFirestoreDocument } from './hooks';
+import firebase from 'firebase/app';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
+
+  const fetchTripDetails = useFirestoreDocument(
+    firebase.firestore().collection('trips').doc(tripId),
+    [tripId]
+  );
+
+  if (!fetchTripDetails) {
+    return null;
+  }
+
   return (
     <ScrollView style={styles.tripDetailsContainer}>
-      <Text style={styles.overviewTitle}>Peru</Text>
+      <Text style={styles.overviewTitle}>{fetchTripDetails.data.title}</Text>
       <Cost tripId={tripId} />
       <Stops tripId={tripId} />
       <Friends tripId={tripId} />

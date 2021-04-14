@@ -94,7 +94,7 @@ export default function TripOverview(props) {
               onPress={navigateToTripDetails}
             >
               <Text style={styles.overviewNavigationText}>
-                Click here to see overview
+                Click here to see details
               </Text>
               <Feather name='arrow-right' size={24} color='#B37650' />
             </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Feather } from '@expo/vector-icons';
 
