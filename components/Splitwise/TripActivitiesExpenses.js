@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     fontSize: 20,
-    color: '#2E5E4E',
+    color: '#93A7AA',
   },
 });

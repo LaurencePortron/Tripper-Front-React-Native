@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: '#93A7AA',
   },
   overviewNavigationSection: {
     display: 'flex',
