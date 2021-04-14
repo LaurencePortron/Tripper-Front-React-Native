@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import API from '../services/API';
+import API from '../../services/API';
 import { useHistory } from 'react-router-native';
 import { TextInput, View, Text, StyleSheet, ScrollView } from 'react-native';
 import firebase from 'firebase/app';
-import BackToDashboardButton from './Buttons';
+import BackToDashboardButton from '../Buttons';
 import { Button } from 'react-native';
 
 export default function AddTrip(props) {

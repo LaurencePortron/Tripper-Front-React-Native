@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NativeRouter, Redirect, Route } from 'react-router-native';
-import LogIn from './components/LogIn';
-import TripDetails from './components/TripDetails';
-import Dashboard from './components/Dashboard';
+import LogIn from './components/Logins/LogIn';
+import TripDetails from './components/Trips/TripDetails';
+import Dashboard from './components/Trips/Dashboard';
 import { UserContext } from './context/Context';
-import AddTrip from './components/AddTrip';
-import AddActivity from './components/AddActivity';
-import SignUp from './components/SignUp';
-import Messages from './components/Messages';
-import Profile from './components/Profile';
-import AccountSettings from './components/AccountSettings';
-import HelpCenter from './components/HelpCenter';
+import AddTrip from './components/Trips/AddTrip';
+import AddActivity from './components/Activities/AddActivity';
+import SignUp from './components/Logins/SignUp';
+import Messages from './components/Messages/Messages';
+import Profile from './components/UserAccount/Profile';
+import AccountSettings from './components/UserAccount/AccountSettings';
+import HelpCenter from './components/Faq/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-import About from './components/About';
-import WelcomePage from './components/WelcomePage';
-import TripOverview from './components/TripOverview';
-import SplitWise from './components/SplitWise';
+import About from './components/AboutMe/About';
+import WelcomePage from './components/Logins/WelcomePage';
+import TripOverview from './components/Trips/TripOverview';
+import SplitWise from './components/Splitwise/SplitWise';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',

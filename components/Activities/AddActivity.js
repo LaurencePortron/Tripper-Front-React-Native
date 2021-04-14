@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-native';
-import API from '../services/API';
+import API from '../../services/API';
 import {
   TextInput,
   View,

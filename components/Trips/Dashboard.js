@@ -10,9 +10,9 @@ import {
 import { useHistory } from 'react-router-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
-import { useFirestoreCollection } from './hooks';
-import Footer from './Footer';
-import NotificationAlertButton from './NotificationAlertButton';
+import { useFirestoreCollection } from '../hooks';
+import Footer from '../Footer';
+import NotificationAlertButton from '../Notifications/NotificationAlertButton';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');

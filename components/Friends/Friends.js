@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import InviteModal from './InviteModal';
-import { useFirestoreCollection } from './hooks';
+import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 
 export default function Friends({ tripId }) {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, StyleSheet, ScrollView } from 'react-native';
-import Footer from './Footer';
-import Activities from './Activities';
-import Cost from './Cost';
-import Stops from './Stops';
-import Friends from './Friends';
-import { useFirestoreDocument } from './hooks';
+import Footer from '../Footer';
+import Activities from '../Activities/Activities';
+import Cost from '../Splitwise/Cost';
+import Stops from '../Stops/Stops';
+import Friends from '../Friends/Friends';
+import { useFirestoreDocument } from '../hooks';
 import firebase from 'firebase/app';
 
 export default function TripDetails(props) {

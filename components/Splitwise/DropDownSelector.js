@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useFirestoreCollection } from './hooks';
+import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import { Feather } from '@expo/vector-icons';
 

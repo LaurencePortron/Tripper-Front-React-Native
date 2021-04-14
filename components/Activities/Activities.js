@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-native';
 import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useFirestoreCollection } from './hooks';
+import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import moment from 'moment';
 

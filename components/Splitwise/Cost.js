@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-native';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useFirestoreDocument, useFirestoreCollection } from './hooks';
+import { useFirestoreDocument, useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 
 export default function Cost({ tripId }) {

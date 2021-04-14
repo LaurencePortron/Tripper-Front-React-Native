@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
-import Footer from './Footer';
+import Footer from '../Footer';
 
 export default function HelpCenter(props) {
   return (
@@ -9,7 +9,7 @@ export default function HelpCenter(props) {
         <View style={styles.aboutImageTextContainer}>
           <Text style={styles.aboutTitle}>About me </Text>
           <Image
-            source={require('./images/about.jpg')}
+            source={require('../images/about.jpg')}
             style={styles.aboutImage}
             alt='random'
           ></Image>

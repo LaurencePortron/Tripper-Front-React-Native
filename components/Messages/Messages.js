@@ -1,5 +1,5 @@
 import React from 'react';
-import AccountHeader from './AccountHeader';
+import AccountHeader from '../UserAccount/AccountHeader';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function Messages(props) {

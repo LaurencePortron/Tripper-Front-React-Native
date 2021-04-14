@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Modal, Text, TextInput, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import API from '../services/API';
+import API from '../../services/API';
 
 export default function InviteModal({
   tripId,

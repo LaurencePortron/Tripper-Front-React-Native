@@ -4,8 +4,8 @@ import moment from 'moment';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
-import { useFirestoreDocument } from './hooks';
-import BackToDashboardButton from './Buttons';
+import { useFirestoreDocument } from '../hooks';
+import BackToDashboardButton from '../Buttons';
 import { TouchableOpacity } from 'react-native';
 
 export default function TripOverview(props) {

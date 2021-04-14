@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
-import {
-  TextInput,
-  View,
-  Button,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-import Footer from './Footer';
+import { View, Text, StyleSheet } from 'react-native';
+import Footer from '../Footer';
 import { Feather } from '@expo/vector-icons';
 
 export default function HelpCenter(props) {

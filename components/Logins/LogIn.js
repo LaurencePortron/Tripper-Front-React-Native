@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Text,
-  TextInput,
-  View,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import { Button, Text, TextInput, View, StyleSheet } from 'react-native';
 import 'firebase/auth';
 import firebase from 'firebase/app';
 

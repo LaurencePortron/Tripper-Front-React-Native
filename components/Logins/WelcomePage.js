@@ -1,11 +1,9 @@
 import React from 'react';
 import {
   ImageBackground,
-  Button,
   StyleSheet,
   Text,
   View,
-  Touchable,
   TouchableOpacity,
 } from 'react-native';
 import { useHistory } from 'react-router-native';
@@ -23,7 +21,7 @@ export default function WelcomePage(props) {
 
   return (
     <ImageBackground
-      source={require('./images/login.jpg')}
+      source={require('../images/login.jpg')}
       style={styles.backgroundImage}
     >
       <View style={styles.titleContainer}>

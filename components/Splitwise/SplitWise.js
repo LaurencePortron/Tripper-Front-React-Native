@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AddExpense from './AddExpense';
 import { useHistory } from 'react-router-native';
-import { useFirestoreCollection } from './hooks';
+import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 
 export default function SplitWise(props) {

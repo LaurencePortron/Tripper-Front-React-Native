@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Footer from './Footer';
+import Footer from '../Footer';
 import firebase from 'firebase/app';
-import Notifications from './Notifications';
+import Notifications from '../Notifications/Notifications';
 
 export default function Profile(props) {
   var db = firebase.firestore();
