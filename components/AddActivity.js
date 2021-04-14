@@ -70,7 +70,7 @@ export default function AddActivity(props) {
         style={styles.backToTripButton}
         name='arrow-left-circle'
         size={32}
-        color='#5B443E'
+        color='#2E5E4E'
         onPress={backToTrip}
       />
       <View style={styles.addActivityContainer}>
@@ -131,7 +131,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addInfoFields: { width: 300, marginTop: 30 },
-  addActivityTitle: { textAlign: 'center', color: '#4d4d4d', fontSize: 18 },
+  addActivityTitle: {
+    textAlign: 'center',
+    color: '#2E5E4E',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   addInfo: {
     display: 'flex',
     padding: 15,
@@ -152,6 +157,6 @@ const styles = StyleSheet.create({
   },
   backToTripButton: {
     marginTop: 20,
-    marginLeft: 10,
+    left: 300,
   },
 });

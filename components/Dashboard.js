@@ -39,8 +39,10 @@ export default function Dashboard(props) {
 
   return (
     <View style={styles.dashboardContainer}>
-      <Text style={styles.myTripsTitle}>My Trips</Text>
-      <NotificationAlertButton />
+      <View style={styles.header}>
+        <Text style={styles.myTripsTitle}>My Trips</Text>
+        <NotificationAlertButton />
+      </View>
       <View style={styles.tabs}>
         <Text
           style={[styles.tabAlone, tab === 'active' ? styles.tabActive : null]}
@@ -181,13 +183,18 @@ export default function Dashboard(props) {
           style={styles.addTripButton}
         />
       </TouchableOpacity>
-
       <Footer />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+  },
   dashboardContainer: { width: '100%', height: '100%' },
   myTripsTitle: {
     marginTop: 25,
@@ -265,6 +272,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 20,
     marginBottom: 10,
+    bottom: 70,
   },
   clickForDetailsText: { fontWeight: 'bold', color: '#93A7AA' },
 });

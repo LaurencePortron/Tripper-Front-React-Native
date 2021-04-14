@@ -23,7 +23,7 @@ export default function BackToDashboardButton() {
 const styles = StyleSheet.create({
   backToDashboardButton: {
     position: 'absolute',
-    top: 40,
+    top: 30,
     right: 30,
   },
 });

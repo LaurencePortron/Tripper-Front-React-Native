@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-native';
 import { TextInput, View, Text, StyleSheet, ScrollView } from 'react-native';
 import firebase from 'firebase/app';
 import BackToDashboardButton from './Buttons';
-import { TouchableOpacity } from 'react-native';
+import { Button } from 'react-native';
 
 export default function AddTrip(props) {
   const [addTripTitle, setAddTripTitle] = useState('');
@@ -58,9 +58,9 @@ export default function AddTrip(props) {
 
   return (
     <View>
-      <BackToDashboardButton />
       <View style={styles.addTripContainer}>
         <Text style={styles.addTripTitle}>Add your trip</Text>
+        <BackToDashboardButton />
         <View style={styles.addInfoFields}>
           <TextInput
             style={styles.addInfo}
@@ -102,14 +102,13 @@ export default function AddTrip(props) {
             onChangeText={addCostInput}
           />
 
-          <TouchableOpacity
+          <Button
             style={styles.button}
+            title='Add Trip'
             onPress={() => {
               clickToAddTrip();
             }}
-          >
-            <Text style={styles.buttonColor}>Add Trip</Text>
-          </TouchableOpacity>
+          ></Button>
         </View>
       </View>
     </View>
@@ -138,14 +137,12 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   button: {
-    padding: 20,
-    backgroundColor: 'white',
-    borderColor: '#2E5E4E',
-    borderWidth: 1,
+    width: 80,
+    padding: 15,
+    backgroundColor: '#1b3332',
     fontWeight: 'bold',
+    color: '#ffffff',
   },
-  buttonColor: {
-    color: '#2E5E4E',
-  },
+
   arrow: { marginTop: 30 },
 });

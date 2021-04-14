@@ -28,8 +28,7 @@ export default function NotificationAlertButton() {
 
 const styles = StyleSheet.create({
   NotificationAlertButton: {
-    position: 'absolute',
-    top: 40,
     right: 30,
+    marginTop: 25,
   },
 });

@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 export default function NotificationDetails(props) {
   const [closeNotifications, setCloseNotifications] = useState(false);
 
   const handleCloseNotifications = () => {
-    setCloseNotifications(true);
+    setCloseNotifications(false);
   };
+
   return (
     <View style={styles.notificationDetailsContainer}>
       <Text>Notification settings</Text>
-      <Feather
-        name='x-circle'
-        size={24}
-        color='black'
-        onPress={handleCloseNotifications}
-      />
+      <TouchableOpacity onPress={handleCloseNotifications}>
+        <Feather name='x-circle' size={24} color='black' />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -26,6 +24,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     position: 'absolute',
-    backgroundColor: 'green',
+    right: 30,
+    top: 60,
   },
 });
