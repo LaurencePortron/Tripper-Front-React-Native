@@ -230,14 +230,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  containerdatesDashboard: {
-    display: 'flex',
-    position: 'absolute',
-    top: 200,
-    left: 30,
-    color: '#2E5E4E',
-    fontWeight: 'bold',
-  },
   titleInfoSection: {
     display: 'flex',
     margin: 10,
@@ -248,7 +240,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     top: 330,
-    right: 250,
+    left: 20,
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: 9,
     padding: 10,
