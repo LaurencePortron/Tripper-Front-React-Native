@@ -6,15 +6,22 @@ export default function NotificationDetails(props) {
   const [closeNotifications, setCloseNotifications] = useState(false);
 
   const handleCloseNotifications = () => {
-    setCloseNotifications(false);
+    setCloseNotifications(true);
   };
 
   return (
-    <View style={styles.notificationDetailsContainer}>
-      <Text>Notification settings</Text>
-      <TouchableOpacity onPress={handleCloseNotifications}>
-        <Feather name='x-circle' size={24} color='black' />
-      </TouchableOpacity>
+    <View>
+      {closeNotifications ? null : (
+        <View style={styles.notificationDetailsContainer}>
+          <TouchableOpacity onPress={handleCloseNotifications}>
+            <Feather name='x-circle' size={24} color='black' />
+          </TouchableOpacity>
+          <View style={styles.notificationBox}>
+            <Text>Samy added a message</Text>
+            <Text>Samy added a message</Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 }
@@ -22,9 +29,13 @@ export default function NotificationDetails(props) {
 const styles = StyleSheet.create({
   notificationDetailsContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    position: 'absolute',
+    flexDirection: 'column',
     right: 30,
-    top: 60,
+    top: 10,
+    width: 90,
+    backgroundColor: 'white',
+    position: 'absolute',
   },
+
+  notificationHeader: { display: 'flex', flexDirection: 'row', flex: 1 },
 });
