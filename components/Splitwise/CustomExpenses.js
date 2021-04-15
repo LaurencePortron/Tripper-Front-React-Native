@@ -14,10 +14,6 @@ export default function CustomExpenses({ tripId }) {
     setExpenseModalOpen(false);
   };
 
-  const BackToTripDetails = () => {
-    history.push(`/trip-details/${tripId}`);
-  };
-
   const fetchExpenses = useFirestoreCollection(
     firebase.firestore().collection('trips').doc(tripId).collection('expenses'),
     [tripId]
@@ -31,10 +27,7 @@ export default function CustomExpenses({ tripId }) {
     <View style={styles.customExpensesContainer}>
       <Text style={styles.currentExpensesTitle}>Custom Expenses</Text>
 
-      <TouchableOpacity
-        style={styles.overviewNavigationSection}
-        onPress={() => setExpenseModalOpen(true)}
-      >
+      <View style={styles.overviewNavigationSection}>
         <View style={styles.splitWiseContainer}>
           {fetchExpenses.map((expense) => {
             return (
@@ -62,16 +55,18 @@ export default function CustomExpenses({ tripId }) {
             );
           })}
         </View>
-        <View style={styles.addExpenseContainer}>
-          <Text style={styles.overviewNavigationText}>Add Expense</Text>
-          <Feather name='arrow-right' size={24} color='#B37650' />
-        </View>
-      </TouchableOpacity>
-      <AddExpense
-        tripId={tripId}
-        show={expenseModalOpen}
-        handleExpenseModalClosure={handleExpenseModalClosure}
-      />
+        <TouchableOpacity onPress={() => setExpenseModalOpen(true)}>
+          <View style={styles.addExpenseContainer}>
+            <Text style={styles.addExpenseText}>Add Expense</Text>
+            <Feather name='arrow-right' size={24} color='#B37650' />
+          </View>
+        </TouchableOpacity>
+        <AddExpense
+          tripId={tripId}
+          show={expenseModalOpen}
+          handleExpenseModalClosure={handleExpenseModalClosure}
+        />
+      </View>
     </View>
   );
 }
@@ -86,8 +81,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 10,
   },
-  overviewNavigationText: {
+  addExpenseText: {
     color: '#B37650',
     fontWeight: 'bold',
     fontSize: 15,

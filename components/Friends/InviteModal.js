@@ -21,11 +21,7 @@ export default function InviteModal({
   };
 
   return (
-    <Modal
-      visible={show}
-      onRequestClose={() => handleInviteModalClosure()}
-      style={styles.modalContainer}
-    >
+    <Modal visible={show} style={styles.modalContainer}>
       <View style={styles.modalMainDisplay}>
         <Feather
           name='x-circle'
@@ -44,6 +40,7 @@ export default function InviteModal({
         <Button
           onPress={() => {
             handleSendInvite();
+            handleInviteModalClosure();
           }}
           type='submit'
           method='post'

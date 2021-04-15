@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { View, Modal, StyleSheet, TextInput, Button } from 'react-native';
+import {
+  View,
+  Modal,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import DropDownSelector from './DropDownSelector';
 import { useHistory } from 'react-router-native';
-import { useScrollToTop } from '@react-navigation/native';
 
 export default function AddExpense({
   tripId,
@@ -55,7 +61,7 @@ export default function AddExpense({
   //add dropdown for friends who are part of the trip
 
   return (
-    <Modal visible={show} onRequestClose={() => handleExpenseModalClosure()}>
+    <Modal visible={show}>
       <View style={styles.modalContainer}>
         <Feather
           name='x-circle'
@@ -85,16 +91,21 @@ export default function AddExpense({
           onChangeText={handleExpenseAmount}
         />
         <DropDownSelector tripId={tripId} onChangeText={onChangeText} />
-
-        <Feather
-          name='plus-circle'
-          size={32}
-          color='#2E5E4E'
+        <TouchableOpacity
+          style={styles.clickForDetailsSection}
           onPress={() => {
             clickToAddExpense();
+            handleExpenseModalClosure();
           }}
-          style={styles.expenseButton}
-        />
+        >
+          <Text style={styles.clickForDetailsText}>Submit Expense</Text>
+          <Feather
+            name='arrow-right'
+            size={24}
+            color='#2E5E4E'
+            style={styles.expenseButton}
+          />
+        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -132,6 +143,15 @@ const styles = StyleSheet.create({
   },
   expenseButton: {
     display: 'flex',
-    color: '#535b63',
+    color: '#2E5E4E',
+    marginLeft: 20,
   },
+  clickForDetailsSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 20,
+    marginBottom: 10,
+  },
+  clickForDetailsText: { fontWeight: 'bold', color: '#2E5E4E' },
 });
