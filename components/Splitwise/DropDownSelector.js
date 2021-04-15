@@ -4,9 +4,9 @@ import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import { Feather } from '@expo/vector-icons';
 
-export default function DropDownSelector({ tripId }) {
+export default function DropDownSelector({ tripId, onChangeText }) {
   const [dropdownIsClicked, setDropdownIsClicked] = useState(false);
-  const [friendSelected, setFriendSelected] = useState();
+  const [friendSelected, setFriendSelected] = useState('');
 
   const fetchFriends = useFirestoreCollection(
     firebase.firestore().collection('trips').doc(tripId).collection('friends'),
@@ -21,16 +21,6 @@ export default function DropDownSelector({ tripId }) {
     setDropdownIsClicked(false);
   };
 
-  const selectFriendToExpense = (e) => {
-    let value = friendSelected(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setFriendSelected({ values: value });
-  };
-
-  console.log('moien', friendSelected);
-
   return (
     <TouchableOpacity
       style={styles.dropDownBox}
@@ -42,9 +32,10 @@ export default function DropDownSelector({ tripId }) {
             return (
               <TouchableOpacity key={friend.id}>
                 <Text
-                  multiple={true}
-                  onPress={selectFriendToExpense}
-                  value={friendSelected}
+                  value={friend.data.name}
+                  onPress={() => {
+                    onChangeText(friend.data.name);
+                  }}
                 >
                   {friend.data.name}
                 </Text>
@@ -54,7 +45,7 @@ export default function DropDownSelector({ tripId }) {
           <Feather name='chevron-up' size={20} color='black' />
         </View>
       ) : (
-        <View>
+        <Text>
           {friendSelected ? (
             friendSelected
           ) : (
@@ -63,7 +54,7 @@ export default function DropDownSelector({ tripId }) {
               <Feather name='chevron-down' size={20} color='black' />
             </View>
           )}
-        </View>
+        </Text>
       )}
     </TouchableOpacity>
   );

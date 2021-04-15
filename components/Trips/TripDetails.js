@@ -3,7 +3,7 @@ import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import Footer from '../Footer';
 import Activities from '../Activities/Activities';
 import Expenses from '../Splitwise/Expenses';
-import Stops from '../Stops/Stops';
+// import Stops from '../Stops/Stops';
 import Friends from '../Friends/Friends';
 import { useFirestoreDocument } from '../hooks';
 import firebase from 'firebase/app';
@@ -25,7 +25,7 @@ export default function TripDetails(props) {
       <ScrollView style={styles.tripDetailsContainer}>
         <Text style={styles.overviewTitle}>{fetchTripDetails.data.title}</Text>
         <Expenses tripId={tripId} />
-        <Stops tripId={tripId} />
+        {/* <Stops tripId={tripId} /> */}
         <Friends tripId={tripId} />
         <Activities tripId={tripId} />
       </ScrollView>

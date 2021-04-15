@@ -4,6 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import DropDownSelector from './DropDownSelector';
 import { useHistory } from 'react-router-native';
+import { useScrollToTop } from '@react-navigation/native';
 
 export default function AddExpense({
   tripId,
@@ -28,8 +29,9 @@ export default function AddExpense({
   const handleExpenseAmount = (inputText) => {
     setAddExpenseAmount(inputText);
   };
-  const handleExpenseParticipants = (inputText) => {
-    setAddExpenseParticipants(inputText);
+
+  const onChangeText = (value) => {
+    setAddExpenseParticipants(value);
   };
 
   const clickToAddExpense = () => {
@@ -82,21 +84,17 @@ export default function AddExpense({
           inputText={addExpenseAmount}
           onChangeText={handleExpenseAmount}
         />
-        <DropDownSelector
-          tripId={tripId}
-          inputText={addExpenseParticipants}
-          onChangeText={handleExpenseParticipants}
-        />
-        <Button
-          style={styles.expenseButton}
-          type='submit'
-          title='Submit Expense'
-          method='post'
-          action='/splitwise'
+        <DropDownSelector tripId={tripId} onChangeText={onChangeText} />
+
+        <Feather
+          name='plus-circle'
+          size={32}
+          color='#2E5E4E'
           onPress={() => {
             clickToAddExpense();
           }}
-        ></Button>
+          style={styles.expenseButton}
+        />
       </View>
     </Modal>
   );

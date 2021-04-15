@@ -39,13 +39,25 @@ export default function CustomExpenses({ tripId }) {
           {fetchExpenses.map((expense) => {
             return (
               <View key={expense.id} style={styles.expenseContainer}>
-                <Text style={styles.expenseSections}>{expense.data.title}</Text>
-                <Text style={styles.expenseSections}>
-                  {expense.data.person}
-                </Text>
-                <Text style={styles.expenseSections}>
-                  ${expense.data.amount}
-                </Text>
+                <View style={styles.expenseSection}>
+                  <Text style={styles.expenseData}>Title:</Text>
+                  <Text>{expense.data.title}</Text>
+                </View>
+
+                <View style={styles.expenseSection}>
+                  <Text style={styles.expenseData}>Owner:</Text>
+                  <Text>{expense.data.person}</Text>
+                </View>
+
+                <View style={styles.expenseSection}>
+                  <Text style={styles.expenseData}>Amount: </Text>
+                  <Text>${expense.data.amount}</Text>
+                </View>
+
+                <View style={styles.expenseSection}>
+                  <Text style={styles.expenseData}>Split with:</Text>
+                  <Text>{expense.data.participants}</Text>
+                </View>
               </View>
             );
           })}
@@ -84,13 +96,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   },
-  expenseSections: {
+  expenseSection: {
+    display: 'flex',
+    flexDirection: 'column',
     borderColor: 'black',
     borderWidth: 1,
-    width: 50,
-    height: 30,
+    width: '26%',
+    height: 50,
   },
-
+  expenseData: { fontWeight: 'bold' },
   currentExpensesTitle: {
     textAlign: 'left',
     marginTop: 10,

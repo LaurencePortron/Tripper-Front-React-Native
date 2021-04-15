@@ -1,7 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-native';
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function Stops({ tripId }) {
   return (
