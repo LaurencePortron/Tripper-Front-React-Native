@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
   },
   activityPhoto: {
     display: 'flex',
-    height: 160,
-    width: 240,
+    height: 100,
+    width: 180,
     borderRadius: 5,
     marginLeft: 20,
   },

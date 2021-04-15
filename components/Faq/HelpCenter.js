@@ -76,10 +76,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-
-    width: 300,
-    height: 300,
-    margin: 30,
+    height: '100%',
   },
   sectionsTitle: {
     textAlign: 'left',

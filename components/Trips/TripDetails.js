@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, ScrollView } from 'react-native';
+import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import Footer from '../Footer';
 import Activities from '../Activities/Activities';
 import Expenses from '../Splitwise/Expenses';
@@ -21,24 +21,23 @@ export default function TripDetails(props) {
   }
 
   return (
-    <ScrollView style={styles.tripDetailsContainer}>
-      <Text style={styles.overviewTitle}>{fetchTripDetails.data.title}</Text>
-      <Expenses tripId={tripId} />
-      <Stops tripId={tripId} />
-      <Friends tripId={tripId} />
-      <Activities tripId={tripId} />
+    <View>
+      <ScrollView style={styles.tripDetailsContainer}>
+        <Text style={styles.overviewTitle}>{fetchTripDetails.data.title}</Text>
+        <Expenses tripId={tripId} />
+        <Stops tripId={tripId} />
+        <Friends tripId={tripId} />
+        <Activities tripId={tripId} />
+      </ScrollView>
       <Footer />
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   tripDetailsContainer: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
+    height: '100%',
+    width: '100%',
   },
   overviewTitle: {
     marginTop: 25,
