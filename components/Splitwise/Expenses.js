@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   costContainer: {
     margin: 10,
     marginLeft: 20,
+    marginRight: 40,
   },
   costTitle: {
     textAlign: 'left',
@@ -45,6 +46,5 @@ const styles = StyleSheet.create({
     color: '#B37650',
     fontWeight: 'bold',
     fontSize: 15,
-    marginLeft: 10,
   },
 });

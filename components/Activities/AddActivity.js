@@ -55,7 +55,7 @@ export default function AddActivity(props) {
           photo: result.data.url,
         });
 
-      history.push(`/trip-overview/${tripId}`);
+      history.push(`/trip-details/${tripId}`);
     } catch (error) {
       console.error('Error', error);
     }

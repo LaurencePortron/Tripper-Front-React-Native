@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import { useFirestoreDocument } from '../hooks';
 import BackToDashboardButton from '../Buttons';
 import { TouchableOpacity } from 'react-native';
+import { useFirestoreCollection } from '../hooks';
 
 export default function TripOverview(props) {
   const tripId = props.match.params.id;
@@ -16,6 +17,24 @@ export default function TripOverview(props) {
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
   );
+
+  const fetchFriends = useFirestoreCollection(
+    firebase.firestore().collection('trips').doc(tripId).collection('friends'),
+    [tripId]
+  );
+
+  const numberOfFriends = fetchFriends.length;
+
+  const fetchActivities = useFirestoreCollection(
+    firebase
+      .firestore()
+      .collection('trips')
+      .doc(tripId)
+      .collection('activities'),
+    [tripId]
+  );
+
+  const numberOfActivities = fetchActivities.length;
 
   const archiveTrip = (tripId) => {
     firebase.firestore().collection('trips').doc(tripId).update({
@@ -28,6 +47,10 @@ export default function TripOverview(props) {
   };
 
   if (!fetchTripDetails) {
+    return null;
+  }
+
+  if (!fetchFriends) {
     return null;
   }
 
@@ -68,7 +91,7 @@ export default function TripOverview(props) {
           <View style={styles.menuItemsSection}>
             <View style={styles.menuItem}>
               <Feather name='users' size={24} color='#93A7AA' />
-              <Text>2 friends</Text>
+              <Text>{numberOfFriends} friends</Text>
             </View>
             <View style={styles.menuItem}>
               <Feather name='map' size={24} color='#93A7AA' />
@@ -76,7 +99,7 @@ export default function TripOverview(props) {
             </View>
             <View style={styles.menuItem}>
               <Feather name='activity' size={24} color='#93A7AA' />
-              <Text>10 activities</Text>
+              <Text>{numberOfActivities} activities</Text>
             </View>
             <View style={styles.menuItem}>
               <Feather name='credit-card' size={24} color='#93A7AA' />

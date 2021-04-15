@@ -18,14 +18,6 @@ export default function TripActivitiesExpenses({ tripId }) {
     [tripId]
   );
 
-  const TotalActivityCost = fetchActivities.reduce(function (
-    totalCost,
-    activitiesArray
-  ) {
-    return totalCost + activitiesArray.data.cost;
-  },
-  0);
-
   if (!fetchTripDetails) {
     return null;
   }
@@ -34,12 +26,22 @@ export default function TripActivitiesExpenses({ tripId }) {
     return null;
   }
 
+  const totalActivityCost = fetchActivities.reduce(function (
+    previousTotalActivityCost,
+    newActivityCost
+  ) {
+    return previousTotalActivityCost + newActivityCost.data.cost;
+  },
+  0);
+
+  const totalTripCost = fetchTripDetails.data.cost + totalActivityCost;
+
   return (
     <View>
       <View style={styles.expenseContainer}>
         <View style={styles.expenseSection}>
           <Text style={styles.costSubcategory}>Total Cost: </Text>
-          <Text style={styles.costData}>${fetchTripDetails.data.cost}</Text>
+          <Text style={styles.costData}>${totalTripCost}</Text>
         </View>
         <View style={styles.expenseSection}>
           <Text style={styles.costSubcategory}>Total trip cost: </Text>
@@ -47,7 +49,7 @@ export default function TripActivitiesExpenses({ tripId }) {
         </View>
         <View style={styles.expenseSection}>
           <Text style={styles.costSubcategory}>Total activities cost: </Text>
-          <Text style={styles.costData}>${TotalActivityCost}</Text>
+          <Text style={styles.costData}>${totalActivityCost}</Text>
         </View>
       </View>
     </View>
