@@ -36,23 +36,42 @@ export default function TripActivitiesExpenses({ tripId }) {
 
   return (
     <View>
-      <Text style={styles.expenseTitle}>Trip & activities expenses</Text>
-      <Text style={styles.costSubcategory}>Total Cost: </Text>
-      <Text>${fetchTripDetails.data.cost}</Text>
-      <Text style={styles.costSubcategory}>Total trip cost: </Text>
-      <Text>${fetchTripDetails.data.cost}</Text>
-      <Text style={styles.costSubcategory}>Total activities cost: </Text>
-      <Text>${TotalActivityCost}</Text>
+      <View style={styles.expenseContainer}>
+        <View style={styles.expenseSection}>
+          <Text style={styles.costSubcategory}>Total Cost: </Text>
+          <Text style={styles.costData}>${fetchTripDetails.data.cost}</Text>
+        </View>
+        <View style={styles.expenseSection}>
+          <Text style={styles.costSubcategory}>Total trip cost: </Text>
+          <Text style={styles.costData}>${fetchTripDetails.data.cost}</Text>
+        </View>
+        <View style={styles.expenseSection}>
+          <Text style={styles.costSubcategory}>Total activities cost: </Text>
+          <Text style={styles.costData}>${TotalActivityCost}</Text>
+        </View>
+      </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  costSubcategory: { fontWeight: 'bold' },
+  costSubcategory: { fontWeight: 'bold', color: '#93A7AA' },
+  costData: { color: '#93A7AA' },
+  expenseContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
   expenseTitle: {
     textAlign: 'left',
     marginTop: 10,
     marginBottom: 10,
     fontSize: 20,
-    color: '#93A7AA',
+  },
+  expenseSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    borderColor: '#93A7AA',
+    borderWidth: 0.5,
+    width: '26%',
+    height: 50,
   },
 });

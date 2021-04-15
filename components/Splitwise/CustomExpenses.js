@@ -25,8 +25,6 @@ export default function CustomExpenses({ tripId }) {
 
   return (
     <View style={styles.customExpensesContainer}>
-      <Text style={styles.currentExpensesTitle}>Custom Expenses</Text>
-
       <View style={styles.overviewNavigationSection}>
         <View style={styles.splitWiseContainer}>
           {fetchExpenses.map((expense) => {
@@ -75,7 +73,6 @@ const styles = StyleSheet.create({
   customExpensesContainer: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 20,
   },
   addExpenseContainer: {
     display: 'flex',
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     borderColor: 'black',
-    borderWidth: 1,
+    borderWidth: 0.5,
     width: '26%',
     height: 50,
   },
