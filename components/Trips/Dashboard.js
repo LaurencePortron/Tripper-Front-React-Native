@@ -17,6 +17,19 @@ import NotificationAlertButton from '../Notifications/NotificationAlertButton';
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
   const history = useHistory();
+  var db = firebase.firestore();
+  const user = firebase.auth().currentUser;
+  const userId = user.uid;
+  console.log(user.email);
+
+  if (user != null) {
+    db.collection('settings').doc(userId).set({
+      email: user.email,
+      notifMessages: false,
+      notifSplitwise: false,
+      notifCancellations: false,
+    });
+  }
 
   const fetchTrips = useFirestoreCollection(
     firebase.firestore().collection('trips'),
@@ -34,8 +47,6 @@ export default function Dashboard(props) {
   const goToMessages = () => {
     history.push(`/messages`);
   };
-
-  var user = firebase.auth().currentUser;
 
   return (
     <View style={styles.dashboardContainer}>

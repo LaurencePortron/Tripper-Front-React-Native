@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Feather } from '@expo/vector-icons';
+import firebase from 'firebase/app';
 
 export default function Footer(props) {
   const history = useHistory();
@@ -36,7 +37,9 @@ export default function Footer(props) {
         </View>
         <View style={styles.item}>
           <Feather
-            onPress={navigateToProfile}
+            onPress={() => {
+              navigateToProfile();
+            }}
             name='settings'
             size={25}
             color='#9D9996'

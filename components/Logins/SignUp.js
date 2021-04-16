@@ -30,7 +30,7 @@ function SignUp(props) {
         history.push(`/dashboard`);
       })
       .catch((error) => {
-        console.log('damn it', error);
+        console.log('error when signing up', error);
       });
   };
 

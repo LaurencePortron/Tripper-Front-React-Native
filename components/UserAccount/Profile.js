@@ -4,10 +4,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Footer from '../Footer';
 import firebase from 'firebase/app';
 import Notifications from '../Notifications/Notifications';
+import { useHistory } from 'react-router-native';
 
 export default function Profile(props) {
   var db = firebase.firestore();
-  require('firebase/firestore');
+  const history = useHistory();
 
   const handleLogOut = (event) => {
     firebase
@@ -21,6 +22,7 @@ export default function Profile(props) {
         console.log(error);
       });
   };
+
   return (
     <View style={styles.profileContainer}>
       <Text style={styles.profileContainerTitle}>My Profile</Text>

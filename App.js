@@ -10,7 +10,7 @@ import AddActivity from './components/Activities/AddActivity';
 import SignUp from './components/Logins/SignUp';
 import Messages from './components/Messages/Messages';
 import Profile from './components/UserAccount/Profile';
-import AccountSettings from './components/UserAccount/AccountSettings';
+
 import HelpCenter from './components/Faq/HelpCenter';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -59,7 +59,7 @@ export default function App() {
           <Route path='/trip-details/:id' component={TripDetails} />
           <Route path='/add-trip' component={AddTrip} />
           <Route path='/add-activities/:id' component={AddActivity} />
-          <Route path='/settings' component={AccountSettings} />
+
           <Route path='/myprofile' component={Profile} />
 
           <Route path='/messages' component={Messages} />

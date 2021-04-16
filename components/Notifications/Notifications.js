@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
 import Toggle from './Toggle';
+import firebase from 'firebase/app';
 
 export default function Notifications(props) {
   return (
