@@ -9,11 +9,14 @@ export default function Notifications(props) {
       <Text style={styles.notificationTitle}>Notifications</Text>
       {notificationTitles.map((notificationTitle) => {
         return (
-          <View style={styles.singleNotificationSection}>
+          <View
+            key={notificationTitle.id}
+            style={styles.singleNotificationSection}
+          >
             <Text style={styles.singleNotification}>
               {notificationTitle.title}
             </Text>
-            <Toggle />
+            <Toggle key={id} />
           </View>
         );
       })}

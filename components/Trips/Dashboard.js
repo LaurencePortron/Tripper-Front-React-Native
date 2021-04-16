@@ -20,7 +20,6 @@ export default function Dashboard(props) {
   var db = firebase.firestore();
   const user = firebase.auth().currentUser;
   const userId = user.uid;
-  console.log(user.email);
 
   if (user != null) {
     db.collection('settings').doc(userId).set({
