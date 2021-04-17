@@ -11,6 +11,7 @@ import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
 import DropDownSelector from './DropDownSelector';
 import { useHistory } from 'react-router-native';
+import { useFirestoreCollection } from '../hooks';
 
 export default function AddExpense({
   tripId,
@@ -20,9 +21,8 @@ export default function AddExpense({
   const [addExpenseTitle, setAddExpenseTitle] = useState('');
   const [addExpensePerson, setAddExpensePerson] = useState('');
   const [addExpenseAmount, setAddExpenseAmount] = useState('');
-  const [addExpenseParticipants, setAddExpenseParticipants] = useState('');
-  var db = firebase.firestore();
-  require('firebase/firestore');
+  const [friendSelected, setFriendSelected] = useState([]);
+  const db = firebase.firestore();
   const history = useHistory();
 
   const handleExpenseTitle = (inputText) => {
@@ -36,9 +36,10 @@ export default function AddExpense({
     setAddExpenseAmount(inputText);
   };
 
-  const onChangeText = (value) => {
-    setAddExpenseParticipants(value);
-  };
+  const fetchFriends = useFirestoreCollection(
+    firebase.firestore().collection('trips').doc(tripId).collection('friends'),
+    [tripId]
+  );
 
   const clickToAddExpense = () => {
     db.collection('trips')
@@ -48,18 +49,12 @@ export default function AddExpense({
         title: addExpenseTitle,
         person: addExpensePerson,
         amount: Number(addExpenseAmount),
-        participants: addExpenseParticipants,
+        participants: friendSelected,
         trip_id: tripId,
         created: firebase.firestore.Timestamp.fromDate(new Date()),
       });
     history.push(`/custom-expenses/${tripId}`);
   };
-
-  // what we need: friends (associate costs), option to add costs (such as groceries, other activities etc: 1 textInput to add with different titles)
-
-  //when adding a cost we display: date, title of cost, person who paid, expense amount,
-
-  //add dropdown for friends who are part of the trip
 
   return (
     <Modal visible={show}>
@@ -91,7 +86,16 @@ export default function AddExpense({
           inputText={addExpenseAmount}
           onChangeText={handleExpenseAmount}
         />
-        <DropDownSelector tripId={tripId} onChangeText={onChangeText} />
+        <Text>{friendSelected.join(', ')}</Text>
+        <DropDownSelector
+          tripId={tripId}
+          values={friendSelected}
+          onValueChange={(newValues) => setFriendSelected(newValues)}
+          dropDownText='Participants'
+          options={fetchFriends.map((friend) => {
+            return { id: friend.data.name, label: friend.data.name };
+          })}
+        />
         <TouchableOpacity
           style={styles.clickForDetailsSection}
           onPress={() => {

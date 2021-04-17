@@ -59,34 +59,45 @@ export default function Expenses({ tripId }) {
   const totalTripCost =
     fetchTripDetails.data.cost + totalActivityCost + totalExpenseBalance;
 
+  const expenseArray = [
+    {
+      title: 'Total Cost:',
+      costData: totalTripCost,
+    },
+    {
+      title: 'Trip cost:',
+      costData: fetchTripDetails.data.cost,
+    },
+    {
+      title: 'Activities cost:',
+      costData: totalActivityCost,
+    },
+    {
+      title: 'Balance Expenses:',
+      costData: totalExpenseBalance,
+    },
+    {
+      title: 'Money owed:',
+      costData: 'TBD',
+    },
+    {
+      title: 'Money lent/due:',
+      costData: 'TBD',
+    },
+  ];
+
   return (
     <View style={styles.costContainer}>
       <Text style={styles.costTitle}>Expenses</Text>
       <View style={styles.expenseContainer}>
-        <View style={styles.expenseSection}>
-          <Text style={styles.costSubcategory}>Total Cost: </Text>
-          <Text style={styles.costData}>${totalTripCost}</Text>
-        </View>
-        <View style={styles.expenseSection}>
-          <Text style={styles.costSubcategory}>Trip cost: </Text>
-          <Text style={styles.costData}>${fetchTripDetails.data.cost}</Text>
-        </View>
-        <View style={styles.expenseSection}>
-          <Text style={styles.costSubcategory}>Activities cost: </Text>
-          <Text style={styles.costData}>${totalActivityCost}</Text>
-        </View>
-      </View>
-      <View style={styles.expenseSection}>
-        <Text style={styles.costSubcategory}>Balance Expenses: </Text>
-        <Text style={styles.costData}>${totalExpenseBalance}</Text>
-      </View>
-      <View style={styles.expenseSection}>
-        <Text style={styles.costSubcategory}>Money owed: </Text>
-        <Text style={styles.costData}>$TO BE DONE</Text>
-      </View>
-      <View style={styles.expenseSection}>
-        <Text style={styles.costSubcategory}>Money lent/due: </Text>
-        <Text style={styles.costData}>$TO BE DONE</Text>
+        {expenseArray.map((expense) => {
+          return (
+            <View style={styles.expenseSection}>
+              <Text style={styles.costSubcategory}>{expense.title} </Text>
+              <Text style={styles.costData}>${expense.costData}</Text>
+            </View>
+          );
+        })}
       </View>
       <TouchableOpacity onPress={navigateToCustomExpenses}>
         <View style={styles.manageExpensesContainer}>
