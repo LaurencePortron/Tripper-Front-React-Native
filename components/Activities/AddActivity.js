@@ -60,7 +60,7 @@ export default function AddActivity(props) {
       console.error('Error', error);
     }
   };
-  const backToTrip = () => {
+  const backToTripDetails = () => {
     history.push(`/trip-details/${tripId}`);
   };
 
@@ -71,7 +71,7 @@ export default function AddActivity(props) {
         name='arrow-left-circle'
         size={32}
         color='#2E5E4E'
-        onPress={backToTrip}
+        onPress={backToTripDetails}
       />
       <View style={styles.addActivityContainer}>
         <Text style={styles.addActivityTitle}>Add an activity</Text>

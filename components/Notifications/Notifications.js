@@ -16,7 +16,7 @@ export default function Notifications(props) {
             <Text style={styles.singleNotification}>
               {notificationTitle.title}
             </Text>
-            <Toggle key={id} />
+            <Toggle />
           </View>
         );
       })}

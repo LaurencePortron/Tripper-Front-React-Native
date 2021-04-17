@@ -50,8 +50,9 @@ export default function AddExpense({
         amount: Number(addExpenseAmount),
         participants: addExpenseParticipants,
         trip_id: tripId,
+        created: firebase.firestore.Timestamp.fromDate(new Date()),
       });
-    history.push(`/trip-details/${tripId}`);
+    history.push(`/custom-expenses/${tripId}`);
   };
 
   // what we need: friends (associate costs), option to add costs (such as groceries, other activities etc: 1 textInput to add with different titles)

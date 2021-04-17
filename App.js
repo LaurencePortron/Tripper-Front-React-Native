@@ -18,7 +18,7 @@ import 'firebase/firestore';
 import About from './components/AboutMe/About';
 import WelcomePage from './components/Logins/WelcomePage';
 import TripOverview from './components/Trips/TripOverview';
-import Expenses from './components/Splitwise/Expenses';
+import CustomExpenses from './components/Splitwise/CustomExpenses';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -66,7 +66,7 @@ export default function App() {
           <Route path='/helpCenter' component={HelpCenter} />
           <Route path='/about' component={About} />
           <Route path='/trip-overview/:id' component={TripOverview} />
-          <Route path='/splitwise/:id' component={Expenses} />
+          <Route path='/custom-expenses/:id' component={CustomExpenses} />
         </View>
       </NativeRouter>
     </UserContext.Provider>

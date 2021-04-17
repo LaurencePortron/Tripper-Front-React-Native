@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AddExpense from './AddExpense';
-import { useHistory } from 'react-router-native';
+import moment from 'moment';
 import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
+import { useHistory } from 'react-router-native';
 
-export default function CustomExpenses({ tripId }) {
+export default function CustomExpenses(props) {
+  const tripId = props.match.params.id;
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   const history = useHistory();
 
@@ -19,60 +21,75 @@ export default function CustomExpenses({ tripId }) {
     [tripId]
   );
 
+  const backToTripDetails = () => {
+    history.push(`/trip-details/${tripId}`);
+  };
+
   if (!fetchExpenses) {
     return null;
   }
 
   return (
     <View style={styles.customExpensesContainer}>
-      <View style={styles.overviewNavigationSection}>
-        <View style={styles.splitWiseContainer}>
-          {fetchExpenses.map((expense) => {
-            return (
-              <View key={expense.id} style={styles.expenseContainer}>
-                <View style={styles.expenseSection}>
-                  <Text style={styles.expenseData}>Title:</Text>
-                  <Text>{expense.data.title}</Text>
-                </View>
-
-                <View style={styles.expenseSection}>
-                  <Text style={styles.expenseData}>Owner:</Text>
-                  <Text>{expense.data.person}</Text>
-                </View>
-
-                <View style={styles.expenseSection}>
-                  <Text style={styles.expenseData}>Amount: </Text>
-                  <Text>${expense.data.amount}</Text>
-                </View>
-
-                <View style={styles.expenseSection}>
-                  <Text style={styles.expenseData}>Split with:</Text>
-                  <Text>{expense.data.participants}</Text>
-                </View>
-              </View>
-            );
-          })}
-        </View>
-        <TouchableOpacity onPress={() => setExpenseModalOpen(true)}>
-          <View style={styles.addExpenseContainer}>
-            <Text style={styles.addExpenseText}>Add Expense</Text>
-            <Feather name='arrow-right' size={24} color='#B37650' />
-          </View>
-        </TouchableOpacity>
-        <AddExpense
-          tripId={tripId}
-          show={expenseModalOpen}
-          handleExpenseModalClosure={handleExpenseModalClosure}
+      <View style={styles.customExpensesHeader}>
+        <Text style={styles.expenseTitle}>Balance Overview</Text>
+        <Feather
+          style={styles.backToTripButton}
+          name='arrow-left-circle'
+          size={32}
+          color='#2E5E4E'
+          onPress={backToTripDetails}
         />
       </View>
+      {fetchExpenses.map((expense) => {
+        return (
+          <View key={expense.id} style={styles.expenseContainer}>
+            <Text>
+              {moment(expense.data.created.toDate()).format('MMM Do')}
+            </Text>
+
+            <View style={styles.expenseSection}>
+              <Text style={styles.expenseData}>{expense.data.title}</Text>
+              <Text>${expense.data.amount}</Text>
+            </View>
+            <View style={styles.expenseSection}>
+              <Text style={styles.expenseData}>'Person' paid:</Text>
+              <Text>{expense.data.participants}</Text>
+            </View>
+          </View>
+        );
+      })}
+      <TouchableOpacity onPress={() => setExpenseModalOpen(true)}>
+        <View style={styles.addExpenseContainer}>
+          <Text style={styles.addExpenseText}>Add Expense</Text>
+          <Feather name='arrow-right' size={24} color='#B37650' />
+        </View>
+      </TouchableOpacity>
+      <AddExpense
+        tripId={tripId}
+        show={expenseModalOpen}
+        handleExpenseModalClosure={handleExpenseModalClosure}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   customExpensesContainer: {
+    marginLeft: 20,
+    marginTop: 25,
+  },
+  backToTripButton: { marginLeft: 120 },
+  customExpensesHeader: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  expenseTitle: {
+    textAlign: 'left',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2E5E4E',
   },
   addExpenseContainer: {
     display: 'flex',
@@ -88,13 +105,14 @@ const styles = StyleSheet.create({
   expenseContainer: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 25,
   },
   expenseSection: {
     display: 'flex',
     flexDirection: 'column',
-    borderColor: 'black',
-    borderWidth: 0.5,
-    width: '26%',
+    alignItems: 'center',
+    width: '30%',
     height: 50,
   },
   expenseData: { fontWeight: 'bold' },
