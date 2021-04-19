@@ -23,6 +23,13 @@ export default function Expenses({ tripId }) {
     [tripId]
   );
 
+  const fetchFriends = useFirestoreCollection(
+    firebase.firestore().collection('trips').doc(tripId).collection('friends'),
+    [tripId]
+  );
+
+  // if one expense has more than one participant this expense should by divided by the number of participants
+
   const fetchActivities = useFirestoreCollection(
     firebase
       .firestore()
@@ -59,6 +66,18 @@ export default function Expenses({ tripId }) {
   const totalTripCost =
     fetchTripDetails.data.cost + totalActivityCost + totalExpenseBalance;
 
+  const amountOfExpenses = fetchExpenses.map((expense) => {
+    return expense.data.amount;
+  });
+
+  const totalOwned = amountOfExpenses.reduce(function (
+    previousTotalExpenseBalance,
+    newExpenseBalance
+  ) {
+    return previousTotalExpenseBalance + newExpenseBalance;
+  },
+  0);
+
   const expenseArray = [
     {
       title: 'Total Cost:',
@@ -78,7 +97,7 @@ export default function Expenses({ tripId }) {
     },
     {
       title: 'Money owed:',
-      costData: 'TBD',
+      costData: totalOwned,
     },
     {
       title: 'Money lent/due:',
@@ -95,6 +114,7 @@ export default function Expenses({ tripId }) {
             <View style={styles.expenseSection}>
               <Text style={styles.costSubcategory}>{expense.title} </Text>
               <Text style={styles.costData}>${expense.costData}</Text>
+              <Text style={styles.costData}></Text>
             </View>
           );
         })}

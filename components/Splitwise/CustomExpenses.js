@@ -17,7 +17,12 @@ export default function CustomExpenses(props) {
   };
 
   const fetchExpenses = useFirestoreCollection(
-    firebase.firestore().collection('trips').doc(tripId).collection('expenses'),
+    firebase
+      .firestore()
+      .collection('trips')
+      .doc(tripId)
+      .collection('expenses')
+      .orderBy('created', 'asc'),
     [tripId]
   );
 
@@ -28,6 +33,18 @@ export default function CustomExpenses(props) {
   if (!fetchExpenses) {
     return null;
   }
+
+  const amountOfExpenses = fetchExpenses.map((expense) => {
+    return expense.data.amount;
+  });
+
+  const totalOwned = amountOfExpenses.reduce(function (
+    previousTotalExpenseBalance,
+    newExpenseBalance
+  ) {
+    return previousTotalExpenseBalance + newExpenseBalance;
+  },
+  0);
 
   return (
     <View style={styles.customExpensesContainer}>
@@ -42,23 +59,31 @@ export default function CustomExpenses(props) {
         />
       </View>
       {fetchExpenses.map((expense) => {
+        const expenseSplitBetweenParticipants =
+          (expense.data.amount / (expense.data.participants.length + 1)) *
+          expense.data.participants.length;
         return (
           <View key={expense.id} style={styles.expenseContainer}>
-            <Text>
-              {moment(expense.data.created.toDate()).format('MMM Do')}
-            </Text>
-
+            <View style={styles.expenseSection}>
+              <Text>
+                {moment(expense.data.created.toDate()).format('MMM Do')}
+              </Text>
+            </View>
             <View style={styles.expenseSection}>
               <Text style={styles.expenseData}>{expense.data.title}</Text>
               <Text>${expense.data.amount}</Text>
             </View>
             <View style={styles.expenseSection}>
-              <Text style={styles.expenseData}>'Person' paid:</Text>
-              <Text>{expense.data.participants}</Text>
+              <Text style={styles.expenseData}>You are owed:</Text>
+              <Text>${expenseSplitBetweenParticipants}</Text>
             </View>
           </View>
         );
       })}
+      <View style={styles.totalBalanceOwed}>
+        <Text style={styles.expenseData}>total owed:</Text>
+        <Text>${totalOwned}</Text>
+      </View>
       <TouchableOpacity onPress={() => setExpenseModalOpen(true)}>
         <View style={styles.addExpenseContainer}>
           <Text style={styles.addExpenseText}>Add Expense</Text>
@@ -78,6 +103,8 @@ const styles = StyleSheet.create({
   customExpensesContainer: {
     marginLeft: 20,
     marginTop: 25,
+    marginRight: 20,
+    width: '80%',
   },
   backToTripButton: { marginLeft: 120 },
   customExpensesHeader: {
@@ -111,8 +138,8 @@ const styles = StyleSheet.create({
   expenseSection: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    width: '30%',
+    alignItems: 'flex-start',
+    width: '40%',
     height: 50,
   },
   expenseData: { fontWeight: 'bold' },
@@ -123,4 +150,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#93A7AA',
   },
+  totalBalanceOwed: { display: 'flex', left: 240, borderTopWidth: 1 },
 });
