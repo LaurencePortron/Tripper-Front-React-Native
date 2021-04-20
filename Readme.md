@@ -15,15 +15,14 @@ Users will be able to:
 ## Tech
 
 Tripper is a react-native-app (Expo) and its back is run with Firestore/FireBase.
-Simply run npm start to get started.
 
-Link to back: [BackEnd](https://github.com/LaurencePortron/Tripper_-Back-)
+Parts of the backend application is run with express.
 
 ## Wireframes/MockUps
 
-![Screenshot](FronPage.PNG)
-![Screenshot](TripOverView.PNG)
+![Screenshot](welcome.PNG)
+![Screenshot](overview.PNG)
 
 ## BackEnd
 
-FireStore, FireBase,..
+FireStore, FireBase Auth,..

@@ -8,11 +8,9 @@ import firebase from 'firebase/app';
 import { useHistory } from 'react-router-native';
 import SettleBalance from './SettleBalance';
 
-export default function CustomExpenses(props) {
-  const tripId = props.match.params.id;
+export default function CustomExpenses({ tripId, totalOwed }) {
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   const history = useHistory();
-  const db = firebase.firestore();
 
   const handleExpenseModalClosure = () => {
     setExpenseModalOpen(false);
@@ -28,48 +26,18 @@ export default function CustomExpenses(props) {
     [tripId]
   );
 
-  const backToTripDetails = () => {
-    history.push(`/trip-details/${tripId}`);
-  };
-
   if (!fetchExpenses) {
     return null;
   }
 
-  const amountOfExpenses = fetchExpenses.map((expense) => {
-    return expense.data.amount;
-  });
-
-  const totalOwed = amountOfExpenses.reduce(function (
-    previousTotalExpenseBalance,
-    newExpenseBalance
-  ) {
-    return previousTotalExpenseBalance + newExpenseBalance;
-  },
-  0);
-
-  const verifySettledBalance = fetchExpenses.map((expense) => {
-    return expense.data.amountSettled;
-  });
-
   return (
     <View style={styles.customExpensesContainer}>
-      <View style={styles.customExpensesHeader}>
-        <Text style={styles.expenseTitle}>Balance Overview</Text>
-        <Feather
-          style={styles.backToTripButton}
-          name='arrow-left-circle'
-          size={32}
-          color='#2E5E4E'
-          onPress={backToTripDetails}
-        />
-      </View>
-
       {fetchExpenses.map((expense) => {
         const expenseSplitBetweenParticipants =
           (expense.data.amount / (expense.data.participants.length + 1)) *
           expense.data.participants.length;
 
+        const verifySettledBalance = expense.data.amountSettled;
         return (
           <View key={expense.id} style={styles.expenseContainer}>
             <View style={styles.expenseSection}>
@@ -88,7 +56,7 @@ export default function CustomExpenses(props) {
             <SettleBalance
               tripId={tripId}
               expenseId={expense.id}
-              fetchExpenses={fetchExpenses}
+              verifySettledBalance={verifySettledBalance}
             />
           </View>
         );
@@ -114,17 +82,11 @@ export default function CustomExpenses(props) {
 
 const styles = StyleSheet.create({
   customExpensesContainer: {
-    marginLeft: 20,
-    marginTop: 25,
     marginRight: 20,
     width: '80%',
   },
   backToTripButton: { marginLeft: 120 },
-  customExpensesHeader: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+
   expenseTitle: {
     textAlign: 'left',
     fontSize: 20,

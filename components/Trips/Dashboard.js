@@ -31,7 +31,7 @@ export default function Dashboard(props) {
   }
 
   const fetchTrips = useFirestoreCollection(
-    firebase.firestore().collection('trips'),
+    firebase.firestore().collection('trips').orderBy('endDate', 'desc'),
     []
   );
 

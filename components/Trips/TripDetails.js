@@ -5,8 +5,9 @@ import Activities from '../Activities/Activities';
 import Expenses from '../Splitwise/Expenses';
 // import Stops from '../Stops/Stops';
 import Friends from '../Friends/Friends';
-import { useFirestoreDocument } from '../hooks';
 import firebase from 'firebase/app';
+import { useFirestoreDocument } from '../hooks';
+import { Feather } from '@expo/vector-icons';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
@@ -16,14 +17,28 @@ export default function TripDetails(props) {
     [tripId]
   );
 
+  console.log(fetchTripDetails);
+
   if (!fetchTripDetails) {
     return null;
   }
+  const backToTripDetails = () => {
+    history.push(`/trip-details/${tripId}`);
+  };
 
   return (
     <View>
-      <ScrollView style={styles.tripDetailsContainer}>
+      <View style={styles.customExpensesHeader}>
         <Text style={styles.overviewTitle}>{fetchTripDetails.data.title}</Text>
+        <Feather
+          style={styles.backToTripButton}
+          name='arrow-left-circle'
+          size={32}
+          color='#2E5E4E'
+          onPress={backToTripDetails}
+        />
+      </View>
+      <ScrollView style={styles.tripDetailsContainer}>
         <Expenses tripId={tripId} />
         {/* <Stops tripId={tripId} /> */}
         <Friends tripId={tripId} />
@@ -40,10 +55,16 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   overviewTitle: {
-    marginTop: 25,
     fontSize: 25,
     marginLeft: 20,
     color: '#2E5E4E',
     fontWeight: 'bold',
   },
+  customExpensesHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'center',
+    marginTop: 25,
+  },
+  backToTripButton: { left: 170 },
 });

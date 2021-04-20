@@ -1,18 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router-native';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-import { Feather } from '@expo/vector-icons';
+import { View, Text, StyleSheet } from 'react-native';
 import { useFirestoreDocument, useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
+import CustomExpenses from './CustomExpenses';
 
 export default function Expenses({ tripId }) {
-  const history = useHistory();
-
-  const navigateToCustomExpenses = () => {
-    history.push(`/custom-expenses/${tripId}`);
-  };
-
   const fetchTripDetails = useFirestoreDocument(
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
@@ -22,13 +14,6 @@ export default function Expenses({ tripId }) {
     firebase.firestore().collection('trips').doc(tripId).collection('expenses'),
     [tripId]
   );
-
-  const fetchFriends = useFirestoreCollection(
-    firebase.firestore().collection('trips').doc(tripId).collection('friends'),
-    [tripId]
-  );
-
-  // if one expense has more than one participant this expense should by divided by the number of participants
 
   const fetchActivities = useFirestoreCollection(
     firebase
@@ -70,13 +55,15 @@ export default function Expenses({ tripId }) {
     return expense.data.amount;
   });
 
-  const totalOwned = amountOfExpenses.reduce(function (
+  const totalOwed = amountOfExpenses.reduce(function (
     previousTotalExpenseBalance,
     newExpenseBalance
   ) {
     return previousTotalExpenseBalance + newExpenseBalance;
   },
   0);
+
+  console.log(totalOwed);
 
   const expenseArray = [
     {
@@ -90,18 +77,6 @@ export default function Expenses({ tripId }) {
     {
       title: 'Activities cost:',
       costData: totalActivityCost,
-    },
-    {
-      title: 'Balance Expenses:',
-      costData: totalExpenseBalance,
-    },
-    {
-      title: 'Money owed:',
-      costData: totalOwned,
-    },
-    {
-      title: 'Money lent/due:',
-      costData: 'TBD',
     },
   ];
 
@@ -119,12 +94,7 @@ export default function Expenses({ tripId }) {
           );
         })}
       </View>
-      <TouchableOpacity onPress={navigateToCustomExpenses}>
-        <View style={styles.manageExpensesContainer}>
-          <Text style={styles.manageExpensesText}>Manage Expenses</Text>
-          <Feather name='arrow-right' size={24} color='#B37650' />
-        </View>
-      </TouchableOpacity>
+      <CustomExpenses tripId={tripId} totalOwed={totalOwed} />
     </View>
   );
 }

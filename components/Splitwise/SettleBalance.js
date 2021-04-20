@@ -3,7 +3,11 @@ import { Feather } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import firebase from 'firebase/app';
 
-export default function SettleBalance({ tripId, expenseId, fetchExpenses }) {
+export default function SettleBalance({
+  tripId,
+  expenseId,
+  verifySettledBalance,
+}) {
   const db = firebase.firestore();
 
   const addSettleToDb = () => {
@@ -15,12 +19,6 @@ export default function SettleBalance({ tripId, expenseId, fetchExpenses }) {
         amountSettled: true,
       });
   };
-
-  const verifySettledBalance = fetchExpenses.map((expense) => {
-    return expense.data.amountSettled;
-  });
-
-  console.log(verifySettledBalance);
 
   return (
     <TouchableOpacity>
