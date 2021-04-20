@@ -19,6 +19,7 @@ import About from './components/AboutMe/About';
 import WelcomePage from './components/Logins/WelcomePage';
 import TripOverview from './components/Trips/TripOverview';
 import CustomExpenses from './components/Splitwise/CustomExpenses';
+import SettleBalance from './components/Splitwise/SettleBalance';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBtMHUYG7yzkUhuqG6SlE5m75GQhh6qG00',
@@ -67,6 +68,7 @@ export default function App() {
           <Route path='/about' component={About} />
           <Route path='/trip-overview/:id' component={TripOverview} />
           <Route path='/custom-expenses/:id' component={CustomExpenses} />
+          <Route path='/settle-balance/:expenseid' component={SettleBalance} />
         </View>
       </NativeRouter>
     </UserContext.Provider>

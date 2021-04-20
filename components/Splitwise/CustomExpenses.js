@@ -6,11 +6,13 @@ import moment from 'moment';
 import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import { useHistory } from 'react-router-native';
+import SettleBalance from './SettleBalance';
 
 export default function CustomExpenses(props) {
   const tripId = props.match.params.id;
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   const history = useHistory();
+  const db = firebase.firestore();
 
   const handleExpenseModalClosure = () => {
     setExpenseModalOpen(false);
@@ -38,13 +40,17 @@ export default function CustomExpenses(props) {
     return expense.data.amount;
   });
 
-  const totalOwned = amountOfExpenses.reduce(function (
+  const totalOwed = amountOfExpenses.reduce(function (
     previousTotalExpenseBalance,
     newExpenseBalance
   ) {
     return previousTotalExpenseBalance + newExpenseBalance;
   },
   0);
+
+  const verifySettledBalance = fetchExpenses.map((expense) => {
+    return expense.data.amountSettled;
+  });
 
   return (
     <View style={styles.customExpensesContainer}>
@@ -58,10 +64,12 @@ export default function CustomExpenses(props) {
           onPress={backToTripDetails}
         />
       </View>
+
       {fetchExpenses.map((expense) => {
         const expenseSplitBetweenParticipants =
           (expense.data.amount / (expense.data.participants.length + 1)) *
           expense.data.participants.length;
+
         return (
           <View key={expense.id} style={styles.expenseContainer}>
             <View style={styles.expenseSection}>
@@ -77,12 +85,17 @@ export default function CustomExpenses(props) {
               <Text style={styles.expenseData}>You are owed:</Text>
               <Text>${expenseSplitBetweenParticipants}</Text>
             </View>
+            <SettleBalance
+              tripId={tripId}
+              expenseId={expense.id}
+              fetchExpenses={fetchExpenses}
+            />
           </View>
         );
       })}
       <View style={styles.totalBalanceOwed}>
         <Text style={styles.expenseData}>total owed:</Text>
-        <Text>${totalOwned}</Text>
+        <Text>${totalOwed}</Text>
       </View>
       <TouchableOpacity onPress={() => setExpenseModalOpen(true)}>
         <View style={styles.addExpenseContainer}>
@@ -138,8 +151,9 @@ const styles = StyleSheet.create({
   expenseSection: {
     display: 'flex',
     flexDirection: 'column',
+
     alignItems: 'flex-start',
-    width: '40%',
+    width: '35%',
     height: 50,
   },
   expenseData: { fontWeight: 'bold' },
@@ -150,5 +164,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#93A7AA',
   },
-  totalBalanceOwed: { display: 'flex', left: 240, borderTopWidth: 1 },
+  totalBalanceOwed: { display: 'flex', left: 210, borderTopWidth: 1 },
 });

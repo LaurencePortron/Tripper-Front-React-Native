@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-native';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
@@ -111,7 +111,7 @@ export default function Expenses({ tripId }) {
       <View style={styles.expenseContainer}>
         {expenseArray.map((expense) => {
           return (
-            <View style={styles.expenseSection}>
+            <View style={styles.expenseSection} key={expense.title}>
               <Text style={styles.costSubcategory}>{expense.title} </Text>
               <Text style={styles.costData}>${expense.costData}</Text>
               <Text style={styles.costData}></Text>

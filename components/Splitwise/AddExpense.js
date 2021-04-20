@@ -52,6 +52,7 @@ export default function AddExpense({
         participants: friendSelected,
         trip_id: tripId,
         created: firebase.firestore.Timestamp.fromDate(new Date()),
+        amountSettled: false,
       });
     history.push(`/custom-expenses/${tripId}`);
   };
