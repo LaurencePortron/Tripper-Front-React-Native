@@ -5,12 +5,10 @@ import AddExpense from './AddExpense';
 import moment from 'moment';
 import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
-import { useHistory } from 'react-router-native';
 import SettleBalance from './SettleBalance';
 
 export default function CustomExpenses({ tripId, totalOwed }) {
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
-  const history = useHistory();
 
   const handleExpenseModalClosure = () => {
     setExpenseModalOpen(false);
@@ -36,7 +34,6 @@ export default function CustomExpenses({ tripId, totalOwed }) {
         const expenseSplitBetweenParticipants =
           (expense.data.amount / (expense.data.participants.length + 1)) *
           expense.data.participants.length;
-
         const verifySettledBalance = expense.data.amountSettled;
         return (
           <View key={expense.id} style={styles.expenseContainer}>

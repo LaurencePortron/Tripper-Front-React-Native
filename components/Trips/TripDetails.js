@@ -8,10 +8,11 @@ import Friends from '../Friends/Friends';
 import firebase from 'firebase/app';
 import { useFirestoreDocument } from '../hooks';
 import { Feather } from '@expo/vector-icons';
+import { useHistory } from 'react-router-native';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
-
+  const history = useHistory();
   const fetchTripDetails = useFirestoreDocument(
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
@@ -23,26 +24,30 @@ export default function TripDetails(props) {
     return null;
   }
   const backToTripDetails = () => {
-    history.push(`/trip-details/${tripId}`);
+    history.push(`/trip-overview/${tripId}`);
   };
 
   return (
     <View>
-      <View style={styles.customExpensesHeader}>
-        <Text style={styles.overviewTitle}>{fetchTripDetails.data.title}</Text>
-        <Feather
-          style={styles.backToTripButton}
-          name='arrow-left-circle'
-          size={32}
-          color='#2E5E4E'
-          onPress={backToTripDetails}
-        />
-      </View>
-      <ScrollView style={styles.tripDetailsContainer}>
-        <Expenses tripId={tripId} />
-        {/* <Stops tripId={tripId} /> */}
-        <Friends tripId={tripId} />
-        <Activities tripId={tripId} />
+      <ScrollView>
+        <View style={styles.customExpensesHeader}>
+          <Text style={styles.overviewTitle}>
+            {fetchTripDetails.data.title}
+          </Text>
+          <Feather
+            style={styles.backToTripButton}
+            name='arrow-left-circle'
+            size={32}
+            color='#2E5E4E'
+            onPress={backToTripDetails}
+          />
+        </View>
+        <View style={styles.tripDetailsContainer}>
+          <Expenses tripId={tripId} />
+          {/* <Stops tripId={tripId} /> */}
+          <Friends tripId={tripId} />
+          <Activities tripId={tripId} />
+        </View>
       </ScrollView>
       <Footer />
     </View>
