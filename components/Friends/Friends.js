@@ -13,7 +13,7 @@ export default function Friends({ tripId }) {
     [tripId]
   );
 
-  const handleInviteModalClosure = (inviteSent) => {
+  const handleInviteModalClosure = () => {
     setInviteModalOpen(false);
   };
 

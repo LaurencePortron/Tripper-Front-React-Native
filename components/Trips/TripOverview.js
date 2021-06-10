@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-native';
 import moment from 'moment';
 import { View, Image, Text, StyleSheet } from 'react-native';
@@ -8,10 +8,17 @@ import { useFirestoreDocument } from '../hooks';
 import BackToDashboardButton from '../Buttons';
 import { TouchableOpacity } from 'react-native';
 import { useFirestoreCollection } from '../hooks';
+import EditTripModal from './EditTripModal.js';
+import { ScrollView } from 'react-native';
 
 export default function TripOverview(props) {
   const tripId = props.match.params.id;
   const history = useHistory();
+  const [inviteModalOpen, setInviteModalOpen] = useState(false);
+
+  const handleInviteModalClosure = () => {
+    setInviteModalOpen(false);
+  };
 
   const fetchTripDetails = useFirestoreDocument(
     firebase.firestore().collection('trips').doc(tripId),
@@ -84,7 +91,7 @@ export default function TripOverview(props) {
           <Text style={styles.tripTitle}>{fetchTripDetails.data.title}</Text>
           <Text style={styles.containerDates}>
             {moment(fetchTripDetails.data.startDate.toDate()).format('MMM Do')}{' '}
-            -{moment(fetchTripDetails.data.endDate.toDate()).format('MMM Do')}
+            - {moment(fetchTripDetails.data.endDate.toDate()).format('MMM Do')}
           </Text>
         </View>
         <View>
@@ -111,7 +118,6 @@ export default function TripOverview(props) {
             <Text style={styles.description}>
               {fetchTripDetails.data.description}
             </Text>
-
             <TouchableOpacity
               style={styles.overviewNavigationSection}
               onPress={navigateToTripDetails}
@@ -123,6 +129,21 @@ export default function TripOverview(props) {
             </TouchableOpacity>
           </View>
         </View>
+
+        <TouchableOpacity
+          style={styles.editSection}
+          onPress={() => setInviteModalOpen(true)}
+        >
+          <Text style={styles.editSectionText}>Edit</Text>
+          <Feather name='edit' size={24} color='#B37650' />
+        </TouchableOpacity>
+        <ScrollView>
+          <EditTripModal
+            tripId={tripId}
+            show={inviteModalOpen}
+            handleInviteModalClosure={handleInviteModalClosure}
+          />
+        </ScrollView>
       </View>
     </View>
   );
@@ -138,6 +159,7 @@ const styles = StyleSheet.create({
   containerDates: {
     display: 'flex',
     marginLeft: 20,
+    marginRight: 10,
     color: '#93A7AA',
     fontSize: 15,
   },
@@ -210,5 +232,19 @@ const styles = StyleSheet.create({
     color: '#B37650',
     fontWeight: 'bold',
     fontSize: 15,
+  },
+
+  editSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+
+  editSectionText: {
+    color: '#B37650',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginRight: 10,
   },
 });

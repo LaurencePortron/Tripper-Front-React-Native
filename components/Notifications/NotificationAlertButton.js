@@ -6,10 +6,6 @@ import NotificationDetails from './NotificationDetails';
 export default function NotificationAlertButton() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-  const clickToOpenNotifications = () => {
-    setNotificationsOpen(true);
-  };
-
   return (
     <View>
       <TouchableOpacity>
@@ -18,7 +14,7 @@ export default function NotificationAlertButton() {
           size={25}
           color='#2E5E4E'
           style={styles.NotificationAlertButton}
-          onPress={clickToOpenNotifications}
+          onPress={() => setNotificationsOpen(!notificationsOpen)}
         />
       </TouchableOpacity>
       {notificationsOpen ? <NotificationDetails /> : null}

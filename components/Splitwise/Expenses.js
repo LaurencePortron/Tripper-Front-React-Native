@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useFirestoreDocument, useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import CustomExpenses from './CustomExpenses';
+import { Feather } from '@expo/vector-icons';
+import { useHistory } from 'react-router-native';
 
 export default function Expenses({ tripId }) {
+  const history = useHistory();
+
   const fetchTripDetails = useFirestoreDocument(
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
@@ -63,7 +67,9 @@ export default function Expenses({ tripId }) {
   },
   0);
 
-  console.log(totalOwed);
+  const goToCustomExpenses = () => {
+    history.push(`/custom-expenses/${tripId}`);
+  };
 
   const expenseArray = [
     {
@@ -94,7 +100,14 @@ export default function Expenses({ tripId }) {
           );
         })}
       </View>
-      <CustomExpenses tripId={tripId} totalOwed={totalOwed} />
+
+      {/* <CustomExpenses tripId={tripId} totalOwed={totalOwed} /> */}
+      <TouchableOpacity onPress={goToCustomExpenses}>
+        <View style={styles.goToCustomExpensesContainer}>
+          <Text style={styles.goToCustomExpensesText}>Custom Expenses</Text>
+          <Feather name='arrow-right' size={24} color='#B37650' />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -137,5 +150,16 @@ const styles = StyleSheet.create({
     color: '#B37650',
     fontWeight: 'bold',
     fontSize: 15,
+  },
+
+  goToCustomExpensesContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+
+  goToCustomExpensesText: {
+    color: '#B37650',
   },
 });

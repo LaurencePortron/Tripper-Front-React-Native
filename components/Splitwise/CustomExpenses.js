@@ -6,12 +6,20 @@ import moment from 'moment';
 import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import SettleBalance from './SettleBalance';
+import { useHistory } from 'react-router-native';
 
-export default function CustomExpenses({ tripId, totalOwed }) {
+export default function CustomExpenses(props) {
+  const tripId = props.match.params.id;
+  const history = useHistory();
+
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
 
   const handleExpenseModalClosure = () => {
     setExpenseModalOpen(false);
+  };
+
+  const backToTripDetails = () => {
+    history.push(`/trip-details/${tripId}`);
   };
 
   const fetchExpenses = useFirestoreCollection(
@@ -28,8 +36,28 @@ export default function CustomExpenses({ tripId, totalOwed }) {
     return null;
   }
 
+  const amountOfExpenses = fetchExpenses.map((expense) => {
+    return expense.data.amount;
+  });
+
+  const totalOwed = amountOfExpenses.reduce(function (
+    previousTotalExpenseBalance,
+    newExpenseBalance
+  ) {
+    return previousTotalExpenseBalance + newExpenseBalance;
+  },
+  0);
+
   return (
     <View style={styles.customExpensesContainer}>
+      <Feather
+        style={styles.backToTripButtoninCustomExpenses}
+        name='arrow-left-circle'
+        size={32}
+        color='#2E5E4E'
+        onPress={backToTripDetails}
+      />
+      <Text style={styles.customExpensesHeader}>Your custom expenses</Text>
       {fetchExpenses.map((expense) => {
         const expenseSplitBetweenParticipants =
           (expense.data.amount / (expense.data.participants.length + 1)) *
@@ -38,7 +66,7 @@ export default function CustomExpenses({ tripId, totalOwed }) {
         return (
           <View key={expense.id} style={styles.expenseContainer}>
             <View style={styles.expenseSection}>
-              <Text>
+              <Text style={styles.expenseData}>
                 {moment(expense.data.created.toDate()).format('MMM Do')}
               </Text>
             </View>
@@ -79,8 +107,21 @@ export default function CustomExpenses({ tripId, totalOwed }) {
 
 const styles = StyleSheet.create({
   customExpensesContainer: {
-    marginRight: 20,
-    width: '80%',
+    alignSelf: 'center',
+    margin: 'auto',
+    width: '90%',
+  },
+
+  backToTripButtoninCustomExpenses: {
+    marginTop: 20,
+    left: 300,
+  },
+  customExpensesHeader: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2E5E4E',
   },
   backToTripButton: { marginLeft: 120 },
 
@@ -93,35 +134,37 @@ const styles = StyleSheet.create({
   addExpenseContainer: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    marginLeft: 30,
     marginTop: 10,
   },
   addExpenseText: {
     color: '#B37650',
     fontWeight: 'bold',
     fontSize: 15,
+    marginRight: 5,
   },
   expenseContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 25,
+
+    backgroundColor: '#ececec',
   },
   expenseSection: {
     display: 'flex',
     flexDirection: 'column',
-
-    alignItems: 'flex-start',
-    width: '35%',
+    alignContent: 'center',
+    justifyContent: 'center',
     height: 50,
+    padding: 10,
   },
-  expenseData: { fontWeight: 'bold' },
-  currentExpensesTitle: {
-    textAlign: 'left',
-    marginTop: 10,
-    marginBottom: 10,
-    fontSize: 20,
-    color: '#93A7AA',
+  expenseData: {
+    fontWeight: 'bold',
   },
-  totalBalanceOwed: { display: 'flex', left: 210, borderTopWidth: 1 },
+
+  totalBalanceOwed: { left: 190, borderTopWidth: 1, marginTop: 10 },
 });
