@@ -8,8 +8,7 @@ import firebase from 'firebase/app';
 import SettleBalance from './SettleBalance';
 import { useHistory } from 'react-router-native';
 
-export default function CustomExpenses(props) {
-  const tripId = props.match.params.id;
+export default function CustomExpenses({ tripId }) {
   const history = useHistory();
 
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
@@ -50,14 +49,6 @@ export default function CustomExpenses(props) {
 
   return (
     <View style={styles.customExpensesContainer}>
-      <Feather
-        style={styles.backToTripButtoninCustomExpenses}
-        name='arrow-left-circle'
-        size={32}
-        color='#2E5E4E'
-        onPress={backToTripDetails}
-      />
-      <Text style={styles.customExpensesHeader}>Your custom expenses</Text>
       {fetchExpenses.map((expense) => {
         const expenseSplitBetweenParticipants =
           (expense.data.amount / (expense.data.participants.length + 1)) *
@@ -136,8 +127,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginLeft: 30,
-    marginTop: 10,
   },
   addExpenseText: {
     color: '#B37650',
@@ -151,7 +140,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 25,
-
     backgroundColor: '#ececec',
   },
   expenseSection: {

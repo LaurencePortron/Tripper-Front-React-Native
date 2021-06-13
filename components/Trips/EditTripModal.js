@@ -24,7 +24,7 @@ export default function InviteModal({
   const [editDescription, setEditDescription] = useState('');
   const [editCost, setEditCost] = useState('');
   const [openCalendar, setOpenCalendar] = useState(false);
-  const [isdateRange, setIsDateRange] = useState();
+  const [dateRange, setDateRange] = useState({});
 
   const editDescriptionInput = (inputText) => {
     setEditDescription(inputText);
@@ -35,19 +35,23 @@ export default function InviteModal({
   };
 
   const handleSaveChanges = () => {
+    if (!dateRange.startDate || !dateRange.endDate) {
+      return;
+    }
     db.collection('trips')
       .doc(tripId)
       .update({
-        startDate: new Date(range.startDate),
-        // endDate: new Date(range),
+        startDate: new Date(dateRange.startDate),
+        endDate: new Date(dateRange.endDate),
         description: editDescription,
         cost: Number(editCost),
       });
   };
 
-  const dateRange = (range) => {
+  const onChangeDateRange = (range) => {
+    setDateRange(range);
     console.log(range);
-    setIsDateRange(range);
+    return range;
   };
 
   return (
@@ -67,7 +71,9 @@ export default function InviteModal({
             <Feather name='arrow-down' size={24} color='black' />
           </View>
         </TouchableOpacity>
-        {openCalendar ? <CalendarExample dateRange={dateRange} /> : null}
+        {openCalendar ? (
+          <CalendarExample dateRange={dateRange} onChange={onChangeDateRange} />
+        ) : null}
 
         <TextInput
           style={styles.editField}

@@ -67,10 +67,6 @@ export default function Expenses({ tripId }) {
   },
   0);
 
-  const goToCustomExpenses = () => {
-    history.push(`/custom-expenses/${tripId}`);
-  };
-
   const expenseArray = [
     {
       title: 'Total Cost:',
@@ -93,41 +89,44 @@ export default function Expenses({ tripId }) {
         {expenseArray.map((expense) => {
           return (
             <View style={styles.expenseSection} key={expense.title}>
-              <Text style={styles.costSubcategory}>{expense.title} </Text>
-              <Text style={styles.costData}>${expense.costData}</Text>
-              <Text style={styles.costData}></Text>
+              <View style={styles.dataSection}>
+                <Text style={styles.costDataTitle}>{expense.title} </Text>
+                <Text style={styles.costData}>${expense.costData}</Text>
+              </View>
             </View>
           );
         })}
       </View>
-
-      {/* <CustomExpenses tripId={tripId} totalOwed={totalOwed} /> */}
-      <TouchableOpacity onPress={goToCustomExpenses}>
-        <View style={styles.goToCustomExpensesContainer}>
-          <Text style={styles.goToCustomExpensesText}>Custom Expenses</Text>
-          <Feather name='arrow-right' size={24} color='#B37650' />
-        </View>
-      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  expenseSection: { display: 'flex', flexDirection: 'row' },
+  expenseSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#ececec',
+    margin: 10,
+    padding: 10,
+    height: 50,
+    alignItems: 'center',
+  },
+  dataSection: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   costContainer: {
     margin: 10,
-    marginLeft: 20,
-    marginRight: 40,
   },
   costTitle: {
     textAlign: 'left',
     marginTop: 10,
-
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
     color: '#93A7AA',
   },
+  costDataTitle: { fontWeight: 'bold' },
   expenseSubTitle: { color: '#93A7AA' },
   overviewNavigationSection: {
     display: 'flex',

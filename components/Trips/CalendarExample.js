@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Calendar } from 'react-native-calendario';
 import { View, StyleSheet } from 'react-native';
 
-export default function CalendarExample({ dateRange }) {
+export default function CalendarExample({ dateRange, onChange }) {
   return (
     <View style={styles.calendarContainer}>
       <Calendar
-        onChange={dateRange}
+        onChange={onChange}
         // minDate={new Date(2018, 3, 20)}
-        // startDate={new Date(2018, 3, 30)}
-        // endDate={new Date(2018, 4, 5)}
+        startDate={dateRange.startDate}
+        endDate={dateRange.endDate}
         theme={{
           activeDayColor: {},
           monthTitleTextStyle: {
@@ -58,4 +58,4 @@ export default function CalendarExample({ dateRange }) {
   );
 }
 
-const styles = StyleSheet.create({ calendarContainer: { height: 100 } });
+const styles = StyleSheet.create({ calendarContainer: { height: 200 } });

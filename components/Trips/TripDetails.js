@@ -3,12 +3,13 @@ import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import Footer from '../Footer';
 import Activities from '../Activities/Activities';
 import Expenses from '../Splitwise/Expenses';
-// import Stops from '../Stops/Stops';
+import Stops from '../Stops/Stops';
 import Friends from '../Friends/Friends';
 import firebase from 'firebase/app';
 import { useFirestoreDocument } from '../hooks';
 import { Feather } from '@expo/vector-icons';
 import { useHistory } from 'react-router-native';
+import CustomExpenses from '../Splitwise/CustomExpenses';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
@@ -17,8 +18,6 @@ export default function TripDetails(props) {
     firebase.firestore().collection('trips').doc(tripId),
     [tripId]
   );
-
-  console.log(fetchTripDetails);
 
   if (!fetchTripDetails) {
     return null;
@@ -44,7 +43,8 @@ export default function TripDetails(props) {
         </View>
         <View style={styles.tripDetailsContainer}>
           <Expenses tripId={tripId} />
-          {/* <Stops tripId={tripId} /> */}
+          <CustomExpenses tripId={tripId} />
+          <Stops tripId={tripId} />
           <Friends tripId={tripId} />
           <Activities tripId={tripId} />
         </View>

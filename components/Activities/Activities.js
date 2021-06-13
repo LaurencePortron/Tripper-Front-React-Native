@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 100,
   },
   activityPhoto: {
     display: 'flex',
