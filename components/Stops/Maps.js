@@ -48,7 +48,6 @@ export default function Maps({ fetchStops, fetchStopId }) {
       {stopInfoVisible ? (
         <View style={styles.stopInfo}>
           {fetchStops.map((stop) => {
-            console.log(stop.id);
             return (
               <View key={stop.id}>
                 <Text style={styles.stopInfoText}>{stop.data.description}</Text>

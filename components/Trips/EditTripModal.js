@@ -7,7 +7,6 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
@@ -19,8 +18,6 @@ export default function InviteModal({
   handleInviteModalClosure,
 }) {
   var db = firebase.firestore();
-  const [editStartDate, setEditStartDate] = useState('');
-  const [editEndDate, setEditEndDate] = useState('');
   const [editDescription, setEditDescription] = useState('');
   const [editCost, setEditCost] = useState('');
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -50,7 +47,6 @@ export default function InviteModal({
 
   const onChangeDateRange = (range) => {
     setDateRange(range);
-    console.log(range);
     return range;
   };
 

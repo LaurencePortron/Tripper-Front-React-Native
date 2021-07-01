@@ -9,7 +9,7 @@ console.log(process.env.REACT_APP_API_BASE_URL);
 // If our API is deployed somewhere else, we just have to change the
 // REACT_APP_API_BASE_URL variable in .env file at the root of the project
 const instance = axios.create({
-  baseURL: 'http://192.168.68.127:5000', //process.env.REACT_APP_API_BASE_URL,
+  baseURL: 'http://192.168.68.103:5000', //process.env.REACT_APP_API_BASE_URL,
 });
 console.log(process.env.REACT_APP_API_BASE_URL);
 const makeCancellable = (method, url, data, config) => {
@@ -55,10 +55,12 @@ export const getCollection = (collectionName, queryParams, config = {}) =>
     config
   ).then(extractData);
 
-export const makeEntityAdder = (collectionName) => (attributes, config = {}) =>
-  makeCancellable('post', `/${collectionName}`, attributes, config).then(
-    extractData
-  );
+export const makeEntityAdder =
+  (collectionName) =>
+  (attributes, config = {}) =>
+    makeCancellable('post', `/${collectionName}`, attributes, config).then(
+      extractData
+    );
 
 export const getEntity = (collectionName, id) =>
   makeCancellable('get', `/${collectionName}/${id}`).then(extractData);

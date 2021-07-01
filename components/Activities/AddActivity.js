@@ -20,6 +20,8 @@ export default function AddActivity(props) {
   const history = useHistory();
   var db = firebase.firestore();
   require('firebase/firestore');
+  const user = firebase.auth().currentUser;
+  const userId = user.uid;
 
   const tripId = props.match.params.id;
 
@@ -54,6 +56,10 @@ export default function AddActivity(props) {
           trip_id: tripId,
           photo: result.data.url,
         });
+      db.collection('notifications').add({
+        userId: userId,
+        trip_id: tripId,
+      });
 
       history.push(`/trip-details/${tripId}`);
     } catch (error) {

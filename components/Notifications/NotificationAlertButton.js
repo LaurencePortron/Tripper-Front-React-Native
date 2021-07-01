@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import NotificationDetails from './NotificationDetails';
 
-export default function NotificationAlertButton() {
+export default function NotificationAlertButton(props) {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   return (

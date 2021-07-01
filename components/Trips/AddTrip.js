@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
 import API from '../../services/API';
 import { useHistory } from 'react-router-native';
-import { TextInput, View, Text, StyleSheet, ScrollView } from 'react-native';
+import {
+  TextInput,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import firebase from 'firebase/app';
 import BackToDashboardButton from '../Buttons';
 import { Button } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import CalendarExample from './CalendarExample';
 
 export default function AddTrip(props) {
   const [addTripTitle, setAddTripTitle] = useState('');
-  const [addStartDate, setAddStartDate] = useState('');
-  const [addEndDate, setAddEndDate] = useState('');
   const [addDescription, setAddDescription] = useState('');
   const [addCost, setAddCost] = useState('');
-
-  var db = firebase.firestore();
-  require('firebase/firestore');
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [dateRange, setDateRange] = useState({});
+  const user = firebase.auth().currentUser;
+  const userId = user.uid;
 
   const history = useHistory();
 
   const addTripTitleInput = (inputText) => {
     setAddTripTitle(inputText);
-  };
-
-  const addStartDateInput = (inputText) => {
-    setAddStartDate(inputText);
-  };
-  const addEndDateInput = (inputText) => {
-    setAddEndDate(inputText);
   };
 
   const addDescriptionInput = (inputText) => {
@@ -41,19 +41,26 @@ export default function AddTrip(props) {
     try {
       const result = await API.post('/images', { title: addTripTitle });
 
+      var db = firebase.firestore();
       await db.collection('trips').add({
         title: addTripTitle,
-        startDate: new Date(addStartDate),
-        endDate: new Date(addEndDate),
+        startDate: new Date(dateRange.startDate),
+        endDate: new Date(dateRange.endDate),
         description: addDescription,
         cost: Number(addCost),
         photo: result.data.url,
+        userId: userId,
       });
 
       history.push(`/dashboard`);
     } catch (error) {
       console.error('Error cannot add trip', error);
     }
+  };
+
+  const onChangeDateRange = (range) => {
+    setDateRange(range);
+    return range;
   };
 
   return (
@@ -69,22 +76,18 @@ export default function AddTrip(props) {
             inputText={addTripTitle}
             onChangeText={addTripTitleInput}
           />
-
-          <TextInput
-            style={styles.addInfo}
-            placeholder='Start Date'
-            name='startDate'
-            inputText={addStartDate}
-            onChangeText={addStartDateInput}
-          />
-
-          <TextInput
-            style={styles.addInfo}
-            placeholder='End Date'
-            name='endDate'
-            inputText={addEndDate}
-            onChangeText={addEndDateInput}
-          />
+          <TouchableOpacity onPress={() => setOpenCalendar(!openCalendar)}>
+            <View style={styles.calendarContainer}>
+              <Text style={styles.calendarText}>Change dates</Text>
+              <Feather name='arrow-down' size={24} color='black' />
+            </View>
+          </TouchableOpacity>
+          {openCalendar ? (
+            <CalendarExample
+              dateRange={dateRange}
+              onChange={onChangeDateRange}
+            />
+          ) : null}
 
           <TextInput
             style={styles.addInfo}
@@ -96,7 +99,7 @@ export default function AddTrip(props) {
 
           <TextInput
             style={styles.addInfo}
-            placeholder='Description'
+            placeholder='Cost'
             name='cost'
             inputText={addCost}
             onChangeText={addCostInput}
@@ -144,4 +147,17 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   arrow: { marginTop: 30 },
+
+  calendarContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  calendarText: {
+    fontSize: 18,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });

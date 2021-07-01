@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useFirestoreCollection } from '../hooks';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export default function NotificationDetails(props) {
   const [closeNotifications, setCloseNotifications] = useState(false);
@@ -32,10 +35,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     right: 30,
     top: 10,
-    width: 90,
-    backgroundColor: 'white',
+    width: 150,
+    backgroundColor: 'grey',
     position: 'absolute',
   },
 
-  notificationHeader: { display: 'flex', flexDirection: 'row', flex: 1 },
+  notificationHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
 });

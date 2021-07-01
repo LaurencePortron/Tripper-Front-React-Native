@@ -22,10 +22,13 @@ function SignUp(props) {
     setRegisterPassword(inputText);
   };
 
+  var db = firebase.firestore();
+
   const handleRegisterSubmit = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(registerEmail, registerPassword)
+
       .then(() => {
         history.push(`/dashboard`);
       })

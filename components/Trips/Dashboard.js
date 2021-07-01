@@ -21,12 +21,12 @@ export default function Dashboard(props) {
   const user = firebase.auth().currentUser;
   const userId = user.uid;
 
+  // console.log(user);
+
   if (user != null) {
-    db.collection('settings').doc(userId).set({
+    db.collection('accounts').doc(userId).set({
       email: user.email,
-      notifMessages: false,
-      notifSplitwise: false,
-      notifCancellations: false,
+      userName: user.displayName,
     });
   }
 
@@ -41,10 +41,6 @@ export default function Dashboard(props) {
 
   const addTrip = () => {
     history.push(`/add-trip`);
-  };
-
-  const goToMessages = () => {
-    history.push(`/messages`);
   };
 
   return (
@@ -94,61 +90,68 @@ export default function Dashboard(props) {
             }
           })
           .map((fetchTrip) => {
-            return (
-              <View key={fetchTrip.id}>
-                <Image
-                  source={{ uri: fetchTrip.data.photo }}
-                  style={styles.Image}
-                  alt='random'
-                ></Image>
+            if (fetchTrip.data.userId === userId) {
+              return (
+                <View key={fetchTrip.id}>
+                  <Image
+                    source={{ uri: fetchTrip.data.photo }}
+                    style={styles.Image}
+                    alt='random'
+                  ></Image>
 
-                <View style={styles.containerTriptitle}>
-                  <Feather name='map-pin' size={24} color='#9D9996' />
-                  <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                  <View style={styles.containerTriptitle}>
+                    <Feather name='map-pin' size={24} color='#9D9996' />
+                    <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                  </View>
+                  <View style={styles.containerRightChevron}>
+                    <Feather
+                      name='chevron-right'
+                      size={35}
+                      color='white'
+                      onPress={() => openTripOverview(fetchTrip.id)}
+                      style={styles.rightChevron}
+                    />
+                  </View>
                 </View>
-                <View style={styles.containerRightChevron}>
-                  <Feather
-                    name='chevron-right'
-                    size={35}
-                    color='white'
-                    onPress={() => openTripOverview(fetchTrip.id)}
-                    style={styles.rightChevron}
-                  />
-                </View>
-              </View>
-            );
+              );
+            }
           })}
         {fetchTrips
           .filter((fetchTrip) => {
             if (tab === 'upcoming') {
-              return fetchTrip.data.endDate.toDate() > new Date();
+              return (
+                fetchTrip.data.startDate.toDate() > new Date() &&
+                fetchTrip.data.endDate.toDate() > new Date()
+              );
             }
           })
 
           .map((fetchTrip) => {
-            return (
-              <View key={fetchTrip.id}>
-                <Image
-                  source={{ uri: fetchTrip.data.photo }}
-                  style={styles.Image}
-                  alt='random'
-                ></Image>
+            if (fetchTrip.data.userId === userId) {
+              return (
+                <View key={fetchTrip.id}>
+                  <Image
+                    source={{ uri: fetchTrip.data.photo }}
+                    style={styles.Image}
+                    alt='random'
+                  ></Image>
 
-                <View style={styles.containerTriptitle}>
-                  <Feather name='map-pin' size={24} color='#9D9996' />
-                  <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                  <View style={styles.containerTriptitle}>
+                    <Feather name='map-pin' size={24} color='#9D9996' />
+                    <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                  </View>
+                  <View style={styles.containerRightChevron}>
+                    <Feather
+                      name='chevron-right'
+                      size={35}
+                      color='white'
+                      onPress={() => openTripOverview(fetchTrip.id)}
+                      style={styles.rightChevron}
+                    />
+                  </View>
                 </View>
-                <View style={styles.containerRightChevron}>
-                  <Feather
-                    name='chevron-right'
-                    size={35}
-                    color='white'
-                    onPress={() => openTripOverview(fetchTrip.id)}
-                    style={styles.rightChevron}
-                  />
-                </View>
-              </View>
-            );
+              );
+            }
           })}
 
         {fetchTrips
@@ -159,29 +162,31 @@ export default function Dashboard(props) {
           })
 
           .map((fetchTrip) => {
-            return (
-              <View key={fetchTrip.id}>
-                <Image
-                  source={{ uri: fetchTrip.data.photo }}
-                  alt='random'
-                  style={styles.Image}
-                ></Image>
+            if (fetchTrip.data.userId === userId) {
+              return (
+                <View key={fetchTrip.id}>
+                  <Image
+                    source={{ uri: fetchTrip.data.photo }}
+                    alt='random'
+                    style={styles.Image}
+                  ></Image>
 
-                <View style={styles.containerTriptitle}>
-                  <Feather name='map-pin' size={24} color='#9D9996' />
-                  <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                  <View style={styles.containerTriptitle}>
+                    <Feather name='map-pin' size={24} color='#9D9996' />
+                    <Text style={styles.tripTitle}>{fetchTrip.data.title}</Text>
+                  </View>
+                  <View style={styles.containerRightChevron}>
+                    <Feather
+                      onPress={() => openTripOverview(fetchTrip.id)}
+                      name='chevron-right'
+                      size={35}
+                      color='white'
+                      style={styles.rightChevron}
+                    />
+                  </View>
                 </View>
-                <View style={styles.containerRightChevron}>
-                  <Feather
-                    onPress={() => openTripOverview(fetchTrip.id)}
-                    name='chevron-right'
-                    size={35}
-                    color='white'
-                    style={styles.rightChevron}
-                  />
-                </View>
-              </View>
-            );
+              );
+            }
           })}
       </ScrollView>
       <TouchableOpacity style={styles.clickForDetailsSection} onPress={addTrip}>
