@@ -22,9 +22,15 @@ export default function Dashboard(props) {
   const userId = user.uid;
 
   const fetchTrips = useFirestoreCollection(
-    firebase.firestore().collection('trips').orderBy('endDate', 'asc'),
+    db.collection('trips').orderBy('endDate', 'asc'),
     []
   );
+
+  // const getTripsForCurrentUser = fetchTrips.map((trip) => {
+  //   if (trip.data.userId === userId) return trip.data.title;
+  // });
+
+  // console.log(getTripsForCurrentUser);
 
   const openTripOverview = (id) => {
     history.push(`/trip-overview/${id}`);
@@ -204,7 +210,7 @@ const styles = StyleSheet.create({
   dashboardContainer: { width: '100%', height: '100%' },
   myTripsTitle: {
     marginTop: 25,
-    fontSize: 25,
+    fontSize: 30,
     marginLeft: 20,
     color: '#2E5E4E',
     fontWeight: 'bold',

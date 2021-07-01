@@ -2,66 +2,43 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Footer from '../Footer';
 import { Feather } from '@expo/vector-icons';
+import { useFirestoreCollection } from '../hooks';
+import firebase from 'firebase/app';
 
 export default function HelpCenter(props) {
-  const [clickedOnQuestion, setClickedOnQuestion] = useState(false);
+  var db = firebase.firestore();
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const openAnswerOfQuestion = () => {
-    setClickedOnQuestion(true);
+  const fetchFaq = useFirestoreCollection(db.collection('faq'), []);
+
+  const openAnswerOfQuestion = (faqiD) => {
+    setIsExpanded(!isExpanded);
+    fetchFaq.map((faq) => {
+      const faqiD = faq.id;
+      return (
+        <View style={styles.answersSection}>
+          <Text>{faq.data.answer}</Text>
+        </View>
+      );
+    });
   };
-  const freqAskedQuestions = [
-    {
-      question: 'How can I add a trip?',
-      answer: 'Go to your dashboard and click on plus.',
-    },
-    {
-      question: 'How can I add an activity?',
-      answer: 'Go to your trip and click on plus.',
-    },
-    {
-      question: 'How can I invite friends?',
-      answer:
-        'Once on a trip clik on the plus avatar and enter the email address.',
-    },
-    {
-      question: 'How can I change my password?',
-      answer: 'Go to your accounts settings, then info in the menu.',
-    },
-    {
-      question: 'How can I change my notification settings',
-      answer: 'Go to your accounts settings, then notifcations in the menu.',
-    },
-  ];
+
   return (
     <View>
       <View style={styles.faqContainer}>
         <Text style={styles.sectionsTitle}>FAQ</Text>
-        {freqAskedQuestions.map((freqAskedQuestion, index) => {
+        {fetchFaq.map((faq) => {
           return (
-            <View key={index} style={styles.questionContainer}>
+            <View style={styles.faq}>
               <View style={styles.questionsSection}>
-                <Text style={styles.question}>
-                  {freqAskedQuestion.question}
-                </Text>
-
+                <Text style={styles.questions}>{faq.data.question}</Text>
                 <Feather
                   name='chevron-down'
-                  size={32}
+                  size={24}
                   color='black'
-                  onPress={openAnswerOfQuestion}
+                  onPress={() => openAnswerOfQuestion(faq.id)}
                 />
               </View>
-              {clickedOnQuestion ? (
-                <View style={styles.answersSection}>
-                  <Text style={styles.answer}>{freqAskedQuestion.answer}</Text>
-                  <Feather
-                    name='chevron-up'
-                    size={32}
-                    color='black'
-                    onPress={openAnswerOfQuestion}
-                  />
-                </View>
-              ) : null}
             </View>
           );
         })}
@@ -75,23 +52,33 @@ const styles = StyleSheet.create({
   faqContainer: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     height: '100%',
+    padding: 20,
   },
   sectionsTitle: {
     textAlign: 'left',
-    fontSize: 20,
-    marginTop: 10,
+    marginBottom: 20,
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#2E5E4E',
   },
+
   questionsSection: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 10,
   },
+
+  questions: { fontSize: 20, fontWeight: 'bold' },
   answersSection: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    marginBottom: 30,
+    fontSize: 18,
   },
   questionContainer: {
     display: 'flex',

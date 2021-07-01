@@ -12,7 +12,6 @@ export default function Profile(props) {
   const history = useHistory();
   const user = firebase.auth().currentUser;
   const userId = user.uid;
-  const [fetchLoggedUser, setFetchLoggedUser] = useState([]);
 
   const handleLogOut = (event) => {
     firebase
