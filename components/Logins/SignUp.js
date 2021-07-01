@@ -28,7 +28,17 @@ function SignUp(props) {
     firebase
       .auth()
       .createUserWithEmailAndPassword(registerEmail, registerPassword)
-
+      .then(() =>
+        firebase
+          .firestore()
+          .collection('accounts')
+          .doc(firebase.auth().currentUser.uid)
+          .set({
+            userName: registerUsername,
+            email: registerEmail,
+            password: registerPassword,
+          })
+      )
       .then(() => {
         history.push(`/dashboard`);
       })

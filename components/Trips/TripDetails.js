@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   overviewTitle: {
-    fontSize: 25,
+    fontSize: 30,
     marginLeft: 20,
     color: '#2E5E4E',
     fontWeight: 'bold',

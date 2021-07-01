@@ -21,15 +21,6 @@ export default function Dashboard(props) {
   const user = firebase.auth().currentUser;
   const userId = user.uid;
 
-  // console.log(user);
-
-  if (user != null) {
-    db.collection('accounts').doc(userId).set({
-      email: user.email,
-      userName: user.displayName,
-    });
-  }
-
   const fetchTrips = useFirestoreCollection(
     firebase.firestore().collection('trips').orderBy('endDate', 'asc'),
     []

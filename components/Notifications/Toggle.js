@@ -5,27 +5,6 @@ import firebase from 'firebase/app';
 export default function Toggle(props) {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  var db = firebase.firestore();
-  const user = firebase.auth().currentUser;
-  const userId = user.uid;
-
-  const collectionRef = firebase.firestore().collection('settings');
-
-  const handleNotificationToggle = () => {
-    if (!isEnabled) {
-      collectionRef.doc(userId).update({
-        notifSplitwise: true,
-        notifCancellations: false,
-        notifMessages: false,
-      });
-    } else {
-      collectionRef.doc(userId).update({
-        notifSplitwise: false,
-        notifCancellations: false,
-        notifMessages: false,
-      });
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -35,7 +14,6 @@ export default function Toggle(props) {
         ios_backgroundColor='#3e3e3e'
         onValueChange={() => {
           toggleSwitch();
-          handleNotificationToggle();
         }}
         value={isEnabled}
         style={styles.toggle}
@@ -46,9 +24,10 @@ export default function Toggle(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  toggle: { marginBottom: 10 },
+  toggle: {
+    transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
+  },
 });
