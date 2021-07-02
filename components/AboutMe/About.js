@@ -7,13 +7,13 @@ export default function HelpCenter(props) {
     <View>
       <View style={styles.aboutContainer}>
         <View style={styles.aboutImageTextContainer}>
-          <Text style={styles.aboutTitle}>About me </Text>
           <Image
             source={require('../images/about.jpg')}
             style={styles.aboutImage}
             alt='random'
           ></Image>
           <View style={styles.aboutDescriptionContainer}>
+            <Text style={styles.aboutTitle}>About me </Text>
             <Text style={styles.aboutText}>
               Basically all abiout this here is my first try. Everything is
               divided into different sections Those are about myself, my Travels
@@ -41,14 +41,28 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
-  aboutImage: { width: 300, height: 300, borderRadius: 20 },
+  aboutImage: {
+    flex: 1,
+    width: '100%',
+    resizeMode: 'cover',
+    marginBottom: 350,
+  },
   aboutTitle: {
     marginTop: 10,
     marginBottom: 10,
-    fontSize: 25,
-    marginLeft: 20,
+    fontSize: 30,
     color: '#2E5E4E',
     fontWeight: 'bold',
   },
-  aboutDescriptionContainer: { margin: 20 },
+  aboutDescriptionContainer: {
+    backgroundColor: 'white',
+    zIndex: 1,
+    bottom: 0,
+    width: '100%',
+    height: 400,
+    padding: 20,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    position: 'absolute',
+  },
 });
