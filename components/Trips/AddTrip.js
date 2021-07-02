@@ -69,6 +69,7 @@ export default function AddTrip(props) {
       <View style={styles.addTripContainer}>
         <Text style={styles.addTripTitle}>Add your trip</Text>
         <View style={styles.addInfoFields}>
+          <Text style={styles.inputTitle}>Location</Text>
           <TextInput
             style={styles.addInfo}
             placeholder='Location'
@@ -78,8 +79,8 @@ export default function AddTrip(props) {
           />
           <TouchableOpacity onPress={() => setOpenCalendar(!openCalendar)}>
             <View style={styles.calendarContainer}>
-              <Text style={styles.calendarText}>Change dates</Text>
-              <Feather name='arrow-down' size={24} color='black' />
+              <Text style={styles.calendarText}>Dates</Text>
+              <Feather name='calendar' size={24} color='black' />
             </View>
           </TouchableOpacity>
           {openCalendar ? (
@@ -88,7 +89,7 @@ export default function AddTrip(props) {
               onChange={onChangeDateRange}
             />
           ) : null}
-
+          <Text style={styles.inputTitle}>Description</Text>
           <TextInput
             style={styles.addInfo}
             placeholder='Description'
@@ -96,7 +97,7 @@ export default function AddTrip(props) {
             inputText={addDescription}
             onChangeText={addDescriptionInput}
           />
-
+          <Text style={styles.inputTitle}>Cost</Text>
           <TextInput
             style={styles.addInfo}
             placeholder='Cost'
@@ -104,14 +105,15 @@ export default function AddTrip(props) {
             inputText={addCost}
             onChangeText={addCostInput}
           />
-
-          <Button
-            style={styles.button}
-            title='Add Trip'
-            onPress={() => {
-              clickToAddTrip();
-            }}
-          ></Button>
+          <View style={styles.button}>
+            <Button
+              title='Add Trip'
+              color='white'
+              onPress={() => {
+                clickToAddTrip();
+              }}
+            ></Button>
+          </View>
         </View>
       </View>
     </View>
@@ -126,7 +128,16 @@ const styles = StyleSheet.create({
     marginTop: 40,
     height: 400,
   },
-  addInfoFields: { width: 300, marginTop: 30 },
+  addInfoFields: {
+    width: 300,
+    marginTop: 30,
+  },
+  inputTitle: {
+    fontWeight: 'bold',
+    marginLeft: 10,
+    fontSize: 20,
+    color: '#93A7AA',
+  },
   addTripTitle: {
     textAlign: 'left',
     color: '#2E5E4E',
@@ -134,37 +145,36 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20,
   },
-
-  dashboardButtonContainer: {
-    position: 'absolute',
-    bottom: 20,
-  },
   addInfo: {
     display: 'flex',
-    padding: 15,
-    borderWidth: 1,
-    marginBottom: 15,
+    borderBottomWidth: 1,
+    marginBottom: 45,
+    marginTop: 20,
     margin: 10,
+    paddingBottom: 10,
   },
   button: {
-    width: 80,
-    padding: 15,
-    backgroundColor: '#1b3332',
+    alignSelf: 'center',
+    width: 200,
+    padding: 5,
+    borderRadius: 10,
+    backgroundColor: '#B37650',
     fontWeight: 'bold',
-    color: '#ffffff',
   },
-  arrow: { marginTop: 30 },
 
   calendarContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 20,
   },
   calendarText: {
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: 'bold',
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
     marginBottom: 10,
+    color: '#93A7AA',
   },
 });

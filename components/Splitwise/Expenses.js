@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#93A7AA',
+    marginLeft: 10,
   },
   costDataTitle: { fontWeight: 'bold' },
   expenseSubTitle: { color: '#93A7AA' },
