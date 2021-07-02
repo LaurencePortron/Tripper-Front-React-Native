@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
-import Toggle from './Toggle';
 import firebase from 'firebase/app';
 
 export default function Notifications(props) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [messageIsEnabled, setMessageIsEnabled] = useState(false);
+  const [cancellationIsEnabled, setCancellationIsEnabled] = useState(false);
+  const [expensesIsEnabled, setExpensesIsEnabled] = useState(false);
+
+  const toggleMessageSwitch = () =>
+    setMessageIsEnabled((previousState) => !previousState);
+
+  const toggleCancellationSwitch = () =>
+    setCancellationIsEnabled((previousState) => !previousState);
+
+  const toggleExpenseSwitch = () =>
+    setExpensesIsEnabled((previousState) => !previousState);
+
   var db = firebase.firestore();
   const user = firebase.auth().currentUser;
   const userId = user.uid;
@@ -13,7 +23,7 @@ export default function Notifications(props) {
   const collectionRef = firebase.firestore().collection('accounts');
 
   const handleExpenseToggle = () => {
-    if (!isEnabled) {
+    if (!expensesIsEnabled) {
       collectionRef.doc(userId).update({
         notifSplitwise: true,
       });
@@ -25,7 +35,7 @@ export default function Notifications(props) {
   };
 
   const handleMessageToggle = () => {
-    if (!isEnabled) {
+    if (!messageIsEnabled) {
       collectionRef.doc(userId).update({
         notifMessages: true,
       });
@@ -35,8 +45,9 @@ export default function Notifications(props) {
       });
     }
   };
+
   const handleCancellationToggle = () => {
-    if (!isEnabled) {
+    if (!cancellationIsEnabled) {
       collectionRef.doc(userId).update({
         notifCancellations: true,
       });
@@ -53,36 +64,39 @@ export default function Notifications(props) {
         <Text style={styles.singleNotification}>Messages</Text>
         <Switch
           trackColor={{ false: '#767577', true: '#93A7AA' }}
-          thumbColor={isEnabled ? '#2E5E4E' : '#f4f3f4'}
+          thumbColor={messageIsEnabled ? '#2E5E4E' : '#f4f3f4'}
           onValueChange={() => {
             handleMessageToggle();
-            toggleSwitch();
+            toggleMessageSwitch();
           }}
-          value={isEnabled}
+          value={messageIsEnabled}
+          style={styles.toggle}
         />
       </View>
       <View style={styles.singleNotificationSection}>
         <Text style={styles.singleNotification}>Expenses</Text>
         <Switch
           trackColor={{ false: '#767577', true: '#93A7AA' }}
-          thumbColor={isEnabled ? '#2E5E4E' : '#f4f3f4'}
+          thumbColor={expensesIsEnabled ? '#2E5E4E' : '#f4f3f4'}
           onValueChange={() => {
             handleExpenseToggle();
-            toggleSwitch();
+            toggleExpenseSwitch();
           }}
-          value={isEnabled}
+          value={expensesIsEnabled}
+          style={styles.toggle}
         />
       </View>
       <View style={styles.singleNotificationSection}>
         <Text style={styles.singleNotification}>Cancellations</Text>
         <Switch
           trackColor={{ false: '#767577', true: '#93A7AA' }}
-          thumbColor={isEnabled ? '#2E5E4E' : '#f4f3f4'}
+          thumbColor={cancellationIsEnabled ? '#2E5E4E' : '#f4f3f4'}
           onValueChange={() => {
             handleCancellationToggle();
-            toggleSwitch();
+            toggleCancellationSwitch();
           }}
-          value={isEnabled}
+          value={cancellationIsEnabled}
+          style={styles.toggle}
         />
       </View>
     </View>
@@ -108,4 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   singleNotification: { fontSize: 18, marginRight: 20 },
+  toggle: {
+    transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }],
+  },
 });

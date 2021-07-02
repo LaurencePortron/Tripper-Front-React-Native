@@ -65,9 +65,9 @@ export default function AddTrip(props) {
 
   return (
     <View>
+      <BackToDashboardButton />
       <View style={styles.addTripContainer}>
         <Text style={styles.addTripTitle}>Add your trip</Text>
-        <BackToDashboardButton />
         <View style={styles.addInfoFields}>
           <TextInput
             style={styles.addInfo}
@@ -124,18 +124,25 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: 40,
+    height: 400,
   },
   addInfoFields: { width: 300, marginTop: 30 },
   addTripTitle: {
-    textAlign: 'center',
+    textAlign: 'left',
     color: '#2E5E4E',
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
+    marginTop: 20,
+  },
+
+  dashboardButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
   },
   addInfo: {
     display: 'flex',
     padding: 15,
-    borderBottomWidth: 1,
+    borderWidth: 1,
     marginBottom: 15,
     margin: 10,
   },
