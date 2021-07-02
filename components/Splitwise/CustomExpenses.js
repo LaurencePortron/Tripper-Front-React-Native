@@ -7,6 +7,7 @@ import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import SettleBalance from './SettleBalance';
 import { useHistory } from 'react-router-native';
+import { COLORS } from '../colors.js';
 
 export default function CustomExpenses({ tripId }) {
   const history = useHistory();
@@ -31,6 +32,8 @@ export default function CustomExpenses({ tripId }) {
     [tripId]
   );
 
+  // if amountSettled === true we need to substradct the expense amount from total owed
+
   if (!fetchExpenses) {
     return null;
   }
@@ -46,6 +49,10 @@ export default function CustomExpenses({ tripId }) {
     return previousTotalExpenseBalance + newExpenseBalance;
   },
   0);
+
+  const getSettledAmount = fetchExpenses.map((expense) => {
+    return expense.data.amountSettled;
+  });
 
   return (
     <View style={styles.customExpensesContainer}>
@@ -84,7 +91,7 @@ export default function CustomExpenses({ tripId }) {
       <TouchableOpacity onPress={() => setExpenseModalOpen(true)}>
         <View style={styles.addExpenseContainer}>
           <Text style={styles.addExpenseText}>Add Expense</Text>
-          <Feather name='arrow-right' size={24} color='#B37650' />
+          <Feather name='arrow-right' size={24} color={COLORS.brown} />
         </View>
       </TouchableOpacity>
       <AddExpense
@@ -112,7 +119,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
   },
   backToTripButton: { marginLeft: 120 },
 
@@ -120,7 +127,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
   },
   addExpenseContainer: {
     display: 'flex',
@@ -129,7 +136,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addExpenseText: {
-    color: '#B37650',
+    color: COLORS.brown,
     fontWeight: 'bold',
     fontSize: 15,
     marginRight: 5,

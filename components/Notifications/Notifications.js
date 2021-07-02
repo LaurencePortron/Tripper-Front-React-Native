@@ -63,7 +63,7 @@ export default function Notifications(props) {
       <View style={styles.singleNotificationSection}>
         <Text style={styles.singleNotification}>Messages</Text>
         <Switch
-          trackColor={{ false: '#767577', true: '#93A7AA' }}
+          trackColor={{ false: '#767577', true: COLORS.lightGreen }}
           thumbColor={messageIsEnabled ? '#2E5E4E' : '#f4f3f4'}
           onValueChange={() => {
             handleMessageToggle();
@@ -76,7 +76,7 @@ export default function Notifications(props) {
       <View style={styles.singleNotificationSection}>
         <Text style={styles.singleNotification}>Expenses</Text>
         <Switch
-          trackColor={{ false: '#767577', true: '#93A7AA' }}
+          trackColor={{ false: '#767577', true: COLORS.lightGreen }}
           thumbColor={expensesIsEnabled ? '#2E5E4E' : '#f4f3f4'}
           onValueChange={() => {
             handleExpenseToggle();
@@ -89,7 +89,7 @@ export default function Notifications(props) {
       <View style={styles.singleNotificationSection}>
         <Text style={styles.singleNotification}>Cancellations</Text>
         <Switch
-          trackColor={{ false: '#767577', true: '#93A7AA' }}
+          trackColor={{ false: '#767577', true: COLORS.lightGreen }}
           thumbColor={cancellationIsEnabled ? '#2E5E4E' : '#f4f3f4'}
           onValueChange={() => {
             handleCancellationToggle();
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
   },
   singleNotificationSection: {
     display: 'flex',

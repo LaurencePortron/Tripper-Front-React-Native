@@ -12,6 +12,7 @@ import firebase from 'firebase/app';
 import DropDownSelector from './DropDownSelector';
 import { useHistory } from 'react-router-native';
 import { useFirestoreCollection } from '../hooks';
+import { COLORS } from '../colors.js';
 
 export default function AddExpense({
   tripId,
@@ -108,7 +109,7 @@ export default function AddExpense({
           <Feather
             name='arrow-right'
             size={24}
-            color='#2E5E4E'
+            color={COLORS.darkGreen}
             style={styles.expenseButton}
           />
         </TouchableOpacity>
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   splitWiseTitle: {
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 30,
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
   },
   expenseButton: {
     display: 'flex',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     marginLeft: 20,
   },
   clickForDetailsSection: {
@@ -159,5 +160,5 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 10,
   },
-  clickForDetailsText: { fontWeight: 'bold', color: '#2E5E4E' },
+  clickForDetailsText: { fontWeight: 'bold', color: COLORS.darkGreen },
 });

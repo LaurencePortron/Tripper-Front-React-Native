@@ -10,6 +10,7 @@ import { TouchableOpacity } from 'react-native';
 import { useFirestoreCollection } from '../hooks';
 import EditTripModal from './EditTripModal.js';
 import { ScrollView } from 'react-native';
+import { COLORS } from '../colors.js';
 
 export default function TripOverview(props) {
   const tripId = props.match.params.id;
@@ -70,20 +71,24 @@ export default function TripOverview(props) {
           alt='random'
         />
         {fetchTripDetails.data.archived ? (
-          <Text style={styles.archiveContainer}>Cancelled</Text>
+          <View style={styles.cancelledContainer}>
+            <Text style={styles.cancelledText}>Cancelled</Text>
+          </View>
         ) : (
           <View style={styles.archiveContainer}>
             <Feather
               name='archive'
               size={25}
-              color='white'
+              color='black'
               onPress={() => archiveTrip(fetchTripDetails.id)}
             />
 
             <Text style={styles.archiveText}>Archive</Text>
           </View>
         )}
-        <BackToDashboardButton />
+        <View style={styles.backToDashButton}>
+          <BackToDashboardButton />
+        </View>
       </View>
       <View style={styles.tripDetails}>
         <View style={styles.locationSection}>
@@ -97,19 +102,19 @@ export default function TripOverview(props) {
         <View>
           <View style={styles.menuItemsSection}>
             <View style={styles.menuItem}>
-              <Feather name='users' size={24} color='#93A7AA' />
+              <Feather name='users' size={24} color={COLORS.lightGreen} />
               <Text>{numberOfFriends} friends</Text>
             </View>
             <View style={styles.menuItem}>
-              <Feather name='map' size={24} color='#93A7AA' />
+              <Feather name='map' size={24} color={COLORS.lightGreen} />
               <Text>5 stops</Text>
             </View>
             <View style={styles.menuItem}>
-              <Feather name='activity' size={24} color='#93A7AA' />
+              <Feather name='activity' size={24} color={COLORS.lightGreen} />
               <Text>{numberOfActivities} activities</Text>
             </View>
             <View style={styles.menuItem}>
-              <Feather name='credit-card' size={24} color='#93A7AA' />
+              <Feather name='credit-card' size={24} color={COLORS.lightGreen} />
               <Text> ${fetchTripDetails.data.cost}</Text>
             </View>
           </View>
@@ -125,7 +130,7 @@ export default function TripOverview(props) {
               <Text style={styles.overviewNavigationText}>
                 Click here to see details
               </Text>
-              <Feather name='arrow-right' size={24} color='#B37650' />
+              <Feather name='arrow-right' size={24} color={COLORS.brown} />
             </TouchableOpacity>
           </View>
         </View>
@@ -135,7 +140,7 @@ export default function TripOverview(props) {
           onPress={() => setInviteModalOpen(true)}
         >
           <Text style={styles.editSectionText}>Edit</Text>
-          <Feather name='edit' size={24} color='#B37650' />
+          <Feather name='edit' size={24} color={COLORS.brown} />
         </TouchableOpacity>
         <ScrollView>
           <EditTripModal
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     marginLeft: 20,
     marginRight: 10,
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
     fontSize: 15,
   },
   archiveContainer: {
@@ -170,11 +175,40 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 300,
     left: 300,
-    backgroundColor: '#2E5E4E',
+    padding: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    borderRadius: 10,
   },
-  archiveText: { fontSize: 10, color: 'white' },
+  archiveText: { fontSize: 10, color: 'black', fontWeight: 'bold' },
+  backToDashButton: {
+    position: 'absolute',
+    top: 30,
+    left: 310,
+    padding: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    borderRadius: 10,
+  },
+
+  cancelledContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 300,
+    left: 260,
+    padding: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    borderRadius: 10,
+  },
+
+  cancelledText: {
+    fontSize: 15,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+
   tripTitle: {
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     fontWeight: 'bold',
     fontSize: 30,
     marginLeft: 10,
@@ -215,7 +249,7 @@ const styles = StyleSheet.create({
   },
   descriptionTitle: {
     textAlign: 'left',
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
     fontWeight: 'bold',
     fontSize: 20,
   },
@@ -229,7 +263,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   overviewNavigationText: {
-    color: '#B37650',
+    color: COLORS.brown,
     fontWeight: 'bold',
     fontSize: 15,
   },
@@ -242,7 +276,7 @@ const styles = StyleSheet.create({
   },
 
   editSectionText: {
-    color: '#B37650',
+    color: COLORS.brown,
     fontWeight: 'bold',
     fontSize: 15,
     marginRight: 10,

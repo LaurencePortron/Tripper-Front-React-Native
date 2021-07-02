@@ -13,6 +13,7 @@ import firebase from 'firebase/app';
 import { useFirestoreCollection } from '../hooks';
 import Footer from '../Footer';
 import NotificationAlertButton from '../Notifications/NotificationAlertButton';
+import { COLORS } from '../colors.js';
 
 export default function Dashboard(props) {
   const [tab, setTab] = useState('active');
@@ -191,7 +192,7 @@ export default function Dashboard(props) {
         <Feather
           name='plus-circle'
           size={24}
-          color='#2E5E4E'
+          color={COLORS.darkGreen}
           style={styles.addTripButton}
         />
       </TouchableOpacity>
@@ -212,7 +213,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     fontSize: 30,
     marginLeft: 20,
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     fontWeight: 'bold',
   },
   tabs: {
@@ -225,12 +226,12 @@ const styles = StyleSheet.create({
   tabAlone: {
     marginRight: 10,
     fontSize: 25,
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
   },
   tabActive: {
     borderBottomWidth: 2,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     textDecorationLine: 'underline',
   },
 
@@ -278,5 +279,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     bottom: 70,
   },
-  clickForDetailsText: { fontWeight: 'bold', color: '#93A7AA' },
+  clickForDetailsText: { fontWeight: 'bold', color: COLORS.lightGreen },
 });

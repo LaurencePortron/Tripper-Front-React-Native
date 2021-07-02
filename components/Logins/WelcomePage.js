@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useHistory } from 'react-router-native';
+import { COLORS } from '../colors';
 
 export default function WelcomePage(props) {
   const history = useHistory();
@@ -72,12 +73,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingVertical: 15,
     paddingHorizontal: 20,
-    color: '#B37650',
+    color: COLORS.brown,
     margin: 3,
     fontSize: 15,
     width: 100,
     fontWeight: 'bold',
-    borderColor: '#B37650',
+    borderColor: COLORS.brown,
     borderWidth: 1,
   },
 });

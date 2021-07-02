@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Modal, Text, TextInput, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
+import { COLORS } from '../colors.js';
 
 export default function AddStopModal({ tripId, show, handleStopModalClosure }) {
   var db = firebase.firestore();
@@ -162,14 +163,14 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     marginTop: 0,
   },
   editField: {
     display: 'flex',
     padding: 15,
     borderWidth: 1,
-    borderColor: '#2E5E4E',
+    borderColor: COLORS.darkGreen,
     marginBottom: 15,
     margin: 10,
   },
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
   addInfoFields: { width: 300, marginTop: 30 },
   addStopTitle: {
     textAlign: 'center',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     fontSize: 20,
     fontWeight: 'bold',
   },

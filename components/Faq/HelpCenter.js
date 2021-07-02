@@ -4,6 +4,7 @@ import Footer from '../Footer';
 import { Feather } from '@expo/vector-icons';
 import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
+import { COLORS } from '../colors.js';
 
 export default function HelpCenter(props) {
   var db = firebase.firestore();
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
   },
 
   questionsSection: {

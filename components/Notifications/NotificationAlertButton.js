@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import NotificationDetails from './NotificationDetails';
+import { COLORS } from '../colors.js';
 
 export default function NotificationAlertButton(props) {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function NotificationAlertButton(props) {
         <Feather
           name='bell'
           size={25}
-          color='#2E5E4E'
+          color={COLORS.darkGreen}
           style={styles.NotificationAlertButton}
           onPress={() => setNotificationsOpen(!notificationsOpen)}
         />

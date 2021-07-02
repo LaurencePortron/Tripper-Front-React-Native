@@ -2,9 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useFirestoreDocument, useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
-import CustomExpenses from './CustomExpenses';
-import { Feather } from '@expo/vector-icons';
 import { useHistory } from 'react-router-native';
+import { COLORS } from '../colors.js';
 
 export default function Expenses({ tripId }) {
   const history = useHistory();
@@ -124,11 +123,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
     marginLeft: 10,
   },
   costDataTitle: { fontWeight: 'bold' },
-  expenseSubTitle: { color: '#93A7AA' },
+  expenseSubTitle: { color: COLORS.lightGreen },
   overviewNavigationSection: {
     display: 'flex',
     flexDirection: 'row',
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   overviewNavigationText: {
-    color: '#B37650',
+    color: COLORS.brown,
     fontWeight: 'bold',
     fontSize: 15,
   },
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   manageExpensesText: {
-    color: '#B37650',
+    color: COLORS.brown,
     fontWeight: 'bold',
     fontSize: 15,
   },
@@ -160,6 +159,6 @@ const styles = StyleSheet.create({
   },
 
   goToCustomExpensesText: {
-    color: '#B37650',
+    color: COLORS.brown,
   },
 });

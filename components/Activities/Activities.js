@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import moment from 'moment';
+import { COLORS } from '../colors.js';
 
 export default function Activites({ tripId }) {
   const history = useHistory();
@@ -46,13 +47,15 @@ export default function Activites({ tripId }) {
                 />
 
                 {fetchActivity.data.archived ? (
-                  <Text style={styles.archiveContainer}>Cancelled</Text>
+                  <View style={styles.cancelledContainer}>
+                    <Text style={styles.cancelledText}>Cancelled</Text>
+                  </View>
                 ) : (
                   <View style={styles.archiveContainer}>
                     <Feather
                       name='archive'
                       size={25}
-                      color='white'
+                      color='black'
                       onPress={() => archiveActivity(fetchActivity.id)}
                     />
 
@@ -77,7 +80,7 @@ export default function Activites({ tripId }) {
           <Feather
             name='plus-circle'
             size={32}
-            color='#2E5E4E'
+            color={COLORS.darkGreen}
             onPress={addActivity}
             style={styles.addButton}
           />
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
   },
   activityContainer: {
     display: 'flex',
@@ -118,11 +121,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     left: 30,
     top: 10,
-    color: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    borderRadius: 10,
+    padding: 5,
   },
-  archiveText: { fontSize: 10, color: 'white' },
+  archiveText: { fontSize: 10, color: 'black', fontWeight: 'bold' },
+  cancelledContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
+    left: 30,
+    top: 10,
+    padding: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    borderRadius: 10,
+  },
+
+  cancelledText: {
+    fontSize: 12,
+    color: 'black',
+    fontWeight: 'bold',
+  },
   activityTitle: {
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     marginLeft: 30,
     marginRight: 20,
     alignSelf: 'center',
@@ -131,7 +153,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   activityCost: {
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
     marginLeft: 30,
     marginRight: 20,
     alignSelf: 'center',
@@ -140,6 +162,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     marginLeft: 10,
-    marginBottom: 45,
+    marginRight: 20,
+    marginBottom: 60,
   },
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Footer from '../Footer';
+import { COLORS } from '../colors.js';
 
 export default function HelpCenter(props) {
   return (
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     fontSize: 30,
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     fontWeight: 'bold',
   },
   aboutDescriptionContainer: {

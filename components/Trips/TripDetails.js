@@ -10,6 +10,7 @@ import { useFirestoreDocument } from '../hooks';
 import { Feather } from '@expo/vector-icons';
 import { useHistory } from 'react-router-native';
 import CustomExpenses from '../Splitwise/CustomExpenses';
+import { COLORS } from '../colors.js';
 
 export default function TripDetails(props) {
   const tripId = props.match.params.id;
@@ -37,7 +38,7 @@ export default function TripDetails(props) {
             style={styles.backToTripButton}
             name='arrow-left-circle'
             size={32}
-            color='#2E5E4E'
+            color={COLORS.darkGreen}
             onPress={backToTripDetails}
           />
         </View>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   overviewTitle: {
     fontSize: 30,
     marginLeft: 20,
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     fontWeight: 'bold',
   },
   customExpensesHeader: {
@@ -70,6 +71,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'center',
     marginTop: 25,
+    justifyContent: 'space-between',
   },
-  backToTripButton: { left: 170 },
+  backToTripButton: {
+    marginRight: 20,
+  },
 });

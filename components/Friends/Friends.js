@@ -5,6 +5,7 @@ import InviteModal from './InviteModal';
 import { useFirestoreCollection } from '../hooks';
 import firebase from 'firebase/app';
 import Avatar from '../images/avatar.png';
+import { COLORS } from '../colors.js';
 
 export default function Friends({ tripId }) {
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function Friends({ tripId }) {
             </View>
           );
         })}
-        <Feather name='user' size={30} color='#93A7AA' />
+        <Feather name='user' size={30} color={COLORS.lightGreen} />
         <TouchableOpacity onPress={() => setInviteModalOpen(true)}>
           <Feather name='user-plus' size={30} color='#2E5E4E' />
         </TouchableOpacity>
@@ -57,10 +58,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
     marginTop: 0,
   },
-  friendsName: { color: '#2E5E4E' },
+  friendsName: { color: COLORS.darkGreen },
   avatars: {
     display: 'flex',
     flexDirection: 'row',

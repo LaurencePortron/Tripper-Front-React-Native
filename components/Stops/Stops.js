@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import AddStopModal from './AddStopModal.js';
 import firebase from 'firebase/app';
 import { useFirestoreCollection } from '../hooks';
+import { COLORS } from '../colors.js';
 
 export default function Stops({ tripId }) {
   const [stopModalOpen, setStopModalOpen] = useState(false);
@@ -41,7 +42,7 @@ export default function Stops({ tripId }) {
         onPress={() => setStopModalOpen(true)}
       >
         <Text style={styles.stopModalText}>Add Stop</Text>
-        <Feather name='arrow-right' size={24} color='#B37650' />
+        <Feather name='arrow-right' size={24} color={COLORS.brown} />
       </TouchableOpacity>
       <AddStopModal
         tripId={tripId}
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
   },
 
   stopModalSection: {
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   },
 
   stopModalText: {
-    color: '#B37650',
+    color: COLORS.brown,
     fontWeight: 'bold',
     fontSize: 15,
     marginRight: 10,

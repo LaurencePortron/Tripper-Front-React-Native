@@ -6,8 +6,10 @@ import firebase from 'firebase/app';
 import Notifications from '../Notifications/Notifications';
 import { useHistory } from 'react-router-native';
 import { useFirestoreDocument } from '../hooks';
+import { COLORS } from '../colors.js';
 
 export default function Profile(props) {
+  const [isNotHidden, setIsNotHidden] = useState(false);
   var db = firebase.firestore();
   const history = useHistory();
   const user = firebase.auth().currentUser;
@@ -46,7 +48,7 @@ export default function Profile(props) {
       ></Image>
       <View style={styles.profileSection}>
         <Text style={styles.profileContainerTitle}>My Profile</Text>
-        <View style={styles.infoSection}>
+        <View>
           <Text style={styles.infoTitle}>Information</Text>
           <View style={styles.infoEmail}>
             <Text style={styles.infoEmailTitle}>Username</Text>
@@ -65,24 +67,17 @@ export default function Profile(props) {
             ) : null}
           </View>
 
-          <View style={styles.infoEmail}>
-            <Text style={styles.infoEmailTitle}>Password</Text>
-            {getCurrentLoggedUser ? (
-              <Text style={styles.userEmail}>
-                {getCurrentLoggedUser.data.password}
-              </Text>
-            ) : null}
-          </View>
-
           <TouchableOpacity style={styles.editInfoButton}>
             <Text style={styles.editInfoText}>Edit Info</Text>
-            <Feather name='edit' size={24} color='#B37650' />
+            <Feather name='edit' size={24} color={COLORS.brown} />
           </TouchableOpacity>
         </View>
         <Notifications />
         <View style={styles.logOut}>
-          <Feather name='log-out' size={25} color='#5B443E' />
-          <Text onPress={handleLogOut}>Log Out</Text>
+          <Text style={styles.editInfoText} onPress={handleLogOut}>
+            Log Out
+          </Text>
+          <Feather name='log-out' size={25} color={COLORS.brown} />
         </View>
       </View>
       <Footer />
@@ -100,13 +95,13 @@ const styles = StyleSheet.create({
   profileImage: {
     flex: 1,
     width: '100%',
-    marginBottom: 500,
+    marginBottom: 400,
     resizeMode: 'cover',
   },
   profileContainerTitle: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
   },
   profileSection: {
     backgroundColor: 'white',
@@ -138,7 +133,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
   },
 
   editInfoButton: {
@@ -149,7 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   editInfoText: {
-    color: '#B37650',
+    color: COLORS.brown,
     fontWeight: 'bold',
     fontSize: 15,
     marginRight: 10,

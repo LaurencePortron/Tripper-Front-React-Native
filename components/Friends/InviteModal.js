@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Modal, Text, TextInput, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import API from '../../services/API';
+import { COLORS } from '../colors.js';
 
 export default function InviteModal({
   tripId,
@@ -76,14 +77,14 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     marginTop: 0,
   },
   addEmail: {
     display: 'flex',
     padding: 15,
     borderWidth: 1,
-    borderColor: '#2E5E4E',
+    borderColor: COLORS.darkGreen,
     marginBottom: 15,
     margin: 10,
   },

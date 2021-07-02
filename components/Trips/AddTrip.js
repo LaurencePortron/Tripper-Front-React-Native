@@ -13,6 +13,7 @@ import BackToDashboardButton from '../Buttons';
 import { Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import CalendarExample from './CalendarExample';
+import { COLORS } from '../colors.js';
 
 export default function AddTrip(props) {
   const [addTripTitle, setAddTripTitle] = useState('');
@@ -65,8 +66,10 @@ export default function AddTrip(props) {
 
   return (
     <View>
-      <BackToDashboardButton />
       <View style={styles.addTripContainer}>
+        <View style={styles.backToDashButton}>
+          <BackToDashboardButton />
+        </View>
         <Text style={styles.addTripTitle}>Add your trip</Text>
         <View style={styles.addInfoFields}>
           <Text style={styles.inputTitle}>Location</Text>
@@ -128,6 +131,12 @@ const styles = StyleSheet.create({
     marginTop: 40,
     height: 400,
   },
+
+  backToDashButton: {
+    position: 'absolute',
+    top: 10,
+    left: 310,
+  },
   addInfoFields: {
     width: 300,
     marginTop: 30,
@@ -136,11 +145,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
     fontSize: 20,
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
   },
   addTripTitle: {
     textAlign: 'left',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     fontSize: 25,
     fontWeight: 'bold',
     marginTop: 20,
@@ -158,7 +167,7 @@ const styles = StyleSheet.create({
     width: 200,
     padding: 5,
     borderRadius: 10,
-    backgroundColor: '#B37650',
+    backgroundColor: COLORS.brown,
     fontWeight: 'bold',
   },
 
@@ -175,6 +184,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     marginBottom: 10,
-    color: '#93A7AA',
+    color: COLORS.lightGreen,
   },
 });

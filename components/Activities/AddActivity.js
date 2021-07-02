@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import firebase from 'firebase/app';
+import { COLORS } from '../colors.js';
 
 export default function AddActivity(props) {
   const [addActivityTitle, setAddActivityTitle] = useState('');
@@ -76,7 +77,7 @@ export default function AddActivity(props) {
         style={styles.backToTripButton}
         name='arrow-left-circle'
         size={32}
-        color='#2E5E4E'
+        color={COLORS.darkGreen}
         onPress={backToTripDetails}
       />
       <View style={styles.addActivityContainer}>
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   addInfoFields: { width: 300, marginTop: 30 },
   addActivityTitle: {
     textAlign: 'center',
-    color: '#2E5E4E',
+    color: COLORS.darkGreen,
     fontSize: 20,
     fontWeight: 'bold',
   },
